@@ -70,6 +70,7 @@ public class Inventory : MonoBehaviour
 
     public void Swap(Transform t1, Transform t2)
     {
+        if (t1 == t2) return;
         InventorySlot slot1;
         InventorySlot slot2;
         slot1 = FindSlot(t1);
