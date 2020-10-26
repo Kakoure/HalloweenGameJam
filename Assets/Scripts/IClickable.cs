@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Items
+//used to define behaviour when clicking an object
+interface IClickable
 {
-    //tmp
-    class Entity
-    {
-        // TODO: ...
-    }
+    void OnClick();
 }
+
