@@ -50,6 +50,11 @@ public class Inventory : MonoBehaviour
         slot.Item = null;
         return tmp;
     }
+    public static Item PopFromSlot(Transform slot)
+    {
+        InventorySlot invSlot = Instance.FindSlot(slot);
+        return PopFromSlot(invSlot);
+    }
 
     public static int GetOpenSlot()
     {

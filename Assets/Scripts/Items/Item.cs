@@ -20,6 +20,14 @@ namespace Items
             this.Mass = mass;
         }
 
+        public void DropAt(Vector3 position)
+        {
+            position.z = 0;
+            transform.position = position;
+            gameObject.SetActive(true);
+        }
+
+
         //abstract
         public abstract void Eat(out int saturation);
         public abstract void Apply(Item other);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,23 +52,34 @@ class Draggable : MonoBehaviour, IClickable
             CameraReference.Instance.canvas.GetComponent<GraphicRaycaster>().Raycast(pointer, res);
 
             GameObject gameObject = null;
-            Transform other = null;
-            bool success = false;
+            bool hitSlot = false;
+            bool hitInventory = false;
 
             foreach (RaycastResult result in res)
             {
-                if ((gameObject = result.gameObject).GetComponent<IClickable>() != null)
+                if (result.gameObject.transform.CompareTag("ItemSlot"))
                 {
-                    success = true;
-                    break;
+                    gameObject = result.gameObject;
+                    hitSlot = true;
+                }
+                if (result.gameObject.transform.CompareTag("Inventory"))
+                {
+                    hitInventory = true;
                 }
             }
 
-            if (success)
-                other = gameObject.transform;
-
-            //call the UnityEvent
-            onRelease?.Invoke(this.transform, other);
+            if (hitSlot)
+            {
+                //place the item in inventory
+                Inventory.Instance.Swap(this.transform, gameObject.transform);
+            }
+            else if (!hitInventory)
+            {
+                //try to drop this item.
+                Inventory.InventorySlot slot = Inventory.Instance.FindSlot(this.transform);
+                Item i = Inventory.PopFromSlot(slot);
+                i.DropAt(CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition));
+            }
         }
     }
 
@@ -75,9 +87,6 @@ class Draggable : MonoBehaviour, IClickable
     {
         isActive = true;
     }
-
-    [Tooltip("Accepts two arguments the first being its own transform and the second being the result from a raycast detecting any items beneth it")]
-    public OnRelease onRelease;
 }
 
 [Serializable]
