@@ -8,15 +8,15 @@ using UnityEngine;
 namespace Items
 {
     //The Item class defines general 
+    [Serializable]
     public abstract class Item : MonoBehaviour , IClickable
     {
         public Entity Owner { get; protected set; } = null;
-        public string SpriteDir { get; private set; }
+        public abstract Sprite Sprite { get; }
         public int Mass { get; protected set; }
 
-        public Item(string spriteDir, int mass)
+        public Item(int mass)
         {
-            this.SpriteDir = spriteDir;
             this.Mass = mass;
         }
 
@@ -34,6 +34,12 @@ namespace Items
             //TODO: pick up the item
 
             Debug.Log("Item clicked");
+
+            //make the item disappear
+            gameObject.SetActive(false);
+
+            //put the item in inventory
+            Inventory.AssignTo(this, 0);
 
             //throw new NotImplementedException();
         }
