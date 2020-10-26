@@ -31,17 +31,26 @@ namespace Items
 
         void IClickable.OnClick()
         {
-            //TODO: pick up the item
+            //pick up the item
 
             Debug.Log("Item clicked");
 
-            //make the item disappear
-            gameObject.SetActive(false);
+            int slot = Inventory.GetOpenSlot();
 
-            //put the item in inventory
-            Inventory.AssignTo(this, 0);
+            //check to see if theres an open slot
+            if (slot != -1)
+            {
+                //make the item disappear
+                gameObject.SetActive(false);
 
-            //throw new NotImplementedException();
+                //put the item in inventory
+                Inventory.AssignTo(this, slot);
+            }
+            else
+            {
+
+            }
+
         }
     }
 }
