@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 199859326}
   - component: {fileID: 199859325}
   - component: {fileID: 199859324}
+  - component: {fileID: 199859328}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -219,6 +220,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &199859328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199859323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ead3c8358442094195488a27c036eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &228044411
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +688,7 @@ GameObject:
   - component: {fileID: 959182053}
   - component: {fileID: 959182055}
   - component: {fileID: 959182054}
+  - component: {fileID: 959182056}
   m_Layer: 0
   m_Name: Inventory transform //items go here idk if that will work
   m_TagString: Untagged
@@ -737,6 +751,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959182052}
   m_CullTransparentMesh: 0
+--- !u!114 &959182056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959182052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a03c763e07493954994071dfbfea98dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onRelease:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1460037104
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,6 +899,7 @@ GameObject:
   - component: {fileID: 1732572805}
   - component: {fileID: 1732572804}
   - component: {fileID: 1732572807}
+  - component: {fileID: 1732572808}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -955,3 +985,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1732572805}
+--- !u!114 &1732572808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732572803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e4a1af73b555a40b9d01187e5bb1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 1732572805}
+  canvas: {fileID: 199859326}

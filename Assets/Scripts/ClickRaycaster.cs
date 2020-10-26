@@ -20,7 +20,7 @@ class ClickRaycaster : MonoBehaviour
             Vector3 pt = camera.ScreenToWorldPoint(Input.mousePosition);
             var hit = Physics2D.Raycast(pt, Vector3.forward);
             Transform transform = hit.transform;
-
+            
             //if the transform exists and if a clickable is attached then call its method
             transform?.GetComponent<IClickable>()?.OnClick();
         }
