@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Items
 {
     //tmp
-    class Entity
+    public class Entity
     {
         // TODO: ...
     }

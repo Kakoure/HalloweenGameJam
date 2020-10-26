@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Items
 {
     //The Item class defines general 
-    abstract class Item : MonoBehaviour , IClickable
+    public abstract class Item : MonoBehaviour , IClickable
     {
         public Entity Owner { get; protected set; } = null;
         public string SpriteDir { get; private set; }
