@@ -108,7 +108,6 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < inventorySlots.Length; i++)
         { 
             inventorySlots[i].standardSprite = inventorySlots[i].img.sprite;
-            Debug.Log(inventorySlots[i].img.sprite);
         }
         weapon.standardSprite = weapon.img.sprite;
         shield.standardSprite = shield.img.sprite;
