@@ -719,7 +719,7 @@ PrefabInstance:
     - target: {fileID: 877171499016523531, guid: fc07048fb7cf0244ba232c488ec9e494,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.63
+      value: -1.69
       objectReference: {fileID: 0}
     - target: {fileID: 877171499016523531, guid: fc07048fb7cf0244ba232c488ec9e494,
         type: 3}
@@ -1875,8 +1875,10 @@ MonoBehaviour:
   damage: 1
   force: 1
   fireTime: 1
-  explosionRadius: 1
-  spd: 1
+  explosionDamage: 100
+  explosionForce: 7
+  explosionRadius: 7
+  spd: 7
   fireball: {fileID: 7254974616750928701, guid: c938f609277e2c74681cd03060d2955b,
     type: 3}
 --- !u!1001 &877171499771652857
