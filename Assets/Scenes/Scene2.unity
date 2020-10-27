@@ -783,7 +783,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 2e7bee173c68a504eb8c497494006b7f,
         type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 877171499016523530, guid: fc07048fb7cf0244ba232c488ec9e494, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fc07048fb7cf0244ba232c488ec9e494, type: 3}
 --- !u!1 &656987280
 GameObject:
@@ -1850,6 +1851,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1732572805}
   canvas: {fileID: 199859326}
+  hitMarker: {fileID: 820874680831379781, guid: 5ab1ab4fefcbb1a41aded6d09e348d95,
+    type: 3}
+  damageConstant: 2
+--- !u!1 &2114067150 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 877171499016523529, guid: fc07048fb7cf0244ba232c488ec9e494,
+    type: 3}
+  m_PrefabInstance: {fileID: 567149065}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2114067155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114067150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bf339f8bc54774da25568c2bc38969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  force: 1
+  fireTime: 1
+  explosionRadius: 1
+  spd: 1
+  fireball: {fileID: 7254974616750928701, guid: c938f609277e2c74681cd03060d2955b,
+    type: 3}
 --- !u!1001 &877171499771652857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1995,7 +2024,7 @@ PrefabInstance:
     - target: {fileID: 1402260636292657370, guid: 755846a13a77f0540bc6d48ec830746f,
         type: 3}
       propertyPath: radius
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1402260636292657370, guid: 755846a13a77f0540bc6d48ec830746f,
         type: 3}

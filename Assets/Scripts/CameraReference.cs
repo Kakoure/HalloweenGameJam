@@ -9,6 +9,11 @@ class CameraReference : MonoBehaviour
 {
     public static CameraReference Instance { get; private set; }
 
+    public static Vector2 MouseVec(Vector2 src)
+    {
+        return (Vector2)Instance.camera.ScreenToWorldPoint(Input.mousePosition) - src;
+    }
+
     new public Camera camera;
     public Canvas canvas;
     public GameObject hitMarker;

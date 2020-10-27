@@ -7,6 +7,7 @@ TagManager:
   - ItemSlot
   - Inventory
   - Monster
+  - Geometry
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Monster
   - Geometry
   - Items
-  - Ping
+  - 
   - 
   - 
   - 
@@ -49,4 +50,7 @@ TagManager:
     locked: 0
   - name: Monster
     uniqueID: 3261618599
+    locked: 0
+  - name: Projectile
+    uniqueID: 2261656525
     locked: 0
