@@ -19,7 +19,6 @@ public class UsePrimary : MonoBehaviour
         if (Input.GetButtonDown("Fire1")) mouse = true;
         if (mouse)
         {
-            Debug.Log("mouse detec");
             //use weapon
             Item primary = Inventory.Instance.weapon.Item;
             primary?.Fire(this.transform);
