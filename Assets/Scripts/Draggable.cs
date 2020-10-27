@@ -37,7 +37,7 @@ class Draggable : MonoBehaviour, IClickable
         this.transform.position = screenpoint; 
         //this should work
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetButtonUp("Interact"))
         //release
         {
             isActive = false;

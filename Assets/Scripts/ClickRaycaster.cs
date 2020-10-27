@@ -14,7 +14,7 @@ class ClickRaycaster : MonoBehaviour
     private void Update()
     {
         //on mouse1
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Interact"))
         {
             //get the transform of the hit
             Vector3 pt = camera.ScreenToWorldPoint(Input.mousePosition);

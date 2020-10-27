@@ -18,7 +18,7 @@ public class CheckClicks : MonoBehaviour
     void Update()
     {
         //Check if the left Mouse button is clicked
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetButtonDown("Interact"))
         {
             //Set up the new Pointer Event
             PointerEventData pointerData = new PointerEventData(EventSystem.current);

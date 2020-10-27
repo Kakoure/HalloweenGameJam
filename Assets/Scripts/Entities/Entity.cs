@@ -8,10 +8,22 @@ using UnityEngine;
 namespace Items
 {
     //tmp
-    public class Entity : MonoBehaviour
+    abstract public class Entity : MonoBehaviour
     {
         // TODO: ...
-        int HP;
+        public int HP;
+        public abstract Rigidbody2D Rigidbody { get; }
+
+        public void DealDamage(int damage)
+        {
+            HP -= damage;
+            CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
+        }
+        public void ApplyImpulse(float force, Vector2 from)
+        {
+            Vector2 disp = (Vector2)transform.position - from;
+            Rigidbody.AddForce(disp.normalized * force, ForceMode2D.Impulse);
+        }
         //etc.
     }
 }

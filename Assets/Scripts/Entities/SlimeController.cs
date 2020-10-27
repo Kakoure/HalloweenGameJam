@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class SlimeController : Entity
 {
     private Rigidbody2D rb;
+    public override Rigidbody2D Rigidbody => rb;
     public float chaseDistance;
     public float aggressiveDist;
     public float jumpStr;
@@ -23,6 +24,8 @@ public class SlimeController : Entity
     public Timer.TimedAction jumpWalk;
 
     private object jumpData;
+
+
     private void Wander()
     {
         Vector2 dir = Random.insideUnitCircle;

@@ -11,8 +11,8 @@ namespace Items
     [Serializable]
     public abstract class Item : MonoBehaviour , IClickable
     {
-        public Entity Owner { get; protected set; } = null;
         public abstract Sprite Sprite { get; }
+        public Entity Owner { get; protected set; } = null;
         public int Mass { get; protected set; }
 
         public Item(int mass)
@@ -22,6 +22,8 @@ namespace Items
 
         public void DropAt(Vector3 position)
         {
+            DropItem(out bool success);
+            if (!success) return;
             position.z = 0;
             transform.position = position;
             gameObject.SetActive(true);
@@ -29,20 +31,23 @@ namespace Items
 
 
         //abstract
+        /*
         public abstract void Eat(out int saturation);
         public abstract void Apply(Item other);
         public abstract void Throw(float momentum, ref int damage, Collision2D collision);
         public abstract void Wield(out bool success);
         public abstract void UnWield(out bool success);
-        public abstract void Fire();
-        public abstract void AltFire();
+        */
+        public abstract void Fire(Transform player);
+        public abstract void AltFire(Transform player);
+        public virtual void DropItem(out bool success)
+        {
+            success = true;
+        }
 
         void IClickable.OnClick()
         {
             //pick up the item
-
-            Debug.Log("Item clicked");
-
             int slot = Inventory.GetOpenSlot();
 
             //check to see if theres an open slot

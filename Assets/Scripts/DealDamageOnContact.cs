@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Items;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,12 +14,12 @@ public class DealDamageOnContact : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log($"Dealt {damage} damage");
             if (force != 0)
             {
                 Vector2 force = (collision.transform.position - transform.position).normalized * this.force;
                 collision.transform.GetComponent<PlayerMove>().SetOutsideForce(force, forceDuration);
             }
+            collision.GetComponent<Entity>().DealDamage(damage);
         }
     }
 
