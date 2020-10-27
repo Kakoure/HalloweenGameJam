@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
-    public static string sceneName;
+    public static string sceneName = "Scene2";
 
     public void SetSceneName(string s)
     {

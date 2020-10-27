@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace Items
 {
-    interface IAbility
+    public interface IAbility
     {
         Bullet Execute(Transform t, out Vector2 v);
     }
-    class FireProjectile : IAbility
+    public class FireProjectile : IAbility
     {
         int damage;
         float speed;
@@ -29,9 +29,10 @@ namespace Items
             fire.layer = player.gameObject.layer;
             return bullet;
         }
-
+        
         public FireProjectile(GameObject original,int damage, float speed, float throwTime = Mathf.Infinity)
         {
+            if (original == null) original = CameraReference.Instance.bulletGeneric;
             this.Bullet = original;
             this.damage = damage;
             this.speed = speed;
