@@ -13,7 +13,7 @@ namespace Items
 
         public override void AltFire(Transform player)
         {
-            throw new System.NotImplementedException();
+            Fire(player);
         }
         public override void Fire(Transform player)
         {

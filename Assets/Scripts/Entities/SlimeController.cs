@@ -15,6 +15,7 @@ public class SlimeController : Entity
     private float actionTime = 0;
     private Player target = null;
 
+
     #region Timer members
 
     private Timer jumper = new Timer();
@@ -58,24 +59,9 @@ public class SlimeController : Entity
 
     #endregion
 
-    //returns squrmagnitude
-    private float getDist(Component ob)
+    public override void Awake()
     {
-        if (ob != null)
-            return ((Vector2)ob.transform.position - (Vector2)transform.position).sqrMagnitude;
-        else
-            return Mathf.Infinity;
-    }
-    private float getDist(GameObject ob)
-    {
-        if (ob != null)
-            return ((Vector2)ob.transform.position - (Vector2)transform.position).sqrMagnitude;
-        else
-            return Mathf.Infinity;
-    }
-
-    private void Awake()
-    {
+        base.Awake();
         rb = GetComponent<Rigidbody2D>();
     }
 

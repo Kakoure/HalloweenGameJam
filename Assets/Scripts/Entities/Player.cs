@@ -13,8 +13,9 @@ class Player : Entity
     private Rigidbody2D _rb;
     public override Rigidbody2D Rigidbody => _rb;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         _rb = GetComponent<Rigidbody2D>();
     }
 

@@ -1,9 +1,11 @@
 ﻿using Items;
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.WSA.Input;
 
 public class Spell : Item
 {
@@ -32,17 +34,19 @@ public class Spell : Item
         if (Time.time < nextFire) return;
 
         //fire a projectile
-        Vector2 dir = CameraReference.MouseVec(player.position);
-        var fire = GameObject.Instantiate(fireball, player.position, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x)));
-        Fireball bullet = fire.GetComponent<Fireball>();
-        bullet.Initialize(damage, spd);
-        fire.layer = player.gameObject.layer;
+        Fireball bullet = (Fireball)fireProjectile.Execute(player, out Vector2 dir);
         bullet.fuse = Time.time + dir.magnitude / spd;
         bullet.explosionDamage = explosionDamage;
         bullet.explosionForce = explosionForce;
         bullet.explosionRadius = explosionRadius;
 
         nextFire = Time.time + fireTime;
+    }
+
+    private FireProjectile fireProjectile;
+    private void Awake()
+    {
+        fireProjectile = new FireProjectile(fireball, damage, spd);
     }
 
     // Start is called before the first frame update

@@ -1,10 +1,14 @@
 ﻿using Items;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : Projectile
 {
+    public Action onCollision;
+    public float maxTime = Mathf.Infinity;
+
     #region IKillable Implimentation
     public bool IsDead
     {
@@ -15,6 +19,7 @@ public class Bullet : Projectile
     }
     public virtual void KillObject()
     {
+        onCollision();
         GameObject.Destroy(this.gameObject);
     }
     #endregion
@@ -26,9 +31,9 @@ public class Bullet : Projectile
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
-        
+        if (Time.time > maxTime) KillObject();
     }
 
     //rewritten to generalize with all shootable targets.

@@ -21,21 +21,22 @@ public class Fireball : Bullet
             KillObject();
     }
 
-    public override void KillObject()
+    public Fireball()
     {
-        //TODO: explode, deal damage, addforce
-        //also fire particles
-        var collisions = Physics2D.OverlapCircleAll(this.transform.position, explosionRadius);
-        foreach (var col in collisions)
+        this.onCollision = () =>
         {
-            if (col.gameObject.CompareTag("Monster"))
+            //explode, deal damage, addforce
+            //TODO: also fire particles
+            var collisions = Physics2D.OverlapCircleAll(this.transform.position, explosionRadius);
+            foreach (var col in collisions)
             {
-                Entity entity = col.GetComponent<Entity>();
-                entity.DealDamage(explosionDamage);
-                entity.ApplyImpulse(explosionForce, this.transform.position);
+                if (col.gameObject.CompareTag("Monster"))
+                {
+                    Entity entity = col.GetComponent<Entity>();
+                    entity.DealDamage(explosionDamage);
+                    entity.ApplyImpulse(explosionForce, this.transform.position);
+                }
             }
-        }
-
-        base.KillObject();
+        };
     }
 }

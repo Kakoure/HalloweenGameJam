@@ -17,6 +17,7 @@ class CameraReference : MonoBehaviour
     new public Camera camera;
     public Canvas canvas;
     public GameObject hitMarker;
+    public GameObject bulletGeneric;
     public float damageConstant = 2;
 
     public void InstantiateHitMarker(int damage, Vector2 pos)
@@ -27,7 +28,7 @@ class CameraReference : MonoBehaviour
         GameObject.Instantiate(hitMarker, pos, Quaternion.identity).GetComponent<Rigidbody2D>().velocity = damageConstant * Mathf.Log(1 + damage) * rand;
     }
 
-    private void Start()
+    private void Awake()
     {
         if (Instance != null) Debug.LogError("Multiple CameraReferences detected");
         Instance = this;

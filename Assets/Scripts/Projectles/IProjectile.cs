@@ -28,7 +28,7 @@ public abstract class Projectile : MonoBehaviour, IProjectile
     }
 
     private Rigidbody2D rb;
-    protected Rigidbody2D RB
+    public Rigidbody2D RB
     {
         get
         {

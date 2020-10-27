@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Sword : Item
 {
-    static int swordMass = 1;
+    public static int swordMass = 10;
 
     public float radius;
     public float arcRadians; //sq
@@ -21,7 +21,15 @@ public class Sword : Item
 
     public override void AltFire(Transform player)
     {
-        throw new System.NotImplementedException();
+        Bullet bullet = throwitem.Execute(player, out _);
+        bullet.RB.angularVelocity = 10;
+        bullet.GetComponent<SpriteRenderer>().sprite = Sprite;
+        bullet.onCollision = () =>
+        {
+            //drop this item
+            this.DropAt(bullet.transform.position);
+        };
+        Inventory.PopFromSlot(Inventory.Instance.shield);
     }
 
     public override void Fire(Transform player)
@@ -48,9 +56,12 @@ public class Sword : Item
         nextSwing = Time.time + swingTime;
     }
 
+    private FireProjectile throwitem;
+
     // Start is called before the first frame update
     void Start()
     {
+        throwitem = new FireProjectile(CameraReference.Instance.bulletGeneric, Mass, Item.massConstant / Mass, 1.5f);
         _sprite = GetComponent<SpriteRenderer>().sprite;
     }
 

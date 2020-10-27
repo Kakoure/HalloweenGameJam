@@ -11,6 +11,8 @@ namespace Items
     [Serializable]
     public abstract class Item : MonoBehaviour , IClickable
     {
+        public static readonly int massConstant = 100;
+
         public abstract Sprite Sprite { get; }
         public Entity Owner { get; protected set; } = null;
         public int Mass { get; protected set; }
