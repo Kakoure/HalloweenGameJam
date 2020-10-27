@@ -15,11 +15,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Monster
+  - Geometry
+  - Items
+  - Ping
   - 
   - 
   - 
@@ -40,6 +40,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Items
+    uniqueID: 4103241067
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Monster
+    uniqueID: 3261618599
     locked: 0

@@ -6,8 +6,8 @@ using UnityEngine;
 //!! could try and make Timer serializable.
 public class Timer
 {
-    public float passiveWait;
-    private List<TimedAction> actions = new List<TimedAction>(4);
+    public float passiveWait = 0.05f;
+    private List<TimedAction> actions = new List<TimedAction>();
     public void AddAction(TimedAction action)
     {
         this.actions.Add(action);
