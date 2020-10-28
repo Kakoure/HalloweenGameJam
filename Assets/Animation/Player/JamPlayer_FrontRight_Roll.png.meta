@@ -1,22 +1,37 @@
 fileFormatVersion: 2
-guid: f86657f69bf9bb04795416f6953e9d24
+guid: 5b58d90a4d91cf44d864f4cb28ad1ef6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8809469708201269854
-    second: JamPlayer_FrontRight_Attack_1_0
+      213: -8453035018562257190
+    second: JamPlayer_FrontRight_Roll_0
   - first:
-      213: -4084562041275943662
-    second: JamPlayer_FrontRight_Attack_1_1
+      213: -1774019060418087060
+    second: JamPlayer_FrontRight_Roll_1
   - first:
-      213: -9030737456756461386
-    second: JamPlayer_FrontRight_Attack_1_2
+      213: -4750029864216713082
+    second: JamPlayer_FrontRight_Roll_2
   - first:
-      213: 1289424522259333755
-    second: JamPlayer_FrontRight_Attack_1_3
+      213: 5694827149257082783
+    second: JamPlayer_FrontRight_Roll_3
   - first:
-      213: 3766384788645833355
-    second: JamPlayer_FrontRight_Attack_1_4
+      213: 7600818130913314938
+    second: JamPlayer_FrontRight_Roll_4
+  - first:
+      213: 7815382644251449721
+    second: JamPlayer_FrontRight_Roll_5
+  - first:
+      213: 7621689162473822284
+    second: JamPlayer_FrontRight_Roll_6
+  - first:
+      213: 4657399213890989242
+    second: JamPlayer_FrontRight_Roll_7
+  - first:
+      213: -8719844374453825687
+    second: JamPlayer_FrontRight_Roll_8
+  - first:
+      213: 4172892231176899641
+    second: JamPlayer_FrontRight_Roll_9
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -125,7 +140,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JamPlayer_FrontRight_Attack_1_0
+      name: JamPlayer_FrontRight_Roll_0
       rect:
         serializedVersion: 2
         x: 0
@@ -139,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da741f7cb0b01f047bd0b8d6e9d2b649
-      internalID: 8809469708201269854
+      spriteID: c682ea54e91e8cd4ca01015e2552fd66
+      internalID: -8453035018562257190
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JamPlayer_FrontRight_Attack_1_1
+      name: JamPlayer_FrontRight_Roll_1
       rect:
         serializedVersion: 2
         x: 32
@@ -160,14 +175,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3dfec0b387cef89478dcd1b7ce8d0f24
-      internalID: -4084562041275943662
+      spriteID: 38057532011682142b40030744292397
+      internalID: -1774019060418087060
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JamPlayer_FrontRight_Attack_1_2
+      name: JamPlayer_FrontRight_Roll_2
       rect:
         serializedVersion: 2
         x: 64
@@ -181,14 +196,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9797855dd5a7e34419ea836c62f8d125
-      internalID: -9030737456756461386
+      spriteID: ba80cf60eb2573347a8a17a6ada47351
+      internalID: -4750029864216713082
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JamPlayer_FrontRight_Attack_1_3
+      name: JamPlayer_FrontRight_Roll_3
       rect:
         serializedVersion: 2
         x: 96
@@ -202,14 +217,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dab4ae8bea3aaab48adffee00eb72144
-      internalID: 1289424522259333755
+      spriteID: ea3d6bf445200c24387101cec2625a0e
+      internalID: 5694827149257082783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JamPlayer_FrontRight_Attack_1_4
+      name: JamPlayer_FrontRight_Roll_4
       rect:
         serializedVersion: 2
         x: 128
@@ -223,8 +238,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a935e411960ed8418138af5d13fdd59
-      internalID: 3766384788645833355
+      spriteID: 0d4b7a0f43cbacb47a9ab24437e29e1a
+      internalID: 7600818130913314938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JamPlayer_FrontRight_Roll_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 610b0a6e18cfa6d41a851c916941c423
+      internalID: 7815382644251449721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JamPlayer_FrontRight_Roll_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4c63a06797c28f4e895be606955a919
+      internalID: 7621689162473822284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JamPlayer_FrontRight_Roll_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4da19a6383a041f4eab28d5596206fc5
+      internalID: 4657399213890989242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JamPlayer_FrontRight_Roll_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 363a73088bd38f743aab16a31d02b302
+      internalID: -8719844374453825687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JamPlayer_FrontRight_Roll_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 514c734e5d7d5f0469be1dd8d4e6e87b
+      internalID: 4172892231176899641
       vertices: []
       indices: 
       edges: []

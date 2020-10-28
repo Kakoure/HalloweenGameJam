@@ -1,22 +1,34 @@
 fileFormatVersion: 2
-guid: f86657f69bf9bb04795416f6953e9d24
+guid: 3b8dc973fdd144744a58a99623fb7b39
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8809469708201269854
-    second: JamPlayer_FrontRight_Attack_1_0
+      213: -4207157112592219863
+    second: JamPlayer_BackRight_Roll_0
   - first:
-      213: -4084562041275943662
-    second: JamPlayer_FrontRight_Attack_1_1
+      213: 6666826297689564127
+    second: JamPlayer_BackRight_Roll_1
   - first:
-      213: -9030737456756461386
-    second: JamPlayer_FrontRight_Attack_1_2
+      213: -4548580865470589607
+    second: JamPlayer_BackRight_Roll_2
   - first:
-      213: 1289424522259333755
-    second: JamPlayer_FrontRight_Attack_1_3
+      213: 8725913747925909361
+    second: JamPlayer_BackRight_Roll_3
   - first:
-      213: 3766384788645833355
-    second: JamPlayer_FrontRight_Attack_1_4
+      213: 4491266322216797160
+    second: JamPlayer_BackRight_Roll_4
+  - first:
+      213: 5090675189174586192
+    second: JamPlayer_BackRight_Roll_5
+  - first:
+      213: -6423931058448424166
+    second: JamPlayer_BackRight_Roll_6
+  - first:
+      213: 8569567965564415477
+    second: JamPlayer_BackRight_Roll_7
+  - first:
+      213: 489487309801686457
+    second: JamPlayer_BackRight_Roll_8
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -46,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: -1
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -78,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -90,7 +102,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -102,7 +114,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -114,7 +126,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,7 +137,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JamPlayer_FrontRight_Attack_1_0
+      name: JamPlayer_BackRight_Roll_0
       rect:
         serializedVersion: 2
         x: 0
@@ -139,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da741f7cb0b01f047bd0b8d6e9d2b649
-      internalID: 8809469708201269854
+      spriteID: eb1c224626d293f42b4d98996da1d799
+      internalID: -4207157112592219863
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JamPlayer_FrontRight_Attack_1_1
+      name: JamPlayer_BackRight_Roll_1
       rect:
         serializedVersion: 2
         x: 32
@@ -160,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3dfec0b387cef89478dcd1b7ce8d0f24
-      internalID: -4084562041275943662
+      spriteID: 7a9fd0ab139b8d844b5b5fdea70adcf8
+      internalID: 6666826297689564127
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JamPlayer_FrontRight_Attack_1_2
+      name: JamPlayer_BackRight_Roll_2
       rect:
         serializedVersion: 2
         x: 64
@@ -181,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9797855dd5a7e34419ea836c62f8d125
-      internalID: -9030737456756461386
+      spriteID: a010dede4a438954f8b4cd67de107369
+      internalID: -4548580865470589607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JamPlayer_FrontRight_Attack_1_3
+      name: JamPlayer_BackRight_Roll_3
       rect:
         serializedVersion: 2
         x: 96
@@ -202,14 +214,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dab4ae8bea3aaab48adffee00eb72144
-      internalID: 1289424522259333755
+      spriteID: e264184dd8bf3fd47a448c5d7aad8b42
+      internalID: 8725913747925909361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JamPlayer_FrontRight_Attack_1_4
+      name: JamPlayer_BackRight_Roll_4
       rect:
         serializedVersion: 2
         x: 128
@@ -223,8 +235,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a935e411960ed8418138af5d13fdd59
-      internalID: 3766384788645833355
+      spriteID: 7450ab0d9ecd9e7469eddf95a29e536f
+      internalID: 4491266322216797160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JamPlayer_BackRight_Roll_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95f973919c7264147a545cc0e9df1b64
+      internalID: 5090675189174586192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JamPlayer_BackRight_Roll_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd83e1c6bc2487d4bb2f73504f7bf97a
+      internalID: -6423931058448424166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JamPlayer_BackRight_Roll_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6c54eac7069a5b4c94aae98982826e8
+      internalID: 8569567965564415477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JamPlayer_BackRight_Roll_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 370d1ca7eb03acc41956014e78670602
+      internalID: 489487309801686457
       vertices: []
       indices: 
       edges: []
