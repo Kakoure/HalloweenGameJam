@@ -24,29 +24,32 @@ public class Spell : Item
     private float nextFire = 0;
     public override Sprite Sprite => _sprite;
 
-    public override void AltFire(Transform player)
+    public override void AltFire(Transform player, bool down)
     {
-        Fire(player);
+        Fire(player, down);
     }
 
-    public override void Fire(Transform player)
+    public override void Fire(Transform player, bool down)
     {
-        if (Time.time < nextFire) return;
+        if (down)
+        {
+            if (Time.time < nextFire) return;
 
-        //fire a projectile
-        Fireball bullet = (Fireball)fireProjectile.Execute(player, out Vector2 dir);
-        bullet.fuse = Time.time + dir.magnitude / spd;
-        bullet.explosionDamage = explosionDamage;
-        bullet.explosionForce = explosionForce;
-        bullet.explosionRadius = explosionRadius;
+            //fire a projectile
+            Fireball bullet = (Fireball)fireProjectile.Execute(player, out Vector2 dir);
+            bullet.fuse = Time.time + dir.magnitude / spd;
+            bullet.explosionDamage = explosionDamage;
+            bullet.explosionForce = explosionForce;
+            bullet.explosionRadius = explosionRadius;
 
-        nextFire = Time.time + fireTime;
+            nextFire = Time.time + fireTime;
+        }
     }
 
     private FireProjectile fireProjectile;
     private void Awake()
     {
-        fireProjectile = new FireProjectile(fireball, damage, spd);
+        fireProjectile = new FireProjectile(fireball, damage, 0, spd);
     }
 
     // Start is called before the first frame update

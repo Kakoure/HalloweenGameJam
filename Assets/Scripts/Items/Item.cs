@@ -12,6 +12,7 @@ namespace Items
     public abstract class Item : MonoBehaviour , IClickable
     {
         public static readonly int massConstant = 100;
+        public static readonly float kbConst = 1.5f;
 
         public abstract Sprite Sprite { get; }
         public Entity Owner { get; protected set; } = null;
@@ -40,9 +41,9 @@ namespace Items
         public abstract void Wield(out bool success);
         public abstract void UnWield(out bool success);
         */
-        public abstract void Fire(Transform player);
-        public abstract void AltFire(Transform player);
-        public virtual void DropItem(out bool success)
+        public abstract void Fire(Transform player, bool down);
+        public abstract void AltFire(Transform player, bool down);
+        protected virtual void DropItem(out bool success)
         {
             success = true;
         }

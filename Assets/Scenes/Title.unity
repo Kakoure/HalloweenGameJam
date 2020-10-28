@@ -775,6 +775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 849968786}
   - component: {fileID: 849968785}
+  - component: {fileID: 849968787}
   m_Layer: 0
   m_Name: StartMenu
   m_TagString: Untagged
@@ -808,6 +809,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &849968787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849968784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b159340d5b34355449c8c7b99194b63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 2800000, guid: f293ac18005abd241b4825c160855d4a, type: 3}
 --- !u!1 &919900002
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,7 +1225,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 452bd1be6ffdbf8409c666d6afa0c112,
       type: 3}
-    m_PressedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: 4b99bb78ab752e3429a4585720b39788, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:

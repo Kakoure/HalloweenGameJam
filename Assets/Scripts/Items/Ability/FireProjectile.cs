@@ -13,9 +13,10 @@ namespace Items
     }
     public class FireProjectile : IAbility
     {
-        int damage;
-        float speed;
-        float throwTime;
+        public int damage;
+        public float speed;
+        public float throwTime;
+        public float knockBack;
 
         public GameObject Bullet;
 
@@ -27,16 +28,24 @@ namespace Items
             bullet.Initialize(damage, speed);
             bullet.maxTime = Time.time + throwTime;
             fire.layer = player.gameObject.layer;
+            bullet.knockBack = knockBack;
+
             return bullet;
         }
         
-        public FireProjectile(GameObject original,int damage, float speed, float throwTime = Mathf.Infinity)
+        public FireProjectile(GameObject original,int damage, float knockBack, float speed, float throwTime = Mathf.Infinity)
         {
             if (original == null) original = CameraReference.Instance.bulletGeneric;
             this.Bullet = original;
             this.damage = damage;
             this.speed = speed;
             this.throwTime = throwTime;
+            this.knockBack = knockBack;
+        }
+
+        public static FireProjectile ThrowProjectile(int mass, float throwTime)
+        {
+            return new FireProjectile(CameraReference.Instance.bulletGeneric, mass, Item.kbConst * Mathf.Sqrt(mass), Item.massConstant / mass);
         }
     }
 }

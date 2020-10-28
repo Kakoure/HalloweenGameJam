@@ -18,16 +18,20 @@ namespace Items
         }
 
 
-        public override void AltFire(Transform player)
+        public override void AltFire(Transform player, bool down)
         {
-            var projectile = throwJar.Execute(player, out _);
-            projectile.GetComponent<SpriteRenderer>().sprite = this.sprite;
-            projectile.onCollision = () => DropAt(projectile.transform.position);
-            Inventory.PopFromSlot(Inventory.Instance.shield);
+            if (down)
+            {
+                var projectile = throwJar.Execute(player, out _);
+                projectile.GetComponent<SpriteRenderer>().sprite = this.sprite;
+                projectile.onCollision = () => DropAt(projectile.transform.position);
+                Inventory.PopFromSlot(Inventory.Instance.shield);
+            }
         }
-        public override void Fire(Transform player)
+        public override void Fire(Transform player, bool down)
         {
-            Debug.Log("You begin eating the Strawberry jam");
+            if (down)
+                Debug.Log("You begin eating the Strawberry jam");
         }
 
         public StrawberryJam() : base(itemMass)

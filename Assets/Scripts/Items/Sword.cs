@@ -19,20 +19,22 @@ public class Sword : Item
     private float nextSwing = 0;
     public override Sprite Sprite => _sprite;
 
-    public override void AltFire(Transform player)
+    public override void AltFire(Transform player, bool down)
     {
-        Bullet bullet = throwitem.Execute(player, out _);
-        bullet.RB.angularVelocity = 10;
-        bullet.GetComponent<SpriteRenderer>().sprite = Sprite;
-        bullet.onCollision = () =>
+        if (down)
         {
-            //drop this item
-            this.DropAt(bullet.transform.position);
-        };
-        Inventory.PopFromSlot(Inventory.Instance.shield);
+            Bullet bullet = throwitem.Execute(player, out _);
+            bullet.GetComponent<SpriteRenderer>().sprite = Sprite;
+            bullet.onCollision = () =>
+            {
+                //drop this item
+                this.DropAt(bullet.transform.position);
+            };
+            Inventory.PopFromSlot(Inventory.Instance.shield);
+        }
     }
 
-    public override void Fire(Transform player)
+    public override void Fire(Transform player, bool down)
     {
         if (Time.time < nextSwing) return;
         var collisions = Physics2D.OverlapCircleAll(player.position, radius);
@@ -61,7 +63,7 @@ public class Sword : Item
     // Start is called before the first frame update
     void Start()
     {
-        throwitem = new FireProjectile(CameraReference.Instance.bulletGeneric, Mass, Item.massConstant / Mass, 1.5f);
+        throwitem = FireProjectile.ThrowProjectile(Mass, 0.5f);
         _sprite = GetComponent<SpriteRenderer>().sprite;
     }
 

@@ -8,6 +8,7 @@ public class Bullet : Projectile
 {
     public Action onCollision;
     public float maxTime = Mathf.Infinity;
+    public float knockBack = 0;
 
     #region IKillable Implimentation
     public bool IsDead
@@ -48,6 +49,7 @@ public class Bullet : Projectile
             if (entity != null)
             {
                 Vector2 pos = collision.ClosestPoint(gameObject.transform.position);
+                entity.Rigidbody.AddForce((entity.transform.position - this.transform.position).normalized * knockBack, ForceMode2D.Impulse);
                 entity.DealDamage(Damage);
                 KillObject();
             }

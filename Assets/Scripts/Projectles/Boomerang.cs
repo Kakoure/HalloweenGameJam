@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using static UnityEngine.Mathf;
 
 public class Boomerang : MonoBehaviour
@@ -38,10 +39,11 @@ public class Boomerang : MonoBehaviour
     public delegate float Converter(float time);
 
     public float startTime;
+    [NonSerialized]
     public float dur = 1;
     public float End => startTime + dur;
 
-    public Path path = Polar180(Poly(8));
+    public Path path = Polar180(Poly(6));
     public Vector2 getCurrent(float time)
     {
         return path(Clamp01((time - startTime)/dur));
