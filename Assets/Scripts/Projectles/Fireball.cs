@@ -15,8 +15,9 @@ public class Fireball : Bullet
     [NonSerialized]
     public float fuse = 1;
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         if (Time.time > fuse)
             KillObject();
     }

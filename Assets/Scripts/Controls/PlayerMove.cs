@@ -20,22 +20,28 @@ public class PlayerMove : MonoBehaviour
         end = Time.time + dur;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    Boomerang.Path GetPath(Vector2 facingDirection) => f => facingDirection * c(f);
+    Boomerang.Converter jumpSpd = f => f < 0.6f ? 4.0f / 3 : 1.0f / 2;
+    Boomerang.Converter c = f => f < 0.6f ? 4 * f / 3 : f / 2 + 0.5f;
+
+    private void Start()
     {
 
     }
 
     // Update is called once per frame
+    float xAxis;
+    float yAxis;
+    bool dodge;
     void Update()
     {
-        
+        xAxis = Input.GetAxis("Horizontal");
+        yAxis = Input.GetAxis("Vertical");
+        dodge = Input.GetButtonDown("Jump");
     }
 
     private void FixedUpdate()
     {
-        float xAxis = Input.GetAxis("Horizontal");
-        float yAxis = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(xAxis, yAxis) * speed;
         rb.velocity += outsideForce;
         if (Time.time > end)
