@@ -26,7 +26,7 @@ public class BoomerangProj : MonoBehaviour, IProjectile
     private void Update()
     {
         transform.position = boomer.getCurrent(Time.time) + src;
-        if (Time.time > boomer.End) KillObject();
+        if (Time.time > boomer.End) Die();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -36,16 +36,16 @@ public class BoomerangProj : MonoBehaviour, IProjectile
 
             // collide and die
             Player p = collision.GetComponent<Player>();
-            p.DealDamage(Damage);
+            bool success = p.DealDamage(Damage, 0, transform.position); // no force yet
+            if (success) this.Die();
         }
-
     }
 
     public void Initialize(int damage, float vel = 0)
     {
         this.Damage = damage;
     }
-    public void KillObject() => gameObject.SetActive(false);
+    public void Die() => gameObject.SetActive(false);
 
     public void Fire(Vector2 src)
     {

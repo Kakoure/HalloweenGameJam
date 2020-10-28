@@ -9,7 +9,7 @@ using UnityEngine;
 class ClickRaycaster : MonoBehaviour
 {
     [SerializeField]
-    private Camera camera;
+    private new Camera camera;
 
     private void Update()
     {
