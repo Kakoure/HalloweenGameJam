@@ -17,12 +17,13 @@ class Player : Entity
     {
         base.Awake();
         _rb = GetComponent<Rigidbody2D>();
+        if (Instance != null) Debug.LogError("Multiple players detected");
+        Instance = this;
     }
 
     private void Start()
     {
-        if (Instance != null) Debug.LogError("Multiple players detected");
-        Instance = this;
+
     }
 
     int exp;

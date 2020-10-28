@@ -34,7 +34,21 @@ public class SlimeController : Entity
     }
     private void Jump(Vector2 location, float str)
     {
-        rb.velocity=(location - (Vector2)transform.position).normalized * str;
+        var nearby = Physics2D.OverlapCircleAll(transform.position, 1);
+
+        Vector2 dir = location - (Vector2)transform.position;
+        dir = dir.normalized;
+        foreach (var other in nearby)
+        {
+            if (other.gameObject.CompareTag("Monster"))
+            {
+                Vector2 vec = (other.transform.position - transform.position);
+                float dist2 = vec.sqrMagnitude;
+                dist2 = 1 / (1 + dist2);
+                dir += -vec.normalized * dist2;
+            }
+        }
+        rb.velocity = dir.normalized * str;
     }
     private bool JumpAggressiveTest()
     {

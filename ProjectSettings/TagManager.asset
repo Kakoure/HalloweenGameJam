@@ -8,6 +8,7 @@ TagManager:
   - Inventory
   - Monster
   - Geometry
+  - Unarmed
   layers:
   - Default
   - TransparentFX

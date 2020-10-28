@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Sword : Item
+public class Sword : Weapon
 {
     public static int swordMass = 10;
 
@@ -13,10 +13,8 @@ public class Sword : Item
     public float arcRadians; //sq
     public int damage;
     public float force;
-    public float swingTime;
 
     private Sprite _sprite;
-    private float nextSwing = 0;
     public override Sprite Sprite => _sprite;
 
     public override void AltFire(Transform player, bool down)
@@ -36,7 +34,8 @@ public class Sword : Item
 
     public override void Fire(Transform player, bool down)
     {
-        if (Time.time < nextSwing) return;
+        if (!down) return;
+        if (!IsReady) return;
         var collisions = Physics2D.OverlapCircleAll(player.position, radius);
         foreach (var col in collisions)
         {
@@ -55,7 +54,7 @@ public class Sword : Item
                 }
             }
         }
-        nextSwing = Time.time + swingTime;
+        SetUseTime();
     }
 
     private FireProjectile throwitem;

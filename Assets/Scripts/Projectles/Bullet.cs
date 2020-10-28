@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Bullet : Projectile
 {
-    public Action onCollision;
+    public Action onCollision = () => { };
     public float maxTime = Mathf.Infinity;
     public float knockBack = 0;
 

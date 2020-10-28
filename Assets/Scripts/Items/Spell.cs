@@ -7,13 +7,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.WSA.Input;
 
-public class Spell : Item
+public class Spell : Weapon
 {
-    static int swordMass = 1;
+    static readonly int SpellMass = 1;
 
     public int damage;
     public float force;
-    public float fireTime;
     public int explosionDamage;
     public float explosionForce;
     public float explosionRadius;
@@ -21,7 +20,6 @@ public class Spell : Item
     public GameObject fireball;
 
     private Sprite _sprite;
-    private float nextFire = 0;
     public override Sprite Sprite => _sprite;
 
     public override void AltFire(Transform player, bool down)
@@ -33,7 +31,7 @@ public class Spell : Item
     {
         if (down)
         {
-            if (Time.time < nextFire) return;
+            if (!IsReady) return;
 
             //fire a projectile
             Fireball bullet = (Fireball)fireProjectile.Execute(player, out Vector2 dir);
@@ -42,7 +40,7 @@ public class Spell : Item
             bullet.explosionForce = explosionForce;
             bullet.explosionRadius = explosionRadius;
 
-            nextFire = Time.time + fireTime;
+            SetUseTime();
         }
     }
 
@@ -64,7 +62,7 @@ public class Spell : Item
         
     }
 
-    public Spell() : base(swordMass)
+    public Spell() : base(SpellMass)
     {
 
     }

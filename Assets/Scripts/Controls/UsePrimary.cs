@@ -24,7 +24,7 @@ public class UsePrimary : MonoBehaviour
         if (mouse != null)
         {
             //use weapon
-            Item primary = Inventory.Instance.weapon.Item;
+            Item primary = Inventory.CurrentWeapon;
             primary?.Fire(this.transform, (bool)mouse);
             mouse = null;
         }

@@ -68,6 +68,8 @@ public class Inventory : MonoBehaviour
         return i;
     }
 
+    public static Item CurrentWeapon => Instance.weapon.Item ?? Instance.unarmed;
+
     public void Swap(Transform t1, Transform t2)
     {
         if (t1 == t2) return;
@@ -97,6 +99,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField]
     private InventorySlot[] inventorySlots;
+    private Item unarmed;
     public InventorySlot weapon;
     public InventorySlot shield;
 
@@ -111,6 +114,7 @@ public class Inventory : MonoBehaviour
         }
         weapon.standardSprite = weapon.img.sprite;
         shield.standardSprite = shield.img.sprite;
+        unarmed = GameObject.FindGameObjectWithTag("Unarmed").GetComponent<Item>();
     }
 
     private void Start()

@@ -7,16 +7,21 @@ using UnityEngine;
 
 namespace Items
 {
-    public class Bow : Item
+    public class Bow : Weapon
     {
         static int bowMass = 1;
 
         public Sprite arrowSprite;
         FireProjectile fireArrow;
 
-        public int basedamage;
+        public int baseDamage;
         public float baseSpeed;
+        public float knockback;
         public float fullCharge;
+        public float slowMoveSpeedMultiplier;
+
+        private float defSpeed;
+        private PlayerMove movement;
 
         #region charging
 
@@ -30,10 +35,12 @@ namespace Items
                 if (value)
                 {
                     chargeTime = Time.time;
+                    movement.speed *= slowMoveSpeedMultiplier;
                 }
                 else
                 {
                     chargeTime = Time.time - chargeTime;
+                    movement.speed = defSpeed;
                 }
                 _isCharging = value;
             }
@@ -44,9 +51,12 @@ namespace Items
         private Sprite _sprite;
         public override Sprite Sprite => _sprite;
 
-        private void Awake()
+        private void Start()
         {
-            _sprite = GetComponent<Sprite>();
+            _sprite = GetComponent<SpriteRenderer>().sprite;
+            movement = Player.Instance.GetComponent<PlayerMove>();
+            defSpeed = movement.speed;
+            fireArrow = new FireProjectile(CameraReference.Instance.bulletGeneric, 0, 0, 0);
         }
 
         public override void AltFire(Transform player, bool down)
@@ -58,40 +68,49 @@ namespace Items
         {
             if (down)
             {
+                if (!IsReady) return;
+
                 //begin charge
                 ChargingState = true;
             }
             else
             {
+                if (!ChargingState) return;
+
                 //release and fire
                 ChargingState = false;
 
                 //chargeTime is deltaTime
                 int damage = GetDamage(chargeTime);
                 float kb = GetKnockback(chargeTime);
+                float speed = GetSpeed(chargeTime);
 
                 fireArrow.damage = damage;
                 fireArrow.knockBack = kb;
+                fireArrow.speed = speed;
 
-                var bul = fireArrow.Execute(player, out var dir);
+                fireArrow.Execute(player, out _);
 
+                SetUseTime();
             }
         }
 
         public int GetDamage(float t)
         {
-            //TODO:some mathematical fctn
-            return 0;
+            return t < fullCharge ? baseDamage : 2 * baseDamage;
         }
         public float GetKnockback(float t)
         {
-            //TODO:some mathematical fctn
-            return 0;
+            return t < fullCharge ? knockback : 1.5f * knockback;
+        }
+        public float GetSpeed(float t)
+        {
+            return t < fullCharge ? baseSpeed : 1.5f * baseSpeed;
         }
 
         public Bow() : base(bowMass)
         {
-            fireArrow = new FireProjectile(CameraReference.Instance.bulletGeneric, 0, 0, 0);
+
         }
     }
 }
