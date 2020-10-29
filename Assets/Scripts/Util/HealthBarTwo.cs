@@ -14,6 +14,7 @@ public class HealthBarTwo : HealthBar
     public Color colorHigh;
     public Color colorMid;
     public Color colorLow;
+    public Gradient colorGradient;
 
     protected override void SetHealthBar(int hp, int HP)
     {
@@ -23,7 +24,7 @@ public class HealthBarTwo : HealthBar
         Vector3 s = bar.transform.localScale;
         s.Set(frac, 1, 1);
         bar.transform.localScale = s;
-
+        barBox.color = colorGradient.Evaluate(frac);
         /*
         if (frac < .25f) barBox.color = colorLow;
         else if (frac < .50f) barBox.color = colorMid;
