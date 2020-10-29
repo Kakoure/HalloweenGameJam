@@ -238,10 +238,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p1: {fileID: 1750526216}
   p2: {fileID: 472882190}
-  boomerangRadius: 10
+  boomerangRadius: 4
   boomerangTime: 1
   boomerangTimer:
-    cooldownTime: 1
+    cooldownTime: 2
 --- !u!4 &1081817174
 Transform:
   m_ObjectHideFlags: 0
