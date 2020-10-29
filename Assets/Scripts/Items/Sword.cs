@@ -63,6 +63,7 @@ public class Sword : Weapon
     {
         throwitem = FireProjectile.ThrowProjectile(Mass, 0.5f);
         _sprite = GetComponent<SpriteRenderer>().sprite;
+        id = ItemID.Sword;
     }
 
     // Update is called once per frame
