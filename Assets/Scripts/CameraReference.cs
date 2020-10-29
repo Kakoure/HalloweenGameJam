@@ -22,6 +22,8 @@ class CameraReference : MonoBehaviour
 
     public void InstantiateHitMarker(int damage, Vector2 pos)
     {
+        if (damage < 0) return; //just apply a hack to cover up a bug
+
         Vector2 rand = UnityEngine.Random.insideUnitCircle;
         rand.y /= 2;
         rand.y += 1;

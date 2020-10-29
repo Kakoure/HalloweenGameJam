@@ -78,7 +78,6 @@ public partial class PlayerMove : MonoBehaviour
         {
             //velocity is determined purely by the path if I am in a path
             Vector2 v = GetPathVel();
-            Debug.Log(v.magnitude);
             rb.velocity = v;
         }
     }

@@ -31,7 +31,14 @@ namespace Items
         public override void Fire(Transform player, bool down)
         {
             if (down)
+            {
                 Debug.Log("You begin eating the Strawberry jam");
+
+                //should pass an instance to the entity that used it...
+                Player.Instance.DealDamage(-100, 0, Vector2.zero);
+
+                Inventory.PopFromSlot(Inventory.Instance.weapon);
+            }
         }
 
         public StrawberryJam() : base(itemMass)

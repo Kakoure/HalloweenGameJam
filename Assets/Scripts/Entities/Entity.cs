@@ -12,7 +12,7 @@ namespace Items
     public abstract class Entity : MonoBehaviour
     {
         public int MaxHP;
-        public int HP;
+        public int hp;
         public abstract Rigidbody2D Rigidbody { get; }
         public HealthBar healthBar;
 
@@ -20,15 +20,20 @@ namespace Items
         public virtual bool DealDamage(int damage, float force, Vector2 from)
         {
             //updates the healthbar
-            HP -= damage;
-            healthBar.SetHealth(HP, MaxHP);
+            hp -= damage;
+            hp = Mathf.Clamp(hp, 0, MaxHP); //prevent overheal
+            healthBar.SetHealth(hp, MaxHP);
+
+            //hit marker
             CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
-            if (HP <= 0) {
+
+            if (hp <= 0) {
                 Die();
             }
             else {
                 StartCoroutine("DamageFlash");
             }
+
             //apply impulse
             ApplyImpulse(force, from);
 
@@ -36,7 +41,7 @@ namespace Items
         }
         public virtual void Die()
         {
-            if (HP <= 0)
+            if (hp <= 0)
                 gameObject.SetActive(false);
         }
         protected virtual void ApplyImpulse(float force, Vector2 from)
@@ -48,7 +53,7 @@ namespace Items
         public virtual void Awake() { }
         public virtual void Start()
         {
-            healthBar.SetHealth(HP, MaxHP);
+            healthBar.SetHealth(hp, MaxHP);
         }
 
         private IEnumerator DamageFlash()

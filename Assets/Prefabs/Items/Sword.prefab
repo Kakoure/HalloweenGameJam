@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3916141102960055223}
   - component: {fileID: 3916141102960055217}
-  - component: {fileID: 7421165024889152018}
+  - component: {fileID: 913851462}
+  - component: {fileID: 9161909879284659548}
   m_Layer: 11
   m_Name: Sword
   m_TagString: Unarmed
@@ -68,9 +69,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -191726229
-  m_SortingLayer: -1
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 88dc8ff2d77bd40439dd9d2297fd059c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 89107684eaf04804f87bf7db691a0be9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -81,7 +82,56 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7421165024889152018
+--- !u!60 &913851462
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3916141102960055221}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.3333334, y: 1.3333334}
+    newSize: {x: 10, y: 10}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.41331673, y: 0.6691787}
+      - {x: -0.28977966, y: -0.042430967}
+      - {x: -0.28938293, y: 0.08464235}
+      - {x: -0.3761673, y: 0.16669577}
+      - {x: -0.5397701, y: 0.16575597}
+      - {x: -0.54187584, y: 0.078858316}
+      - {x: -0.45921898, y: -0.0015271306}
+      - {x: -0.45965385, y: -0.12011474}
+      - {x: -0.3743477, y: -0.24453002}
+      - {x: -0.57606506, y: -0.4172616}
+      - {x: -0.6667843, y: -0.5049788}
+      - {x: -0.66666603, y: -0.58125824}
+      - {x: -0.5785961, y: -0.66861707}
+      - {x: -0.5019741, y: -0.66364086}
+      - {x: -0.22790146, y: -0.36831367}
+      - {x: -0.12772179, y: -0.4556576}
+      - {x: 0.03831482, y: -0.4541831}
+      - {x: 0.08965492, y: -0.54493546}
+      - {x: 0.16437721, y: -0.54486394}
+      - {x: 0.16430283, y: -0.37652218}
+      - {x: 0.07388115, y: -0.2890309}
+      - {x: -0.042446136, y: -0.2864223}
+      - {x: 0.66666603, y: 0.41830486}
+      - {x: 0.6666667, y: 0.6666667}
+--- !u!114 &9161909879284659548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,11 +140,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3916141102960055221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 186ae8927844ee349ba09cff2db9b17c, type: 3}
+  m_Script: {fileID: 11500000, guid: a3344fc90e7d645419c4b5d1f9a9b942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTime: 1
-  radius: 2
-  arcRadians: 0.375
-  damage: 2
-  force: 5
+  cooldownTime: 0
+  radius: 0
+  arcRadians: 0
+  damage: 0
+  force: 0

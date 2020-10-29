@@ -7,7 +7,12 @@ using UnityEngine;
 
 namespace Items
 {
-    public class Bow : Weapon
+    public interface IDamageTaken
+    {
+        void OnDamageTaken(int damage, Vector2 src);
+    }
+
+    public class Bow : Weapon, IDamageTaken
     {
         static int bowMass = 1;
 
@@ -106,6 +111,13 @@ namespace Items
         public float GetSpeed(float t)
         {
             return t < fullCharge ? baseSpeed : 1.5f * baseSpeed;
+        }
+
+        public void OnDamageTaken(int damage, Vector2 src)
+        {
+            //cancel charge
+            if (ChargingState)
+                ChargingState = false;
         }
 
         public Bow() : base(bowMass)
