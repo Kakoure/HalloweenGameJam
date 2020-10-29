@@ -22,15 +22,6 @@ public partial class PlayerMove : MonoBehaviour
     private float end;
 
     private Animator anim;
-    public void SetOutsideForce(Vector2 outsideForce, float dur)
-    {
-        this.outsideForce = outsideForce;
-        end = Time.time + dur;
-    }
-
-    Boomerang.Path GetPath(Vector2 facingDirection) => f => facingDirection * c(f);
-    Boomerang.Converter jumpSpd = f => f < 0.6f ? 4.0f / 3 : 1.0f / 2;
-    Boomerang.Converter c = f => f < 0.6f ? 4 * f / 3 : f / 2 + 0.5f;
 
     private void Start()
     {
@@ -48,8 +39,12 @@ public partial class PlayerMove : MonoBehaviour
         yAxis = Input.GetAxis("Vertical");
         dodge = Input.GetButtonDown("Jump");
 
-        anim.SetFloat("xInput", xAxis);
-        anim.SetFloat("yInput", yAxis);
+        //Store last control input for anim facing dir
+        if (xAxis != 0 || yAxis != 0)
+        {
+            anim.SetFloat("xInput", xAxis);
+            anim.SetFloat("yInput", yAxis);
+        }
 
         if (dodge && jumpCooldown.IsReady)
         {
@@ -65,6 +60,14 @@ public partial class PlayerMove : MonoBehaviour
         if (PathEnd)
         {
             rb.velocity = new Vector2(xAxis, yAxis) * speed;
+            //Set moving state for animator
+            if (xAxis != 0 || yAxis != 0)
+            {
+                anim.SetBool("isMoving", true);
+            } else
+            {
+                anim.SetBool("isMoving", false);
+            }
         }
         else
         {
