@@ -32,6 +32,8 @@ public partial class PlayerMove : MonoBehaviour
     // Update is called once per frame
     float xAxis;
     float yAxis;
+    float xAxisRaw;
+    float yAxisRaw;
     bool dodge;
     void Update()
     {
@@ -39,11 +41,14 @@ public partial class PlayerMove : MonoBehaviour
         yAxis = Input.GetAxis("Vertical");
         dodge = Input.GetButtonDown("Jump");
 
+        //Check Raw inputs, keyboard only
+        xAxisRaw = Input.GetAxisRaw("Horizontal");
+        yAxisRaw = Input.GetAxisRaw("Vertical");
         //Store last control input for anim facing dir
-        if (xAxis != 0 || yAxis != 0)
+        if (xAxisRaw != 0 || yAxisRaw != 0)
         {
-            anim.SetFloat("xInput", xAxis);
-            anim.SetFloat("yInput", yAxis);
+            anim.SetFloat("xInput", xAxisRaw);
+            anim.SetFloat("yInput", yAxisRaw);
         }
 
         if (dodge && jumpCooldown.IsReady)
@@ -61,7 +66,7 @@ public partial class PlayerMove : MonoBehaviour
         {
             rb.velocity = new Vector2(xAxis, yAxis) * speed;
             //Set moving state for animator
-            if (xAxis != 0 || yAxis != 0)
+            if (Mathf.Abs(xAxis) >= .1f || Mathf.Abs(yAxis) >= .1f)
             {
                 anim.SetBool("isMoving", true);
             } else
