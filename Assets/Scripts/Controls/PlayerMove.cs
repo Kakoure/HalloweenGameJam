@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     [NonSerialized]
     public Vector2 outsideForce;
     private float end;
-
+    private Animator anim;
     public void SetOutsideForce(Vector2 outsideForce, float dur)
     {
         this.outsideForce = outsideForce;
@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
-
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -38,6 +38,8 @@ public class PlayerMove : MonoBehaviour
         xAxis = Input.GetAxis("Horizontal");
         yAxis = Input.GetAxis("Vertical");
         dodge = Input.GetButtonDown("Jump");
+        anim.SetFloat("xInput", xAxis);
+        anim.SetFloat("yInput", yAxis);
     }
 
     private void FixedUpdate()
