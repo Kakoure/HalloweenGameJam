@@ -23012,6 +23012,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 358116244, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2705875875498543486, guid: 217ecd0ba23b10a418a4fe7e25083954,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -23081,10 +23085,6 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 358116244}
-    - target: {fileID: 358116244, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
 --- !u!114 &1940231062 stripped
@@ -23491,32 +23491,9 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 88dc8ff2d77bd40439dd9d2297fd059c,
         type: 3}
     m_RemovedComponents:
-    - {fileID: 1402260636292657370, guid: 755846a13a77f0540bc6d48ec830746f, type: 3}
-    - {fileID: 3916141102960055220, guid: 755846a13a77f0540bc6d48ec830746f, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 755846a13a77f0540bc6d48ec830746f, type: 3}
---- !u!1 &7421165024889152017 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3916141102960055221, guid: 755846a13a77f0540bc6d48ec830746f,
-    type: 3}
-  m_PrefabInstance: {fileID: 7421165024889152016}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7421165024889152018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7421165024889152017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 186ae8927844ee349ba09cff2db9b17c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTime: 1
-  radius: 2
-  arcRadians: 0.375
-  damage: 2
-  force: 5
 --- !u!1001 &8603324811697038520
 PrefabInstance:
   m_ObjectHideFlags: 0
