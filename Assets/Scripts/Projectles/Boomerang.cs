@@ -13,7 +13,7 @@ public class Boomerang : MonoBehaviour
     {
         float rad = r(f);
         float thet = f * PI;
-        return new Vector2(rad * Sin(thet), rad * Cos(thet));
+        return new Vector2(rad * Mathf.Sin(thet), rad * Cos(thet));
     };
 
     public static Path Negx(Path p) => f =>
@@ -46,7 +46,7 @@ public class Boomerang : MonoBehaviour
     public float End => startTime + dur;
 
     public Path path = Polar180(Poly(6));
-    public Vector2 getCurrent(float time)
+    public Vector2 GetCurrent(float time)
     {
         return path(Clamp01((time - startTime)/dur));
     }
