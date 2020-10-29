@@ -9,7 +9,14 @@ using UnityEngine.UI;
 
 public abstract class HealthBar : MonoBehaviour
 {
-    public abstract void SetHealthBar(int hp, int HP);
+    public HealthBar chainLink;
+
+    public void SetHealth(int hp, int HP)
+    {
+        SetHealthBar(hp, HP);
+        chainLink?.SetHealth(hp, HP);
+    }
+    protected abstract void SetHealthBar(int hp, int HP);
 }
 
 public class TextHealthBar : HealthBar
@@ -22,7 +29,7 @@ public class TextHealthBar : HealthBar
         msg = text.text;
     }
 
-    public override void SetHealthBar(int hp, int HP)
+    protected override void SetHealthBar(int hp, int HP)
     {
         text.text = msg + hp;
     }

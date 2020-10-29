@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 class Player : Entity
 {
@@ -39,7 +40,7 @@ class Player : Entity
 
         //updates the healthbar
         HP -= damage;
-        healthBar.SetHealthBar(HP, MaxHP);
+        healthBar.SetHealth(HP, MaxHP);
         CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
         if (HP <= 0) Die();
         damageInvuln.Use();

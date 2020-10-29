@@ -21,20 +21,36 @@ public partial class PlayerMove : MonoBehaviour
     [Obsolete]
     private float end;
 
+    private Animator anim;
+
     private void Start()
     {
+        anim = GetComponent<Animator>();
         player = Player.Instance;
     }
 
     // Update is called once per frame
     float xAxis;
     float yAxis;
+    float xAxisRaw;
+    float yAxisRaw;
     bool dodge;
     void Update()
     {
         xAxis = Input.GetAxis("Horizontal");
         yAxis = Input.GetAxis("Vertical");
         dodge = Input.GetButtonDown("Jump");
+
+        //Check Raw inputs, keyboard only
+        xAxisRaw = Input.GetAxisRaw("Horizontal");
+        yAxisRaw = Input.GetAxisRaw("Vertical");
+        //Store last control input for anim facing dir
+        if (xAxisRaw != 0 || yAxisRaw != 0)
+        {
+            anim.SetFloat("xInput", xAxisRaw);
+            anim.SetFloat("yInput", yAxisRaw);
+        }
+
         if (dodge && jumpCooldown.IsReady)
         {
             Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -49,6 +65,14 @@ public partial class PlayerMove : MonoBehaviour
         if (PathEnd)
         {
             rb.velocity = new Vector2(xAxis, yAxis) * speed;
+            //Set moving state for animator
+            if (Mathf.Abs(xAxis) >= .1f || Mathf.Abs(yAxis) >= .1f)
+            {
+                anim.SetBool("isMoving", true);
+            } else
+            {
+                anim.SetBool("isMoving", false);
+            }
         }
         else
         {

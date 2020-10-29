@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CooldownTimer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ public class Joker : MonoBehaviour
     [NonSerialized]
     public BoomerangProj p2;
     private Boomerang b2;
+
+    public Cooldown boomerangTimer;
 
     private void Start()
     {

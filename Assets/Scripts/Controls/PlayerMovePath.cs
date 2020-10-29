@@ -25,7 +25,6 @@ public partial class PlayerMove
     /// <param name="duration">duration of path, higher is slower</param>
     public void SetPath(Path path, float duration)
     {
-        Debug.Log("dur :" + duration);
         this.pathStart = Time.time;
         this.pathDuration = duration;
         this.path = path;
