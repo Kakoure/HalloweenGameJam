@@ -10,7 +10,7 @@ public partial class PlayerMove : MonoBehaviour
     private static Player player;
     public Rigidbody2D rb;
 
-    public float speed;
+    public float speed = 5;
     public float diveDur;
     public float diveCoef;
     public Cooldown jumpCooldown;
