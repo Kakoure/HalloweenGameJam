@@ -249,7 +249,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1033348697
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8d5db41e6eacd92408a726778c9ec5a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 0
   HP: 100
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 1045067142}
   chaseDistance: 15
   aggressiveDist: 4
   jumpStr: 15
@@ -361,4 +361,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd4d576dd8f4464e8d9d903bccab35b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
+  chainLink: {fileID: 1045067142}
+  text: {fileID: 358116244}
