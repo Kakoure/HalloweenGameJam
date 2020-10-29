@@ -43,7 +43,14 @@ class Player : Entity
         HP -= damage;
         healthBar.SetHealth(HP, MaxHP);
         CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
-        if (HP <= 0) Die();
+        if (HP <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            StartCoroutine("DamageFlash");
+        }
         damageInvuln.Use();
 
         ApplyImpulse(force, from);

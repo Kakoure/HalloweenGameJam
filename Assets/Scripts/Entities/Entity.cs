@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 
 namespace Items
@@ -22,8 +23,12 @@ namespace Items
             HP -= damage;
             healthBar.SetHealth(HP, MaxHP);
             CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
-            if (HP <= 0) Die();
-
+            if (HP <= 0) {
+                Die();
+            }
+            else {
+                StartCoroutine("DamageFlash");
+            }
             //apply impulse
             ApplyImpulse(force, from);
 
@@ -44,6 +49,21 @@ namespace Items
         public virtual void Start()
         {
             healthBar.SetHealth(HP, MaxHP);
+        }
+
+        private IEnumerator DamageFlash()
+        {
+            if(GetComponent<SpriteRenderer>() != null)
+            {
+                SpriteRenderer sprRend = GetComponent<SpriteRenderer>();
+                sprRend.material.SetColor("_FlashColor", Color.white);
+                sprRend.material.SetFloat("_FlashAmount", 1);
+                yield return new WaitForSeconds(.1f);
+                sprRend.material.SetColor("_FlashColor", Color.red);
+                yield return new WaitForSeconds(.1f);
+                sprRend.material.SetFloat("_FlashAmount", 0);
+            }
+           
         }
         //etc.
     }
