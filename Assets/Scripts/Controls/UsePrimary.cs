@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class UsePrimary : MonoBehaviour
 {
+    Player p;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        p = Player.Instance;
     }
 
     bool? mouse = null;
@@ -17,6 +19,8 @@ public class UsePrimary : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!p.pm.PathEnd) return;
+
         if (Input.GetButtonDown("Fire1")) mouse = true;
         if (Input.GetButtonDown("Fire2")) mouse2 = true;
         if (Input.GetButtonUp("Fire1")) mouse = false;

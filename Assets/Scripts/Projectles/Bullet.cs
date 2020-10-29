@@ -38,26 +38,25 @@ public class Bullet : Projectile
     }
 
     //rewritten to generalize with all shootable targets.
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         //bullet should be on the same layer as player so no self collision
         //if (collision.gameObject == Owner) return;
-
         if (collision.gameObject.CompareTag("Monster"))
         {
             Entity entity = collision.gameObject.GetComponent<Entity>();
             if (entity != null)
             {
-                Vector2 pos = collision.ClosestPoint(gameObject.transform.position);
-                entity.Rigidbody.AddForce((entity.transform.position - this.transform.position).normalized * knockBack, ForceMode2D.Impulse);
-                entity.DealDamage(Damage);
-                KillObject();
+                bool damageSuccess = entity.DealDamage(Damage, knockBack, this.transform.position);
+                if (damageSuccess)
+                {
+                    KillObject();
+                }
             }
         }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
+
         //delete on collision with wall
+        //only if transform is inside the wall to make it easier to shoot through/around corners
         if (collision.gameObject.CompareTag("Geometry") && collision.OverlapPoint(this.transform.position))
         {
             KillObject();

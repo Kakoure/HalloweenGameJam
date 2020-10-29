@@ -47,8 +47,7 @@ namespace Items
                     {
                         //deal damage
                         Entity entity = col.GetComponent<Entity>();
-                        entity.ApplyImpulse(force, player.position);
-                        entity.DealDamage(damage);
+                        bool success = entity.DealDamage(damage, force, player.position);
                     }
                 }
             }

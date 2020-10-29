@@ -12,12 +12,12 @@ public class SetPlayerCursor : MonoBehaviour
     {
         if (cursor != null)
             Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
-        if (cursorTwo == null) cursorTwo = cursor;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (cursorTwo == null) return;
         if (Input.GetButtonDown("Fire1")) Cursor.SetCursor(cursorTwo, new Vector2(cursorTwo.width / 2, cursorTwo.height / 2), CursorMode.ForceSoftware);
         if (Input.GetButtonUp("Fire1")) Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
     }
