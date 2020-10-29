@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 class Player : Entity
@@ -48,6 +49,10 @@ class Player : Entity
         ApplyImpulse(force, from);
 
         return true;
+    }
+    public override void Die()
+    {
+        SceneManager.LoadScene("RIP");
     }
 
     public override void Awake()
