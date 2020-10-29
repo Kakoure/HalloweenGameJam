@@ -36,8 +36,6 @@ public partial class PlayerMove : MonoBehaviour
         yAxis = Input.GetAxis("Vertical");
         dodge = Input.GetButtonDown("Jump");
 
-        
-
         if (dodge && jumpCooldown.IsReady)
         {
             SetPath(Boomerang.Mult(speed * diveCoef, RollPath(facingDir.normalized)), diveDur);
@@ -62,10 +60,9 @@ public partial class PlayerMove : MonoBehaviour
                 anim.SetFloat("xInput", xAxisRaw);
                 anim.SetFloat("yInput", yAxisRaw);
                 facingDir.Set(xAxisRaw, yAxisRaw);
-
             }
 
-            rb.velocity = new Vector2(xAxis, yAxis) * speed;
+            rb.velocity = new Vector2(xAxis, yAxis).normalized * speed;
             //Set moving state for animator
             if (Mathf.Abs(xAxis) >= .1f || Mathf.Abs(yAxis) >= .1f)
             {

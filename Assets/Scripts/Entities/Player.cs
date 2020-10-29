@@ -45,7 +45,7 @@ class Player : Entity
         CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
         if (HP <= 0) Die();
         damageInvuln.Use();
-
+        StartCoroutine("DamageFlash");
         ApplyImpulse(force, from);
 
         return true;
