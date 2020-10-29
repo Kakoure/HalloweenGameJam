@@ -22,8 +22,8 @@ TagManager:
   - Monster
   - Geometry
   - Items
-  - 
-  - 
+  - PhysicalCollider
+  - DamageOnCollision
   - 
   - 
   - 
@@ -43,14 +43,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Items
-    uniqueID: 4103241067
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Floors
     uniqueID: 2544038573
+    locked: 0
+  - name: Items
+    uniqueID: 4103241067
     locked: 0
   - name: Monster
     uniqueID: 3261618599

@@ -15,12 +15,6 @@ public partial class PlayerMove : MonoBehaviour
     public float diveCoef;
     public Cooldown jumpCooldown;
 
-    [NonSerialized]
-    [Obsolete]
-    public Vector2 outsideForce;
-    [Obsolete]
-    private float end;
-
     private Animator anim;
 
     private void Start()
@@ -35,18 +29,16 @@ public partial class PlayerMove : MonoBehaviour
     float xAxisRaw;
     float yAxisRaw;
     bool dodge;
+    Vector2 facingDir;
     void Update()
     {
         xAxis = Input.GetAxis("Horizontal");
         yAxis = Input.GetAxis("Vertical");
         dodge = Input.GetButtonDown("Jump");
 
-        
-
         if (dodge && jumpCooldown.IsReady)
         {
-            Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            SetPath(Boomerang.Mult(speed * diveCoef, RollPath(dir)), diveDur);
+            SetPath(Boomerang.Mult(speed * diveCoef, RollPath(facingDir.normalized)), diveDur);
             player.damageInvuln.Use();
             jumpCooldown.Use();
 
@@ -67,9 +59,10 @@ public partial class PlayerMove : MonoBehaviour
             {
                 anim.SetFloat("xInput", xAxisRaw);
                 anim.SetFloat("yInput", yAxisRaw);
+                facingDir.Set(xAxisRaw, yAxisRaw);
             }
 
-            rb.velocity = new Vector2(xAxis, yAxis) * speed;
+            rb.velocity = new Vector2(xAxis, yAxis).normalized * speed;
             //Set moving state for animator
             if (Mathf.Abs(xAxis) >= .1f || Mathf.Abs(yAxis) >= .1f)
             {

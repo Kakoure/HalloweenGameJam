@@ -11,6 +11,6 @@ public class Debugger : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.D)) joker.FireBoomerangs();
+
     }
 }

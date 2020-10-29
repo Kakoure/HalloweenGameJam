@@ -10,7 +10,7 @@ public class RevealInSeconds : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        seconds += Time.time;
     }
 
     // Update is called once per frame
