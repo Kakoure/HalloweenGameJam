@@ -9,7 +9,7 @@ public class HealthBarTwo : HealthBar
 {
     public Transform bar;
 
-    public override void SetHealthBar(int hp, int HP)
+    protected override void SetHealthBar(int hp, int HP)
     {
         //scale the x component
         float frac = (float)hp / HP;

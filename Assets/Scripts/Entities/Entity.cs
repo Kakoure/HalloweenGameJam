@@ -20,7 +20,7 @@ namespace Items
         {
             //updates the healthbar
             HP -= damage;
-            healthBar.SetHealthBar(HP, MaxHP);
+            healthBar.SetHealth(HP, MaxHP);
             CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
             if (HP <= 0) Die();
 
@@ -43,7 +43,7 @@ namespace Items
         public virtual void Awake() { }
         public virtual void Start()
         {
-            healthBar.SetHealthBar(HP, MaxHP);
+            healthBar.SetHealth(HP, MaxHP);
         }
         //etc.
     }
