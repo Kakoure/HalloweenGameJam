@@ -23085,6 +23085,11 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 358116244}
+    - target: {fileID: 2705875875498543481, guid: 217ecd0ba23b10a418a4fe7e25083954,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d2eeacee9d847045ab18bce8c82f174, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
 --- !u!114 &1940231062 stripped
@@ -23509,12 +23514,12 @@ PrefabInstance:
     - target: {fileID: 377278816543342217, guid: e7ec070ab4e74614a9090250c607c005,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.62
+      value: 15.74
       objectReference: {fileID: 0}
     - target: {fileID: 377278816543342217, guid: e7ec070ab4e74614a9090250c607c005,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.4668267
+      value: 3.33
       objectReference: {fileID: 0}
     - target: {fileID: 377278816543342217, guid: e7ec070ab4e74614a9090250c607c005,
         type: 3}
@@ -23576,5 +23581,35 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 20567189}
+    - target: {fileID: 377278816543342192, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 377278816543342192, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 377278816543342192, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 377278816543342192, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 377278816543342192, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 377278816543342192, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d2eeacee9d847045ab18bce8c82f174, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7ec070ab4e74614a9090250c607c005, type: 3}
