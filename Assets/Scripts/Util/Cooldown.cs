@@ -8,17 +8,18 @@ namespace CooldownTimer
     [Serializable]
     public struct Cooldown
     {
-        private float useTime;
-        public float UseTime => useTime;
+        public float UseTime { get; private set; }
 
         [SerializeField]
         private float cooldownTime;
         public float CooldownTime => cooldownTime;
 
+        public float StartTime => UseTime - cooldownTime;
+
         public bool IsReady { get => Time.time > UseTime; }
         public void Use()
         {
-            useTime = Time.time + CooldownTime;
+            UseTime = Time.time + CooldownTime;
         }
         public void Use(float cooldownTime)
         {

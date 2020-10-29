@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CooldownTimer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,11 @@ public partial class PlayerMove
     static Converter c = f => f < 0.6f ? 4 * f / 3 : f / 2 + 0.5f;
     public static Path RollPath(Vector2 dir) => LinePath(rollConv, dir);
 
-    float pathStart = 0;
-    float pathDuration;
+    //float pathStart = 0;
+    //float pathDuration;
+    Cooldown pathDuration;
 
-    public bool PathEnd => Time.time > pathStart + pathDuration;
+    public bool PathEnd => pathDuration.IsReady;
     public Path path = f => Vector2.zero;
 
     /// <summary>
@@ -25,14 +27,13 @@ public partial class PlayerMove
     /// <param name="duration">duration of path, higher is slower</param>
     public void SetPath(Path path, float duration)
     {
-        this.pathStart = Time.time;
-        this.pathDuration = duration;
+        this.pathDuration.Use(duration);
         this.path = path;
     }
     Vector2 GetPathVel()
     {
-        float t = Time.time - pathStart;
-        t /= pathDuration;
+        float t = Time.time - pathDuration.StartTime;
+        t /= pathDuration.CooldownTime;
         return path(t);
     }
 }

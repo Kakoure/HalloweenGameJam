@@ -557,6 +557,58 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 877171499016523530, guid: fc07048fb7cf0244ba232c488ec9e494, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fc07048fb7cf0244ba232c488ec9e494, type: 3}
+--- !u!1 &580140486 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2705875875498543480, guid: 217ecd0ba23b10a418a4fe7e25083954,
+    type: 3}
+  m_PrefabInstance: {fileID: 1940231061}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &580140493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580140486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742bd5c33e58d0344bb0c81041fdd381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  force: 10
+--- !u!1 &661588991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2114062026, guid: 217ecd0ba23b10a418a4fe7e25083954,
+    type: 3}
+  m_PrefabInstance: {fileID: 1940231061}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &661588993
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661588991}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 0.64, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &664278060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,8 +1777,30 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 9b285a8f0f3821c4b8c1f4da408f521e, type: 2}
+    - target: {fileID: 1696261734, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696261734, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696261734, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696261734, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114062026, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1696261738, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
+    - {fileID: 2114062029, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
+    - {fileID: 2114062028, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 217ecd0ba23b10a418a4fe7e25083954, type: 3}
 --- !u!1 &2055213529
 GameObject:
@@ -1953,6 +2027,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Geometry
       objectReference: {fileID: 0}
+    - target: {fileID: 1501473095146283053, guid: b3227afb86da96843b9a084c09542fd2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1501473095146283048, guid: b3227afb86da96843b9a084c09542fd2,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -1962,6 +2041,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501473096234464033, guid: b3227afb86da96843b9a084c09542fd2,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1750928723
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501473096234464033, guid: b3227afb86da96843b9a084c09542fd2,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3227afb86da96843b9a084c09542fd2, type: 3}
