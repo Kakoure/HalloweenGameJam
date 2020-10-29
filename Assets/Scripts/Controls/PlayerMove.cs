@@ -7,6 +7,7 @@ using CooldownTimer;
 
 public partial class PlayerMove : MonoBehaviour
 {
+    private const float deadZone = .1f;
     private static Player player;
     public Rigidbody2D rb;
 
@@ -62,15 +63,16 @@ public partial class PlayerMove : MonoBehaviour
                 facingDir.Set(xAxisRaw, yAxisRaw);
             }
 
-            rb.velocity = new Vector2(xAxis, yAxis).normalized * speed;
             //Set moving state for animator
-            if (Mathf.Abs(xAxis) >= .1f || Mathf.Abs(yAxis) >= .1f)
+            if (Mathf.Abs(xAxis) >= deadZone || Mathf.Abs(yAxis) >= deadZone)
             {
                 anim.SetBool("isMoving", true);
             } else
             {
                 anim.SetBool("isMoving", false);
             }
+
+            rb.velocity = Vector2.ClampMagnitude(new Vector2(xAxis, yAxis), 1) * speed;
         }
         else
         {

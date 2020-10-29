@@ -43,11 +43,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Floors
     uniqueID: 2544038573
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Items
     uniqueID: 4103241067

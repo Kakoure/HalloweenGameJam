@@ -31,19 +31,22 @@ class Player : Entity
     //also apply impuls for playe ignores force parameter
     protected override void ApplyImpulse(float force, Vector2 from)
     {
+        if (force == 0) return; //if no force return
+
         Vector2 v = (Vector2)transform.position - from;
-        Debug.Log(damageKnockbackDur);
         pm.SetPath(PlayerMove.RollPath(damageKnockbackCoef * v.normalized), damageKnockbackDur);
     }
     public override bool DealDamage(int damage, float force, Vector2 from)
     {
         if (IsInvuln) return false;
 
+        hp -= damage;
+        hp = Mathf.Clamp(hp, 0, MaxHP); //make sure that the player is not overhealed
+
         //updates the healthbar
-        HP -= damage;
-        healthBar.SetHealth(HP, MaxHP);
+        healthBar.SetHealth(hp, MaxHP);
         CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
-        if (HP <= 0)
+        if (hp <= 0)
         {
             Die();
         }
@@ -51,9 +54,16 @@ class Player : Entity
         {
             StartCoroutine("DamageFlash");
         }
+
+        //activate damageInvulnurablilty
         damageInvuln.Use();
 
+        //apply force
         ApplyImpulse(force, from);
+
+        //if weapon implements IDamageTaken then call it
+        IDamageTaken damageTaken = Inventory.CurrentWeapon as IDamageTaken;
+        damageTaken?.OnDamageTaken(damage, from);
 
         return true;
     }

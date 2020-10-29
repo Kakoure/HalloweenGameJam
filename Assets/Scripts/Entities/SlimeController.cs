@@ -30,9 +30,9 @@ public class SlimeController : Entity
     private void Wander()
     {
         Vector2 dir = Random.insideUnitCircle;
-        Jump((Vector2)transform.position + dir, passiveStr);
+        Jump((Vector2)transform.position + dir, passiveStr, false);
     }
-    private void Jump(Vector2 location, float str)
+    private void Jump(Vector2 location, float str, bool setVel)
     {
         var nearby = Physics2D.OverlapCircleAll(transform.position, 1);
 
@@ -48,7 +48,9 @@ public class SlimeController : Entity
                 dir += -vec.normalized * dist2;
             }
         }
-        rb.velocity = dir.normalized * str;
+
+        if (setVel) rb.velocity = dir.normalized * str; //override current velocity
+        else rb.velocity += dir.normalized * str; //add to current velocity
     }
     private bool JumpAggressiveTest()
     {
@@ -56,14 +58,14 @@ public class SlimeController : Entity
     }
     private void JumpAggressiveAction()
     {
-        Jump(target.transform.position, jumpStr);
+        Jump(target.transform.position, jumpStr, true);
     }
 
     private void JumpWalkAction()
     {
         if (target != null)
         {
-            Jump(target.transform.position, passiveStr);
+            Jump(target.transform.position, passiveStr, false);
         }
         else
         {
