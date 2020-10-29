@@ -41,15 +41,7 @@ public partial class PlayerMove : MonoBehaviour
         yAxis = Input.GetAxis("Vertical");
         dodge = Input.GetButtonDown("Jump");
 
-        //Check Raw inputs, keyboard only
-        xAxisRaw = Input.GetAxisRaw("Horizontal");
-        yAxisRaw = Input.GetAxisRaw("Vertical");
-        //Store last control input for anim facing dir
-        if (xAxisRaw != 0 || yAxisRaw != 0)
-        {
-            anim.SetFloat("xInput", xAxisRaw);
-            anim.SetFloat("yInput", yAxisRaw);
-        }
+        
 
         if (dodge && jumpCooldown.IsReady)
         {
@@ -57,6 +49,9 @@ public partial class PlayerMove : MonoBehaviour
             SetPath(Boomerang.Mult(speed * diveCoef, RollPath(dir)), diveDur);
             player.damageInvuln.Use();
             jumpCooldown.Use();
+
+            //Anim parameter updates
+            anim.SetTrigger("Dodge");
         }
     }
 
@@ -64,6 +59,16 @@ public partial class PlayerMove : MonoBehaviour
     {
         if (PathEnd)
         {
+            //Check Raw inputs, keyboard only
+            xAxisRaw = Input.GetAxisRaw("Horizontal");
+            yAxisRaw = Input.GetAxisRaw("Vertical");
+            //Store last control input for anim facing dir
+            if (xAxisRaw != 0 || yAxisRaw != 0)
+            {
+                anim.SetFloat("xInput", xAxisRaw);
+                anim.SetFloat("yInput", yAxisRaw);
+            }
+
             rb.velocity = new Vector2(xAxis, yAxis) * speed;
             //Set moving state for animator
             if (Mathf.Abs(xAxis) >= .1f || Mathf.Abs(yAxis) >= .1f)
