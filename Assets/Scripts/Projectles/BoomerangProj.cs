@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using static Boomerang;
 
 public class BoomerangProj : MonoBehaviour, IProjectile
 {
@@ -19,13 +19,13 @@ public class BoomerangProj : MonoBehaviour, IProjectile
     public void Awake()
     {
         boomer = GetComponent<Boomerang>();
-        boomer.startTime = Time.time;
-        boomer.dur = dur;
+        Debug.Log(boomer);
+        gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        transform.position = boomer.getCurrent(Time.time) + src;
+        transform.position = boomer.GetCurrent(Time.time) + src;
         if (Time.time > boomer.End) Die();
     }
 
@@ -46,11 +46,18 @@ public class BoomerangProj : MonoBehaviour, IProjectile
         this.Damage = damage;
     }
     public void Die() => gameObject.SetActive(false);
-
+   
     public void Fire(Vector2 src)
     {
         this.src = src;
         gameObject.SetActive(true);
+        boomer.startTime = Time.time;
+    }
+    public void Fire(Vector2 src, Path p, float dur)
+    {
+        this.boomer.path = p;
+        this.boomer.dur = dur;
+        this.Fire(src);
     }
 }
 
