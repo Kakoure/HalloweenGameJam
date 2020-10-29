@@ -10,34 +10,40 @@ namespace Items
     //tmp
     public abstract class Entity : MonoBehaviour
     {
-        // TODO: ...
+        public int MaxHP;
         public int HP;
         public abstract Rigidbody2D Rigidbody { get; }
-        public HealthBar HealthBar { get; private set; }
+        public HealthBar healthBar;
 
-        public void DealDamage(int damage)
+        //return success
+        public virtual bool DealDamage(int damage, float force, Vector2 from)
         {
             //updates the healthbar
             HP -= damage;
-            HealthBar.Health = HP;
+            healthBar.SetHealth(HP, MaxHP);
             CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
             if (HP <= 0) Die();
+
+            //apply impulse
+            ApplyImpulse(force, from);
+
+            return true;
         }
-        public void Die()
+        public virtual void Die()
         {
             if (HP <= 0)
                 gameObject.SetActive(false);
         }
-        public void ApplyImpulse(float force, Vector2 from)
+        protected virtual void ApplyImpulse(float force, Vector2 from)
         {
             Vector2 disp = (Vector2)transform.position - from;
             Rigidbody.AddForce(disp.normalized * force, ForceMode2D.Impulse);
         }
 
-        public virtual void Awake()
+        public virtual void Awake() { }
+        public virtual void Start()
         {
-            HealthBar = GetComponent<HealthBar>();
-            HealthBar.Health = HP;
+            healthBar.SetHealth(HP, MaxHP);
         }
         //etc.
     }

@@ -80,8 +80,10 @@ public class SlimeController : Entity
     }
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         jumper.passiveWait = invalidAttemptCooldown;
         jumpAggressive.test = JumpAggressiveTest;
         jumpAggressive.action = JumpAggressiveAction;
