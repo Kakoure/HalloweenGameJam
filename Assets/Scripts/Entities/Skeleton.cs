@@ -21,7 +21,9 @@ public class Skeleton : Entity
     public Cooldown seekTimer;
     public Sprite bulletSprite;
     public float deadZone;
-
+    private Animator anim;
+    [Tooltip("Time disabled after getting hit")]
+    public Cooldown hitstun;
     public Vector2 Wander()
     {
         return UnityEngine.Random.insideUnitCircle * wander;
@@ -35,8 +37,45 @@ public class Skeleton : Entity
         rb = GetComponent<Rigidbody2D>();
         var i = Wander();
         seeker = () => i;
+        
+        anim = GetComponent<Animator>();
     }
+    public override bool DealDamage(int damage, float force, Vector2 from)
+    {
+        hitstun.Use();
+       return base.DealDamage(damage, force, from);      
+    }
+    public override void Die()
+    {
+        //For archer while no sprite
+        if (fireArrows)
+        {
+            base.Die();
+            return;
+        }
 
+        //For skele warror
+        if (hp <= 0)
+        {
+            anim.SetTrigger("Dead");
+        }
+        Neutralize();
+        Invoke("Disappear", 6f);
+    }
+    //Make slime stop attacking, corpse sits there for a bit
+    private void Neutralize()
+    {
+        hitstun.Use(10f);
+        foreach (Collider2D col in GetComponents<Collider2D>())
+        {
+            col.enabled = false;
+        }
+    }
+    private void Disappear()
+    {
+        IEnumerator fade = FadeAway(2f);
+        StartCoroutine(fade);
+    }
     Func<Vector2> seeker;
     Transform target = null;
     // Update is called once per frame
@@ -63,6 +102,34 @@ public class Skeleton : Entity
             bul.GetComponent<SpriteRenderer>().sprite = bulletSprite;
             arrowCooldown.Use();
             stopWhileFireing.Use();
+        }
+
+        //Anim updates
+        if(anim != null)
+        {
+            if(rb.velocity.sqrMagnitude > .05f)
+            {
+                anim.SetBool("isMoving", true);
+                
+            } else
+            {
+                anim.SetBool("isMoving", false);
+            }
+            if (target != null)
+            {
+                Vector2 dist = target.position - transform.position;
+                float absDist = dist.magnitude;
+                if (absDist < 1.8f)
+                {
+                    anim.SetTrigger("Attack");
+                }
+                anim.SetFloat("xInput", dist.normalized.x);
+                anim.SetFloat("yInput", dist.normalized.y);
+            } else
+            {
+                anim.SetFloat("xInput", rb.velocity.normalized.x);
+                anim.SetFloat("yInput", rb.velocity.normalized.y);
+            }
         }
     }
     private void FixedUpdate()
@@ -92,8 +159,10 @@ public class Skeleton : Entity
                 dir += -vec.normalized * dist2;
             }
         }
-
-        rb.velocity = dir.normalized * speed;
+        if (hitstun.IsReady)
+        {
+            rb.velocity = dir.normalized * speed;
+        }
 
     }
 }

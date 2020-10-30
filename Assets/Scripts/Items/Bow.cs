@@ -27,7 +27,7 @@ namespace Items
         private float defSpeed;
         public FireProjectile fireArrow;
         private PlayerMove movement;
-
+        private Animator playerAnim;
         #region charging
 
         private float chargeTime = 0;
@@ -62,6 +62,7 @@ namespace Items
             movement = Player.Instance.GetComponent<PlayerMove>();
             defSpeed = movement.speed;
             id = ItemID.Bow;
+            playerAnim = Player.Instance.GetComponent<Animator>();
         }
 
         public override void AltFire(Transform player, bool down)
@@ -77,6 +78,7 @@ namespace Items
 
                 //begin charge
                 ChargingState = true;
+                playerAnim.SetBool("isAiming", true);
             }
             else
             {
@@ -84,7 +86,10 @@ namespace Items
 
                 //release and fire
                 ChargingState = false;
-
+                playerAnim.SetBool("isAiming", false);
+                Vector2 lookDir = (CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.gameObject.transform.position).normalized;
+                playerAnim.SetFloat("xInput", lookDir.x);
+                playerAnim.SetFloat("yInput", lookDir.y);
                 //chargeTime is deltaTime
                 int damage = GetDamage(chargeTime);
                 float kb = GetKnockback(chargeTime);
@@ -117,7 +122,13 @@ namespace Items
         {
             //cancel charge
             if (ChargingState)
+            {
                 ChargingState = false;
+                playerAnim.SetBool("isAiming", false);
+                Vector2 lookDir = (CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.gameObject.transform.position).normalized;
+                playerAnim.SetFloat("xInput", lookDir.x);
+                playerAnim.SetFloat("yInput", lookDir.y);
+            }
         }
 
         public Bow() : base(bowMass)

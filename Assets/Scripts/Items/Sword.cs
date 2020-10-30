@@ -34,6 +34,7 @@ public class Sword : Weapon
                 //drop this item
                 this.DropAt(bullet.transform.position);
             };
+            bullet.GetComponent<Animator>().enabled = false;
             Inventory.PopFromSlot(Inventory.Instance.shield);
         }
     }
@@ -107,8 +108,8 @@ public class Sword : Weapon
             anim.SetInteger("Combo", 0);
         }
         comboReset.Use(1f);
-        anim.SetFloat("xInput", lookDir.x);
-        anim.SetFloat("yInput", lookDir.y);
+        //anim.SetFloat("xInput", lookDir.x);
+        //anim.SetFloat("yInput", lookDir.y);
         
         Path lungePath = LinePath(lungeConverter, lookDir);
         Player.Instance.pm.SetPath(Boomerang.Mult(Player.Instance.pm.speed, lungePath), .5f);
