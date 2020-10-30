@@ -1,7 +1,4 @@
 ﻿using Items;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,12 +39,14 @@ public class Inventory : MonoBehaviour
     public static void AssignTo(Item item, InventorySlot slot)
     {
         slot.Item = item;
+        EvaluateAnimWeaponID();
     }
 
     public static Item PopFromSlot(InventorySlot slot)
     {
         Item tmp = slot.Item;
         slot.Item = null;
+        EvaluateAnimWeaponID();
         return tmp;
     }
     public static Item PopFromSlot(Transform slot)
@@ -102,6 +101,7 @@ public class Inventory : MonoBehaviour
     private Item unarmed;
     public InventorySlot weapon;
     public InventorySlot shield;
+    private int currentWepID;
 
     private void Awake()
     {
@@ -117,6 +117,24 @@ public class Inventory : MonoBehaviour
         unarmed = GameObject.FindGameObjectWithTag("Unarmed").GetComponent<Item>();
     }
 
+    private static void EvaluateAnimWeaponID()
+    {
+        Animator anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        if(anim != null && Instance.currentWepID != CurrentWeapon.ID)
+        {
+            switch (CurrentWeapon.ID)
+            {
+                case 1:
+                    anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Sword Anim Controller") as RuntimeAnimatorController;
+                    break;
+                default:
+                    anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Anim Controller") as RuntimeAnimatorController;
+                    break;
+            }
+           
+        }
+        Instance.currentWepID = CurrentWeapon.ID;
+    }
     private void Start()
     {
     }

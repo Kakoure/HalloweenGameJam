@@ -1424,6 +1424,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614764580}
   m_CullTransparentMesh: 0
+--- !u!1 &1685813608 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3916141102960055221, guid: 755846a13a77f0540bc6d48ec830746f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7421165024889152016}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1685813609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685813608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186ae8927844ee349ba09cff2db9b17c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 0.15
+  radius: 2
+  arcRadians: 0.5
+  damage: 3
+  force: 2
 --- !u!1 &1712847092 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 877171499016523529, guid: fc07048fb7cf0244ba232c488ec9e494,
@@ -2236,6 +2259,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 9161909879284659548, guid: 755846a13a77f0540bc6d48ec830746f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 755846a13a77f0540bc6d48ec830746f, type: 3}
 --- !u!1001 &8603324811697038520
 PrefabInstance:
@@ -2319,5 +2343,10 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 20567189}
+    - target: {fileID: 377278816543342216, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 31dcbc1c2fffc774f98c23767eae9f94, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7ec070ab4e74614a9090250c607c005, type: 3}
