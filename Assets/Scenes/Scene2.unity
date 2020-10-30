@@ -527,6 +527,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 343150431}
   m_CullTransparentMesh: 0
+--- !u!1 &354033404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8849658275894621418, guid: 1753444629d78284d95ebdf4e5d406b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 481606585}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &357018858
 GameObject:
   m_ObjectHideFlags: 0
@@ -4057,6 +4063,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 2197358225126124150, guid: 1753444629d78284d95ebdf4e5d406b0,
+        type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8849658275894621416, guid: 1753444629d78284d95ebdf4e5d406b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4112,11 +4123,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2197358225126124150, guid: 1753444629d78284d95ebdf4e5d406b0,
-        type: 3}
-      propertyPath: damage
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1753444629d78284d95ebdf4e5d406b0, type: 3}
 --- !u!1 &479069587
@@ -4165,6 +4171,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2197358225126124150, guid: 1753444629d78284d95ebdf4e5d406b0,
+        type: 3}
+      propertyPath: damage
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8849658275894621416, guid: 1753444629d78284d95ebdf4e5d406b0,
         type: 3}
@@ -4220,11 +4231,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2197358225126124150, guid: 1753444629d78284d95ebdf4e5d406b0,
-        type: 3}
-      propertyPath: damage
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1753444629d78284d95ebdf4e5d406b0, type: 3}
@@ -4290,6 +4296,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 2197358225126124150, guid: 1753444629d78284d95ebdf4e5d406b0,
+        type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8849658275894621416, guid: 1753444629d78284d95ebdf4e5d406b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4344,11 +4355,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2197358225126124150, guid: 1753444629d78284d95ebdf4e5d406b0,
-        type: 3}
-      propertyPath: damage
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1753444629d78284d95ebdf4e5d406b0, type: 3}
@@ -7764,9 +7770,9 @@ MonoBehaviour:
   shotDamage: 10
   shotKnockback: 1
   shotSpeed: 6
-  shotPrefab: {fileID: 883646783086878824, guid: bb9dfae2a93d88346859ad45ce8871c4,
+  shotPrefab: {fileID: 9029948078912441039, guid: 641be07ab27295a46bbfa9a4cb010de9,
     type: 3}
-  ballPrefab: {fileID: 0}
+  ballPrefab: {fileID: 354033404}
   slimePrefab: {fileID: 0}
   boomerangTimer:
     cooldownTime: 2
@@ -8306,6 +8312,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 2197358225126124150, guid: 1753444629d78284d95ebdf4e5d406b0,
+        type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8849658275894621416, guid: 1753444629d78284d95ebdf4e5d406b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8360,11 +8371,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2197358225126124150, guid: 1753444629d78284d95ebdf4e5d406b0,
-        type: 3}
-      propertyPath: damage
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1753444629d78284d95ebdf4e5d406b0, type: 3}
@@ -8529,7 +8535,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 481606585}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 354033404}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b6f8863ef0ad89429a6564a55f4bc56, type: 3}
