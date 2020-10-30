@@ -23,6 +23,10 @@ namespace Items
         public Bullet Execute(Transform player, out Vector2 dir)
         {
             dir = CameraReference.MouseVec(player.position);
+            return Execute(player, dir);
+        }
+        public Bullet Execute(Transform player, Vector2 dir)
+        {
             var fire = GameObject.Instantiate(Bullet, player.position, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x)));
             Bullet bullet = fire.GetComponent<Bullet>();
             bullet.Initialize(damage, speed);

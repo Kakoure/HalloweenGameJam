@@ -1,4 +1,5 @@
 ﻿using CooldownTimer;
+using Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using static Boomerang;
 
-public partial class Joker : MonoBehaviour
+public partial class Joker : Entity
 {
     public BoomerangProj p1;
     private Boomerang b1;
@@ -17,13 +18,32 @@ public partial class Joker : MonoBehaviour
     public Transform testTarget;
     public float boomerangRadius;
     public float boomerangTime;
+    public float shotSpread;
+    public int shotDamage;
+    public int shotKnockback = 1;
+    public int shotSpeed;
+    public Sprite shotSprite;
     public Cooldown boomerangTimer;
     public Cooldown altTimer;
     public Cooldown mainTimer;
+    public int teleportHP1;
+    public Transform secondTeleport;
+    public int teleportHP2;
+    public Transform thirdTeleport;
 
+    FireProjectile fire;
 
-    private void Start()
+    public override void Awake()
     {
+        base.Awake();
+        //_rb = GetComponent<Rigidbody2D>();
+    }
+    private int teleportHP;
+    private Transform teleport;
+    public override void Start()
+    {
+        base.Start();
+
         b1 = p1.GetComponent<Boomerang>();
         b2 = p2.GetComponent<Boomerang>();
 
@@ -35,6 +55,12 @@ public partial class Joker : MonoBehaviour
         p2.Fire(this.transform.position, path2, boomerangTime);
 
         mainCycle = MainCycler;
+        altCycle = FireAtTarget;
+
+        teleportHP = teleportHP1;
+        teleport = secondTeleport;
+
+        fire = new FireProjectile(CameraReference.Instance.bulletGeneric, shotDamage, shotKnockback, shotSpeed);
     }
 
     public void FireBoomerangs(Path path1, Path path2, float time = -1)
@@ -45,96 +71,47 @@ public partial class Joker : MonoBehaviour
         p2.Fire(this.transform.position, path2, time);
         boomerangTimer.Use();
     }
+    public void FireAt(Vector2 location)
+    {
+        Vector2 dir = location - (Vector2)this.transform.position;
+        dir = dir.normalized;
+        Vector2 dir2 = Quaternion.Euler(0, 0, shotSpread) * dir;
+        Vector2 dir3 = Quaternion.Euler(0, 0, -shotSpread) * dir;
+
+        fire.Execute(transform, dir).GetComponent<SpriteRenderer>().sprite = shotSprite;
+        fire.Execute(transform, dir2).GetComponent<SpriteRenderer>().sprite = shotSprite;
+        fire.Execute(transform, dir3).GetComponent<SpriteRenderer>().sprite = shotSprite;
+    }
 
     //amazing recursion
     //some really interesting feature of C# is that you can declare a delegate type that depends on itself
     public delegate float Cycle(ref Cycle c);
     private Cycle mainCycle;
-    private Cycle action;// the current state called every update
+    private Cycle action;// the current state called every timer cooldown
     private Cycle altCycle;
-    
-    float MainCycler(ref Cycle self)
-    {
-        action = Phase1;
-        self = Cycle2;
-        return -1;
-    }
-    float Cycle2(ref Cycle self)
-    {
-        action = BoomerangCycle;
-        self = MainCycler;
-        return -1;
-    }
 
-    float Phase1(ref Cycle action)
-    {
-        //do somthing
-        FireBoomerangs(path1, path2);
+    public override Rigidbody2D Rigidbody => null;
 
-        action = Phase2;
-        return -1;
-    }
-    float Phase2(ref Cycle action)
-    {
-        //do somthing
-        FireBoomerangs(Path3, Path4);
-
-        action = Phase3;
-        return -1;
-    }
-    float Phase3(ref Cycle action)
-    {
-        //do somthing
-        FireBoomerangs(Path5, Path6);
-
-        action = Phase4;
-        return -1;
-    }
-    float Phase4(ref Cycle action)
-    {
-        //do somthing
-        FireBoomerangs(Path7, Path8);
-
-        action = Phase1;
-        return 1.5f;
-    }
-
-    float BoomerangCycle(ref Cycle action)
-    {
-        FireBoomerangs(wiggle, wiggle2);
-
-        action = Boomer2;
-        return -1;
-    }
-    float Boomer2(ref Cycle action)
-    {
-        FireBoomerangs(wiggle3, wiggle4);
-
-        action = Boomer3;
-        return -1;
-    }
-    float Boomer3(ref Cycle action)
-    {
-        FireBoomerangs(wiggle5, wiggle6);
-
-        action = Boomer4;
-        return -1;
-    }
-    float Boomer4(ref Cycle action)
-    {
-        FireBoomerangs(wiggle7, wiggle8);
-
-        action = BoomerangCycle;
-        return -1;
-    }
     public void Update()
     {
+        if (hp <= teleportHP)
+        {
+            action = null;
+            altCycle = null;
+            mainCycle = TPAndStartMain(teleport);
+
+            //dumb code
+            teleportHP = teleportHP2;
+            teleportHP2 = -1;
+            teleport = thirdTeleport;
+        }
+
         if (mainTimer.IsReady)
         {
             mainCycle(ref mainCycle);
             mainTimer.Use();
         }
-        if (boomerangTimer.IsReady)
+        if (action != null && boomerangTimer.IsReady)
         {
             action(ref action);
             boomerangTimer.Use();
@@ -145,6 +122,11 @@ public partial class Joker : MonoBehaviour
             altTimer.Use();
         }
     }
-    
+
+    protected override void ApplyImpulse(float force, Vector2 from)
+    {
+        //no impulse for you
+        return;
+    }
 }
 
