@@ -36,19 +36,18 @@ public partial class Joker
 
     #endregion
 
-    //all of this is irrelevent
     #region Cycles
 
-    Cycle TPFrom(Transform location, Cycle main) => (ref Cycle self) =>
+    Cycle TPFrom(Vector2 location, Cycle main) => (ref Cycle self) =>
     {
         //tpFromAnimationStart
         self = TPAndStart(location, main);
 
         return teleportFromTime;
     };
-    Cycle TPAndStart(Transform location, Cycle main) => (ref Cycle self) =>
+    Cycle TPAndStart(Vector2 location, Cycle main) => (ref Cycle self) =>
     {
-        transform.position = location.position;
+        transform.position = location;
 
         boomerangTimer.Use();
         altTimer.Use();
@@ -61,6 +60,8 @@ public partial class Joker
 
         return teleportToTime;
     };
+
+    //everything below this is kinda irrelevent
 
     Cycle AttackPrep(float time, Cycle next) => (ref Cycle self) =>
     {
@@ -178,7 +179,7 @@ public partial class Joker
     {
         this.FireAt(testTarget.position);
 
-        action = AttackPrep(prepTime, FireAtTarget);
+        action = AttackPrep(windupTime, FireAtTarget);
 
         return fireTime;
     }
@@ -264,9 +265,9 @@ public partial class Joker
         if (++counter < 2)
             action = Burst8(counter);
         else
-            action = null;// next cycle
+            action = Fire18(0);// next cycle
 
-        return fiveSecondIntervals;
+        return fiveSecondIntervals / 2;
     };
 
     private float timeBetweenShots18 => (fiveSecondIntervals - timeAfterBurst18) / 18;
@@ -285,7 +286,7 @@ public partial class Joker
        else
        {
            //next cycler
-           action = null;
+           action = ThrowBall;
 
            return timeAfterBurst18;
        }
@@ -302,7 +303,7 @@ public partial class Joker
             Instantiate(slimePrefab, m.transform.position, Quaternion.identity);
         };
 
-        action = null; //next cycle
+        action = Juggle2(0, 0); //next cycle
 
         return fiveSecondIntervals;
     }
@@ -310,16 +311,21 @@ public partial class Joker
     float juggleTime2 = 1;
     Cycle Juggle2(float del, int counter) => (ref Cycle action) =>
     {
-        p1.Fire(this.transform.position, Polar(RadialFunc, 0 + del, Mathf.PI / 2), juggleTime1);
-        p2.Fire(this.transform.position, Polar(RadialFunc, Mathf.PI / 2 + del, Mathf.PI / 2), juggleTime1);
-        p3.Fire(this.transform.position, Polar(RadialFunc, Mathf.PI + del, Mathf.PI / 2), juggleTime1);
-        p4.Fire(this.transform.position, Polar(RadialFunc, 3 * Mathf.PI / 2 + del, Mathf.PI / 2), juggleTime1);
+        p1.Fire(this.transform.position, Polar(RadialFunc, 0 + del, Mathf.PI / 2), juggleTime2);
+        p2.Fire(this.transform.position, Polar(RadialFunc, Mathf.PI / 2 + del, Mathf.PI / 2), juggleTime2);
+        p3.Fire(this.transform.position, Polar(RadialFunc, Mathf.PI + del, Mathf.PI / 2), juggleTime2);
+        p4.Fire(this.transform.position, Polar(RadialFunc, 3 * Mathf.PI / 2 + del, Mathf.PI / 2), juggleTime2);
 
         if (++counter < 6)
             action = Juggle2(del + Mathf.PI / 6, counter);
         else
-            action = Burst6; //next Cycle
-
+        {
+            if (hp < teleportHP3)
+                //go to teleport
+                TPFrom(testTarget.transform.position, Burst8(0));
+            else
+                action = Burst8(0); //next Cycle
+        }
 
         return juggleTime1;
     };

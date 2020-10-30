@@ -47,7 +47,7 @@ public partial class Joker : Entity
     public float teleportToTime = 1;
     public float defaultAttackTime = 1;
     public float fireTime = 1;
-    public float prepTime = 1;
+    public float windupTime = 1;
     public float phaseTime = 8;
 
     FireProjectile fire;
@@ -82,8 +82,7 @@ public partial class Joker : Entity
         fire = new FireProjectile(shotPrefab, shotDamage, shotKnockback, shotSpeed);
         fireBall = new FireProjectile(ballPrefab, 10, 1, 5, 2);
 
-        //boomerangCycle = Burst6;
-        boomerangCycle = Juggle2(0, 0);
+        boomerangCycle = Burst6;
 
         invulnCooldown = new Cooldown(teleportFromTime + teleportToTime);
     }
@@ -134,13 +133,18 @@ public partial class Joker : Entity
     {
         if (hp <= teleportHP)
         {
-            boomerangCycle = null;
-            altCycle = null;
-            mainCycle = TPFrom(teleport, MainCycler2);
+            Cycle c;
 
+            if (hp > teleportHP2) c = Burst6;
+            else c = Burst8(0);
+
+            boomerangCycle = TPFrom(teleport.position, c);
+            Debug.Log(teleport);
+
+            if (teleportHP == teleportHP3) { teleportHP = -1; }
             if (teleportHP == teleportHP2) { teleportHP = teleportHP3; teleport = thirdTeleport; }
             if (teleportHP == teleportHP1) { teleportHP = teleportHP2; teleport = secondTeleport; }
-            mainTimer.Use(0);
+            boomerangTimer.Use(0);
             invulnCooldown.Use();
         }
 
@@ -190,6 +194,10 @@ public partial class Joker : Entity
     public override void Die()
     {
         //death Animation
+
+
+
+        Destroy(this);
     }
 }
 
