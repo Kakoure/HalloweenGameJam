@@ -34,6 +34,7 @@ public class Sword : Weapon
                 //drop this item
                 this.DropAt(bullet.transform.position);
             };
+            bullet.GetComponent<Animator>().enabled = false;
             Inventory.PopFromSlot(Inventory.Instance.shield);
         }
     }

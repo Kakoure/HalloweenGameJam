@@ -65,7 +65,6 @@ public class SlimeController : Entity
     }
     private IEnumerator JumpAgressiveSequence()
     {
-        Debug.Log("Lunge");
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(.5f);
         Jump(target.transform.position, jumpStr, true);

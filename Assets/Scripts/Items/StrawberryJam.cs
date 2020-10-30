@@ -28,6 +28,7 @@ namespace Items
             {
                 var projectile = throwJar.Execute(player, out _);
                 projectile.GetComponent<SpriteRenderer>().sprite = this.sprite;
+                projectile.GetComponent<Animator>().enabled = false;
                 projectile.onCollision = () => DropAt(projectile.transform.position);
                 Inventory.PopFromSlot(Inventory.Instance.shield);
 
