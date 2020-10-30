@@ -1,4 +1,5 @@
 ﻿using Items;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine.UIElements;
 public class SlimeController : Entity
 {
     private Rigidbody2D rb;
+    private Animator anim;
     public override Rigidbody2D Rigidbody => rb;
     public float chaseDistance;
     public float aggressiveDist;
@@ -25,11 +27,11 @@ public class SlimeController : Entity
     public Timer.TimedAction jumpWalk;
 
     private object jumpData;
-
+    private Coroutine aiCoroutine;
 
     private void Wander()
     {
-        Vector2 dir = Random.insideUnitCircle;
+        Vector2 dir = UnityEngine.Random.insideUnitCircle;
         Jump((Vector2)transform.position + dir, passiveStr, false);
     }
     private void Jump(Vector2 location, float str, bool setVel)
@@ -58,9 +60,16 @@ public class SlimeController : Entity
     }
     private void JumpAggressiveAction()
     {
+        //Jump(target.transform.position, jumpStr, true);
+        StartCoroutine("JumpAgressiveSequence");
+    }
+    private IEnumerator JumpAgressiveSequence()
+    {
+        Debug.Log("Lunge");
+        anim.SetTrigger("Attack");
+        yield return new WaitForSeconds(.5f);
         Jump(target.transform.position, jumpStr, true);
     }
-
     private void JumpWalkAction()
     {
         if (target != null)
@@ -79,6 +88,7 @@ public class SlimeController : Entity
     {
         base.Awake();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -93,9 +103,31 @@ public class SlimeController : Entity
         jumpWalk.action = JumpWalkAction;
         jumper.AddAction(jumpAggressive);
         jumper.AddAction(jumpWalk);
-        StartCoroutine(jumper.TimerCoroutine());
+        aiCoroutine = StartCoroutine(jumper.TimerCoroutine());
     }
-
+    public override void Die()
+    {
+        if(hp <= 0)
+        {
+            anim.SetBool("Dead", true);
+        }
+        Neutralize();
+        Invoke("Disappear", 2f);
+    }
+    //Make slime stop attacking, corpse sits there for a bit
+    private void Neutralize()
+    {
+        StopCoroutine(aiCoroutine);
+        foreach(Collider2D col in GetComponents<Collider2D>())
+        {
+            col.enabled = false;
+        }
+    }
+    //Kill slime for good
+    private void Disappear()
+    {
+        gameObject.SetActive(false);
+    }
     void FixedUpdate()
     {
         /*

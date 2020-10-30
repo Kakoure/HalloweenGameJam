@@ -245,6 +245,8 @@ GameObject:
   - component: {fileID: 1696261734}
   - component: {fileID: 580140493}
   - component: {fileID: 4226414351105399903}
+  - component: {fileID: 8204457717377122206}
+  - component: {fileID: 319399987593839751}
   m_Layer: 9
   m_Name: Slime
   m_TagString: Monster
@@ -306,7 +308,7 @@ SpriteRenderer:
   m_SortingLayerID: -1033348697
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8d5db41e6eacd92408a726778c9ec5a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e9122ae05958d8a4b972cda4adcde5ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -360,7 +362,7 @@ MonoBehaviour:
   invalidAttemptCooldown: 0.05
   jumpAggressive:
     cooldown: 1
-    waitTime: 0
+    waitTime: 0.25
   jumpWalk:
     cooldown: 0
     waitTime: 0.5
@@ -381,14 +383,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 0.96, y: 0.96}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.5, y: 0.3}
   m_EdgeRadius: 0
 --- !u!114 &580140493
 MonoBehaviour:
@@ -448,6 +450,40 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
+--- !u!95 &8204457717377122206
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705875875498543480}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 504c52c5da0a2a2468d595a35437d4d1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &319399987593839751
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705875875498543480}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &4605499404408062599
 GameObject:
   m_ObjectHideFlags: 0
