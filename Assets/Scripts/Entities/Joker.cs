@@ -130,7 +130,6 @@ public partial class Joker : Entity
     public override Rigidbody2D Rigidbody => null;
 
     private float currentAttackTime;
-    private int TPcounter = 0;
     public void Update()
     {
         if (hp <= teleportHP)
@@ -139,13 +138,9 @@ public partial class Joker : Entity
             altCycle = null;
             mainCycle = TPFrom(teleport, MainCycler2);
 
-            //dumb code
-            //like REALLY dumb code
-
             if (teleportHP == teleportHP2) { teleportHP = teleportHP3; teleport = thirdTeleport; }
             if (teleportHP == teleportHP1) { teleportHP = teleportHP2; teleport = secondTeleport; }
             mainTimer.Use(0);
-            TPcounter++;
             invulnCooldown.Use();
         }
 
