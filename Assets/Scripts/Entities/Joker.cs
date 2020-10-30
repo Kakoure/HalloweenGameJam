@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.iOS;
 using static Boomerang;
 
 public partial class Joker : Entity
@@ -14,6 +15,8 @@ public partial class Joker : Entity
     private Boomerang b1;
     public BoomerangProj p2;
     private Boomerang b2;
+    public BoomerangProj p3;
+    public BoomerangProj p4;
 
     public Transform testTarget;
     public float boomerangRadius;
@@ -22,16 +25,34 @@ public partial class Joker : Entity
     public int shotDamage;
     public int shotKnockback = 1;
     public int shotSpeed;
-    public Sprite shotSprite;
+    //public Sprite shotSprite;
+    public GameObject shotPrefab;
+    public GameObject ballPrefab;
+    public GameObject slimePrefab;
+
+    //cooldowns are basically clocks
     public Cooldown boomerangTimer;
     public Cooldown altTimer;
     public Cooldown mainTimer;
+
     public int teleportHP1;
-    public Transform secondTeleport;
+    public Transform firstTeleport;
     public int teleportHP2;
+    public Transform secondTeleport;
+    public int teleportHP3;
     public Transform thirdTeleport;
 
+
+    public float teleportFromTime = 1;
+    public float teleportToTime = 1;
+    public float defaultAttackTime = 1;
+    public float fireTime = 1;
+    public float prepTime = 1;
+    public float phaseTime = 8;
+
     FireProjectile fire;
+
+    public bool IsInPhaseTwo => hp <= 500;
 
     public override void Awake()
     {
@@ -51,16 +72,20 @@ public partial class Joker : Entity
         path1 = Mult(boomerangRadius, path1);
         path2 = Negx(path1);
 
-        p1.Fire(this.transform.position, path1, boomerangTime);
-        p2.Fire(this.transform.position, path2, boomerangTime);
-
-        mainCycle = MainCycler;
-        altCycle = FireAtTarget;
+        //mainCycle = TPAndStart(this.transform, MainCycler);
 
         teleportHP = teleportHP1;
-        teleport = secondTeleport;
+        teleport = firstTeleport;
 
-        fire = new FireProjectile(CameraReference.Instance.bulletGeneric, shotDamage, shotKnockback, shotSpeed);
+        currentAttackTime = defaultAttackTime;
+
+        fire = new FireProjectile(shotPrefab, shotDamage, shotKnockback, shotSpeed);
+        fireBall = new FireProjectile(ballPrefab, 10, 1, 5, 2);
+
+        //boomerangCycle = Burst6;
+        boomerangCycle = Juggle2(0, 0);
+
+        invulnCooldown = new Cooldown(teleportFromTime + teleportToTime);
     }
 
     public void FireBoomerangs(Path path1, Path path2, float time = -1)
@@ -79,58 +104,97 @@ public partial class Joker : Entity
         Vector2 dir3 = Quaternion.Euler(0, 0, -shotSpread) * dir;
 
         Bullet bullet = fire.Execute(transform, dir);
-        bullet.GetComponent<SpriteRenderer>().sprite = shotSprite;
         Bullet bullet1 = fire.Execute(transform, dir2);
-        bullet1.GetComponent<SpriteRenderer>().sprite = shotSprite;
         Bullet bullet2 = fire.Execute(transform, dir3);
-        bullet2.GetComponent<SpriteRenderer>().sprite = shotSprite;
         
+    }
+    //warning: this overload might produce unexpected behaviour
+    public void FireAt(Vector2 dir, uint numLeft, float spread)
+    {
+        dir = dir.normalized;
+        Bullet bullet = fire.Execute(transform, dir);
+        for (int i = 0; i < numLeft; i++)
+        {
+            dir = Quaternion.Euler(0, 0, spread) * dir;
+            _ = fire.Execute(transform, dir);
+        }
     }
 
     //amazing recursion
     //some really interesting feature of C# is that you can declare a delegate type that depends on itself
     public delegate float Cycle(ref Cycle c);
     private Cycle mainCycle;
-    private Cycle action;// the current state called every timer cooldown
+    private Cycle boomerangCycle;// the current state called every timer cooldown
     private Cycle altCycle;
 
     public override Rigidbody2D Rigidbody => null;
 
+    private float currentAttackTime;
+    private int TPcounter = 0;
     public void Update()
     {
         if (hp <= teleportHP)
         {
-            action = null;
+            boomerangCycle = null;
             altCycle = null;
-            mainCycle = TPAndStartMain(teleport);
+            mainCycle = TPFrom(teleport, MainCycler2);
 
             //dumb code
-            teleportHP = teleportHP2;
-            teleportHP2 = -1;
-            teleport = thirdTeleport;
+            //like REALLY dumb code
+
+            if (teleportHP == teleportHP2) { teleportHP = teleportHP3; teleport = thirdTeleport; }
+            if (teleportHP == teleportHP1) { teleportHP = teleportHP2; teleport = secondTeleport; }
+            mainTimer.Use(0);
+            TPcounter++;
+            invulnCooldown.Use();
         }
 
-        if (mainTimer.IsReady)
+        //three timers being maintained
+        //cycles are found in JokerCycles.cs
+        if (mainCycle != null && mainTimer.IsReady)
         {
-            mainCycle(ref mainCycle);
-            mainTimer.Use();
+            float t = mainCycle(ref mainCycle);
+            if (t >= 0)
+                //uses return value time
+                mainTimer.Use(t);
+            else
+                //uses previous time
+                mainTimer.Use();
         }
-        if (action != null && boomerangTimer.IsReady)
+        if (boomerangCycle != null && boomerangTimer.IsReady)
         {
-            action(ref action);
-            boomerangTimer.Use();
+            float t = boomerangCycle(ref boomerangCycle);
+            if (t >= 0)
+                boomerangTimer.Use(t);
+            else
+                boomerangTimer.Use(defaultAttackTime);
         }
         if (altCycle != null && altTimer.IsReady)
         {
-            altCycle(ref altCycle);
-            altTimer.Use();
+            float t = altCycle(ref altCycle);
+            if (t >= 0)
+                altTimer.Use(t);
+            else
+                altTimer.Use(currentAttackTime);
         }
     }
 
+    private Cooldown invulnCooldown; //start
     protected override void ApplyImpulse(float force, Vector2 from)
     {
         //no impulse for you
         return;
+    }
+    public override bool DealDamage(int damage, float force, Vector2 from)
+    {
+        if (!invulnCooldown.IsReady)
+            return false;
+        else
+            return base.DealDamage(damage, force, from);
+    }
+    public override void Die()
+    {
+        //death Animation
     }
 }
 

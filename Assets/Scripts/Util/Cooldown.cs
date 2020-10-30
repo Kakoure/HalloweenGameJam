@@ -26,5 +26,12 @@ namespace CooldownTimer
             this.cooldownTime = cooldownTime;
             Use();
         }
+
+        public Cooldown(float cooldownTime)
+        {
+            this.cooldownTime = cooldownTime;
+            this.UseTime = 0;
+        }
+
     }
 }

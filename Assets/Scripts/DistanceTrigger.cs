@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class DistanceTrigger : MonoBehaviour
 {
     public float dist;
+    public Transform target;
 
     public bool allChildren;
     [Tooltip("If allChildren is on then this is irrelevent")]
@@ -14,7 +15,7 @@ public class DistanceTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Player.Instance.transform.position - transform.position).magnitude <= dist)
+        if ((Player.Instance.transform.position - target.position).magnitude <= dist)
         {
             if (!allChildren)
             {

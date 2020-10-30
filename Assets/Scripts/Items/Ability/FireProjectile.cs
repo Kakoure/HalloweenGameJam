@@ -43,7 +43,6 @@ namespace Items
         {
             if (original == null) original = CameraReference.Instance.bulletGeneric;
             this.Bullet = original;
-            Debug.Log("damage " + damage);
             this.damage = damage;
             this.speed = speed;
             this.throwTime = throwTime;

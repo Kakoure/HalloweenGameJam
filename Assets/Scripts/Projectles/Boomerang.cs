@@ -9,6 +9,7 @@ public class Boomerang : MonoBehaviour
     public static Converter Pow(float p) => f => Mathf.Pow(f, p);
     public static Converter Poly(float p) => f => -Pow(p)(2 * f - 1) + 1;
     public static Converter Dot(Path p1, Path p2) => f => Vector2.Dot(p1(f), p2(f));
+    public static Converter Mult(float c, Converter p) => f => c * p(f);
 
     //turns converter into a polar function from theta = [0, pi] (180 degrees)
     public static Path Polar180(Converter r) => f =>
@@ -16,6 +17,13 @@ public class Boomerang : MonoBehaviour
         float rad = r(f);
         float thet = f * PI;
         return new Vector2(rad * Mathf.Sin(thet), rad * Cos(thet)); //im so dumb I cant change it though
+    };
+    public static Path Polar(Converter r, float l, float del) => f =>
+    {
+        float rad = r(f);
+        float thet = f * del + l;
+
+        return new Vector2(rad * Cos(thet), rad * Sin(thet)); //im so dumb I cant change it though
     };
 
     public static Path Negx(Path p) => f =>

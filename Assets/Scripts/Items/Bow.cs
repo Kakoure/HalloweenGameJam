@@ -17,7 +17,6 @@ namespace Items
         static int bowMass = 1;
 
         public Sprite arrowSprite;
-        FireProjectile fireArrow;
 
         public int baseDamage;
         public float baseSpeed;
@@ -26,6 +25,7 @@ namespace Items
         public float slowMoveSpeedMultiplier;
 
         private float defSpeed;
+        public FireProjectile fireArrow;
         private PlayerMove movement;
 
         #region charging
@@ -61,7 +61,6 @@ namespace Items
             _sprite = GetComponent<SpriteRenderer>().sprite;
             movement = Player.Instance.GetComponent<PlayerMove>();
             defSpeed = movement.speed;
-            fireArrow = new FireProjectile(CameraReference.Instance.bulletGeneric, 0, 0, 0);
             id = ItemID.Bow;
         }
 
@@ -95,7 +94,7 @@ namespace Items
                 fireArrow.knockBack = kb;
                 fireArrow.speed = speed;
 
-                fireArrow.Execute(player, out _);
+                var i =fireArrow.Execute(player, out _);
 
                 SetUseTime();
             }
