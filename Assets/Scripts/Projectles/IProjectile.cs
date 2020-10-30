@@ -42,7 +42,6 @@ public abstract class Projectile : MonoBehaviour, IProjectile
 
     public virtual void Initialize(int damage, float vel)
     {
-        Debug.Log("Initialized with " + damage);
         this.Damage = damage;
         this.RB.velocity = transform.right * vel;
     }
