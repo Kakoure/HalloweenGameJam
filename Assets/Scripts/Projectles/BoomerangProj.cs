@@ -20,7 +20,6 @@ public class BoomerangProj : MonoBehaviour, IProjectile
     public void Awake()
     {
         boomer = GetComponent<Boomerang>();
-        Debug.Log(boomer);
         gameObject.SetActive(false);
         Damage = damage;
     }
