@@ -1613,6 +1613,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.6999512
       objectReference: {fileID: 0}
+    - target: {fileID: 8465192134617645790, guid: 9bf967faf8aebb9438f8bf1a432c595c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.099975586
+      objectReference: {fileID: 0}
     - target: {fileID: 689679352, guid: 9bf967faf8aebb9438f8bf1a432c595c, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.099975586
@@ -15333,6 +15338,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 3916141102960055221, guid: 755846a13a77f0540bc6d48ec830746f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3916141102960055223, guid: 755846a13a77f0540bc6d48ec830746f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15411,7 +15421,21 @@ PrefabInstance:
     - target: {fileID: 9161909879284659548, guid: 755846a13a77f0540bc6d48ec830746f,
         type: 3}
       propertyPath: force
-      value: 5
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9161909879284659548, guid: 755846a13a77f0540bc6d48ec830746f,
+        type: 3}
+      propertyPath: lungeForce
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916141102960055217, guid: 755846a13a77f0540bc6d48ec830746f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 913851462, guid: 755846a13a77f0540bc6d48ec830746f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 755846a13a77f0540bc6d48ec830746f, type: 3}
