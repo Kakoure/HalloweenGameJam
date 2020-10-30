@@ -2283,10 +2283,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 0.15
-  radius: 2
+  radius: 1.5
   arcRadians: 0.5
   damage: 3
-  force: 2
+  force: 10
+  lungeForce: 3
 --- !u!1 &1732572803
 GameObject:
   m_ObjectHideFlags: 0
