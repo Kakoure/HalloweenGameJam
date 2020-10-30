@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674768061030231091}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -166,10 +166,12 @@ MonoBehaviour:
   healthBar: {fileID: 5896991534296956896}
   seekRadius: 10
   wander: 2
-  speed: 3
+  speed: 1
   behaviour: {fileID: 674768061030231088}
   fireArrows: 1
   arrowCooldown:
+    cooldownTime: 3
+  stopWhileFireing:
     cooldownTime: 1
   arrowSettings:
     damage: 10

@@ -15,6 +15,7 @@ public class Skeleton : Entity
     public EntityBehaviour behaviour;
     public bool fireArrows;
     public Cooldown arrowCooldown;
+    public Cooldown stopWhileFireing;
     public FireProjectile arrowSettings;
     [Tooltip("Time in between searches for the player")]
     public Cooldown seekTimer;
@@ -61,10 +62,17 @@ public class Skeleton : Entity
             var bul = arrowSettings.Execute(this.transform, target.position - this.transform.position);
             bul.GetComponent<SpriteRenderer>().sprite = bulletSprite;
             arrowCooldown.Use();
+            stopWhileFireing.Use();
         }
     }
     private void FixedUpdate()
     {
+        if (!stopWhileFireing.IsReady)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
         //set movement
         Vector2 dir = seeker() - (Vector2)transform.position;
         if (dir.magnitude < deadZone)
