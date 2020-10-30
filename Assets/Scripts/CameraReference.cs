@@ -22,12 +22,16 @@ class CameraReference : MonoBehaviour
 
     public void InstantiateHitMarker(int damage, Vector2 pos)
     {
-        if (damage < 0) return; //just apply a hack to cover up a bug
+        if (damage <= 0) return; //just apply a hack to cover up a bug
 
         Vector2 rand = UnityEngine.Random.insideUnitCircle;
         rand.y /= 2;
         rand.y += 1;
-        GameObject.Instantiate(hitMarker, pos, Quaternion.identity).GetComponent<Rigidbody2D>().velocity = damageConstant * Mathf.Log(1 + damage) * rand;
+        GameObject g;
+        g = GameObject.Instantiate(hitMarker, pos, Quaternion.identity);
+        g.GetComponent<Rigidbody2D>().velocity = damageConstant * Mathf.Log(1 + damage) * rand;
+
+        g.GetComponent<GetText>().text.text = "-" + damage;
     }
 
     private void Awake()

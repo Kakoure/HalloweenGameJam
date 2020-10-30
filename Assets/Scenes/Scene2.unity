@@ -1815,11 +1815,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4765399477202076750, guid: 4640a154ad6a0ad4fbbffdd9e0d0097c,
-        type: 3}
-      propertyPath: deadZone
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4640a154ad6a0ad4fbbffdd9e0d0097c, type: 3}
 --- !u!4 &1107860199 stripped
@@ -1847,7 +1842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1130907238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3160,7 +3155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 1
-  damage: 1
+  damage: 0
   force: 1
   explosionDamage: 10
   explosionForce: 7
@@ -16017,20 +16012,50 @@ PrefabInstance:
       propertyPath: barBox
       value: 
       objectReference: {fileID: 972693362}
+    - target: {fileID: 377278816543342197, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: colorGradient.key1.r
+      value: 0.95488715
+      objectReference: {fileID: 0}
+    - target: {fileID: 377278816543342197, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: colorGradient.key2.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 377278816543342197, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: colorGradient.key2.b
+      value: 0.181463
+      objectReference: {fileID: 0}
+    - target: {fileID: 377278816543342197, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: colorGradient.ctime1
+      value: 24672
+      objectReference: {fileID: 0}
+    - target: {fileID: 377278816543342197, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: colorGradient.ctime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 377278816543342197, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: colorGradient.m_NumColorKeys
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 377278816543342195, guid: e7ec070ab4e74614a9090250c607c005,
         type: 3}
       propertyPath: text
       value: 
       objectReference: {fileID: 20567189}
-    - target: {fileID: 377278816543342216, guid: e7ec070ab4e74614a9090250c607c005,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 31dcbc1c2fffc774f98c23767eae9f94, type: 2}
     - target: {fileID: 377278816543342194, guid: e7ec070ab4e74614a9090250c607c005,
         type: 3}
       propertyPath: damageKnockbackDur
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 377278816543342216, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 31dcbc1c2fffc774f98c23767eae9f94, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7ec070ab4e74614a9090250c607c005, type: 3}
