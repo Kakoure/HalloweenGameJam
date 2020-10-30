@@ -15,7 +15,7 @@ public class Boomerang : MonoBehaviour
     {
         float rad = r(f);
         float thet = f * PI;
-        return new Vector2(rad * Mathf.Sin(thet), rad * Cos(thet));
+        return new Vector2(rad * Mathf.Sin(thet), rad * Cos(thet)); //im so dumb I cant change it though
     };
 
     public static Path Negx(Path p) => f =>
