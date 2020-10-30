@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
@@ -186,13 +187,24 @@ public partial class Joker
 
     #endregion
 
+    const float defaultPrepDuration = .5f;
+
+    Cycle PrepareAttack(Cycle next, float duration = defaultPrepDuration) => (ref Cycle action) =>
+    {
+        //put prepare code here
+
+        action = next;
+
+        return duration;
+    };
+
     //entry point
     float Burst6(ref Cycle action)
     {
         FireAt(Vector2.up, 5, 60);
 
         //next cycler;
-        action = Fire6(0);
+        action = PrepareAttack(Fire6(0));
 
         return fiveSecondIntervals;
     }
@@ -206,14 +218,15 @@ public partial class Joker
         if (++counter < 6)
         {
             //not actually recursion btw
-            action = Fire6(counter);
+            action = PrepareAttack(Fire6(counter));
 
             return TimeInBetweenShots;
         }
         else
         {
             //next cycler
-            action = Juggle1(0, 0);
+            //dont prepare juggling
+            action = PrepareAttack(Juggle1(0, 0));
 
             return TimeAfterShots;
         }
@@ -251,21 +264,22 @@ public partial class Joker
         if (++counter < 4)
             action = Juggle1(del + Mathf.PI / 6, counter);
         else
-            action = Burst6; //next Cycle
+            action = PrepareAttack(Burst6); //next Cycle
 
 
         return juggleTime1;
     };
 
     //phase2
+    //second entry point
     Cycle Burst8(int counter) => (ref Cycle action) =>
     {
         FireAt(Vector2.up, 7, 45);
 
         if (++counter < 2)
-            action = Burst8(counter);
+            action = PrepareAttack(Burst8(counter));
         else
-            action = Fire18(0);// next cycle
+            action = PrepareAttack(Fire18(0));// next cycle
 
         return fiveSecondIntervals / 2;
     };
@@ -279,14 +293,14 @@ public partial class Joker
        if (++counter < 18)
        {
            //not actually recursion btw
-           action = Fire18(counter);
+           action = PrepareAttack(Fire18(counter));
 
            return timeBetweenShots18;
        }
        else
        {
            //next cycler
-           action = ThrowBall;
+           action = PrepareAttack(ThrowBall);
 
            return timeAfterBurst18;
        }
@@ -321,10 +335,13 @@ public partial class Joker
         else
         {
             if (hp < teleportHP3)
+            {
                 //go to teleport
-                TPFrom(testTarget.transform.position, Burst8(0));
+                Debug.Log("Teleporting");
+                TPFrom(testTarget.transform.position, PrepareAttack(Burst8(0)));
+            }
             else
-                action = Burst8(0); //next Cycle
+                action = PrepareAttack(Burst8(0)); //next Cycle
         }
 
         return juggleTime1;
