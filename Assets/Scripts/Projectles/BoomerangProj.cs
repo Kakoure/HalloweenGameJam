@@ -12,6 +12,7 @@ public class BoomerangProj : MonoBehaviour, IProjectile
     public Boomerang boomer;
 
     public float dur;
+    public int damage;
     public int Damage { get; set; }
     public float Speed => 0;
     private Vector2 src;
@@ -21,6 +22,7 @@ public class BoomerangProj : MonoBehaviour, IProjectile
         boomer = GetComponent<Boomerang>();
         Debug.Log(boomer);
         gameObject.SetActive(false);
+        Damage = damage;
     }
 
     private void Update()

@@ -11,6 +11,8 @@ namespace Items
     {
         Bullet Execute(Transform t, out Vector2 v);
     }
+
+    [System.Serializable]
     public class FireProjectile : IAbility
     {
         public int damage;

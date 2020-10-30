@@ -34,10 +34,10 @@ public class SlimeController : Entity
     }
     private void Jump(Vector2 location, float str, bool setVel)
     {
-        var nearby = Physics2D.OverlapCircleAll(transform.position, 1);
 
         Vector2 dir = location - (Vector2)transform.position;
         dir = dir.normalized;
+        var nearby = Physics2D.OverlapCircleAll(transform.position, 1);
         foreach (var other in nearby)
         {
             if (other.gameObject.CompareTag("Monster"))

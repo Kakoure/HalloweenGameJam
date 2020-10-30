@@ -11,6 +11,7 @@ namespace Items
         public Sprite sprite;
         public override Sprite Sprite => sprite;
         public FireProjectile throwJar;
+        public int healHP;
 
         public void Start()
         {
@@ -21,22 +22,24 @@ namespace Items
 
         public override void AltFire(Transform player, bool down)
         {
+            //Fire(player, down);
+
             if (down)
             {
                 var projectile = throwJar.Execute(player, out _);
                 projectile.GetComponent<SpriteRenderer>().sprite = this.sprite;
                 projectile.onCollision = () => DropAt(projectile.transform.position);
                 Inventory.PopFromSlot(Inventory.Instance.shield);
+
             }
+
         }
         public override void Fire(Transform player, bool down)
         {
             if (down)
             {
-                Debug.Log("You begin eating the Strawberry jam");
-
                 //should pass an instance to the entity that used it...
-                Player.Instance.DealDamage(-100, 0, Vector2.zero);
+                Player.Instance.DealDamage(-healHP, 0, Vector2.zero);
 
                 Inventory.PopFromSlot(Inventory.Instance.weapon);
             }

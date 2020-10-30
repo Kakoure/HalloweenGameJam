@@ -42,16 +42,14 @@ public class Bullet : Projectile
     {
         //bullet should be on the same layer as player so no self collision
         //if (collision.gameObject == Owner) return;
-        if (collision.gameObject.CompareTag("Monster"))
+
+        Entity entity = collision.gameObject.GetComponent<Entity>();
+        if (entity != null)
         {
-            Entity entity = collision.gameObject.GetComponent<Entity>();
-            if (entity != null)
+            bool damageSuccess = entity.DealDamage(Damage, knockBack, this.transform.position);
+            if (damageSuccess)
             {
-                bool damageSuccess = entity.DealDamage(Damage, knockBack, this.transform.position);
-                if (damageSuccess)
-                {
-                    KillObject();
-                }
+                KillObject();
             }
         }
 

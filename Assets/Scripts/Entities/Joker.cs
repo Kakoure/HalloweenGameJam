@@ -78,9 +78,13 @@ public partial class Joker : Entity
         Vector2 dir2 = Quaternion.Euler(0, 0, shotSpread) * dir;
         Vector2 dir3 = Quaternion.Euler(0, 0, -shotSpread) * dir;
 
-        fire.Execute(transform, dir).GetComponent<SpriteRenderer>().sprite = shotSprite;
-        fire.Execute(transform, dir2).GetComponent<SpriteRenderer>().sprite = shotSprite;
-        fire.Execute(transform, dir3).GetComponent<SpriteRenderer>().sprite = shotSprite;
+        Bullet bullet = fire.Execute(transform, dir);
+        bullet.GetComponent<SpriteRenderer>().sprite = shotSprite;
+        Bullet bullet1 = fire.Execute(transform, dir2);
+        bullet1.GetComponent<SpriteRenderer>().sprite = shotSprite;
+        Bullet bullet2 = fire.Execute(transform, dir3);
+        bullet2.GetComponent<SpriteRenderer>().sprite = shotSprite;
+        
     }
 
     //amazing recursion
