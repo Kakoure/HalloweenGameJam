@@ -39,12 +39,24 @@ public partial class PlayerMove : MonoBehaviour
 
         if (dodge && jumpCooldown.IsReady)
         {
+            //Check Raw inputs, keyboard only
+            xAxisRaw = Input.GetAxisRaw("Horizontal");
+            yAxisRaw = Input.GetAxisRaw("Vertical");
+            //Store last control input for anim facing dir
+            if (xAxisRaw != 0 || yAxisRaw != 0)
+            {
+                anim.SetFloat("xInput", xAxisRaw);
+                anim.SetFloat("yInput", yAxisRaw);
+                facingDir.Set(xAxisRaw, yAxisRaw);
+            }
+
             SetPath(Boomerang.Mult(speed * diveCoef, RollPath(facingDir.normalized)), diveDur);
             player.damageInvuln.Use();
             jumpCooldown.Use();
 
             //Anim parameter updates
             anim.SetTrigger("Dodge");
+           
         }
     }
 

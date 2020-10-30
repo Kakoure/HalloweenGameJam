@@ -139,7 +139,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d28a64079f385bf4a995e789a642b1f7
+      spriteID: 8fabd621a1bb46f449b4fe158c913ac5
       internalID: 1712162890185235830
       vertices: []
       indices: 
@@ -160,7 +160,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a08648199609094409b37e3d1aee8c66
+      spriteID: 5eb53bc92ac4c474898ec4c65416faa0
       internalID: -8338460726850458829
       vertices: []
       indices: 
@@ -170,7 +170,7 @@ TextureImporter:
       name: JamPlayer_Sword_Back_Attack_1_2
       rect:
         serializedVersion: 2
-        x: 130
+        x: 96
         y: 0
         width: 48
         height: 48
@@ -181,7 +181,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc2d1bd56c36c6e4382f12c845c9a35c
+      spriteID: 815a566e6891eab428e38b80cb7373be
       internalID: -7218155280013333442
       vertices: []
       indices: 
@@ -202,7 +202,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56d41cf5c8b3088438331a85accc3422
+      spriteID: 7d6c25268bf38af40a5d3a0b39dbc024
       internalID: 8577189076648807714
       vertices: []
       indices: 
@@ -223,7 +223,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c3048c39943e434ba99453fe41421e3
+      spriteID: e353d429088f06c42a8495870b9e2287
       internalID: -3746198553797597010
       vertices: []
       indices: 

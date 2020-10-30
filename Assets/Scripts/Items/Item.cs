@@ -40,7 +40,8 @@ namespace Items
             if (!success) return;
             position.z = 0;
             transform.position = position;
-            gameObject.SetActive(true);
+            MakeVisible();
+            //gameObject.SetActive(true);
         }
 
 
@@ -68,8 +69,8 @@ namespace Items
             if (slot != -1)
             {
                 //make the item disappear
-                gameObject.SetActive(false);
-
+                //gameObject.SetActive(false);
+                MakeInvisible();
                 //put the item in inventory
                 Inventory.AssignTo(this, slot);
             }
@@ -79,5 +80,22 @@ namespace Items
             }
 
         }
+        //To remove sprite + collider without deactivating object (so I can use Corutines within items)
+        void MakeInvisible()
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            foreach (Collider2D col in GetComponents<Collider2D>())
+            {
+                col.enabled = false;
+            }
+        }
+        void MakeVisible()
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+            foreach (Collider2D col in GetComponents<Collider2D>())
+            {
+                col.enabled = true;
+            }
+}
     }
 }
