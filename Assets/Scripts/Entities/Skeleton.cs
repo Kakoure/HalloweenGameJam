@@ -60,12 +60,12 @@ public class Skeleton : Entity
             anim.SetTrigger("Dead");
         }
         Neutralize();
-        Invoke("Disappear", 2f);
+        Invoke("Disappear", 6f);
     }
     //Make slime stop attacking, corpse sits there for a bit
     private void Neutralize()
     {
-        hitstun.Use(3f);
+        hitstun.Use(10f);
         foreach (Collider2D col in GetComponents<Collider2D>())
         {
             col.enabled = false;
@@ -73,7 +73,8 @@ public class Skeleton : Entity
     }
     private void Disappear()
     {
-        gameObject.SetActive(false);
+        IEnumerator fade = FadeAway(2f);
+        StartCoroutine(fade);
     }
     Func<Vector2> seeker;
     Transform target = null;

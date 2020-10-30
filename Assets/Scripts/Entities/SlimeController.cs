@@ -112,7 +112,7 @@ public class SlimeController : Entity
             anim.SetBool("Dead", true);
         }
         Neutralize();
-        Invoke("Disappear", 2f);
+        Invoke("Disappear", 6f);
     }
     //Make slime stop attacking, corpse sits there for a bit
     private void Neutralize()
@@ -126,7 +126,8 @@ public class SlimeController : Entity
     //Kill slime for good
     private void Disappear()
     {
-        gameObject.SetActive(false);
+        IEnumerator fade = FadeAway(2f);
+        StartCoroutine(fade);
     }
     void FixedUpdate()
     {

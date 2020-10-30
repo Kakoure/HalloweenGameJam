@@ -16,6 +16,7 @@ namespace Items
         public abstract Rigidbody2D Rigidbody { get; }
         public HealthBar healthBar;
 
+        private SpriteRenderer sprRend;
         //return success
         public virtual bool DealDamage(int damage, float force, Vector2 from)
         {
@@ -54,6 +55,7 @@ namespace Items
         public virtual void Start()
         {
             healthBar.SetHealth(hp, MaxHP);
+            sprRend = GetComponent<SpriteRenderer>();
         }
 
         private IEnumerator DamageFlash()
@@ -69,6 +71,18 @@ namespace Items
                 sprRend.material.SetFloat("_FlashAmount", 0);
             }
            
+        }
+        protected IEnumerator FadeAway(float time)
+        {
+            float timeStep = .1f;
+            Color c = sprRend.material.GetColor("_Color");
+            for (float i = 1; i >= 0f; i -= (timeStep / time))
+            {
+                
+                sprRend.material.SetColor("_Color",new Color(c.r, c.g, c.b, i * c.a));
+                yield return new WaitForSeconds(timeStep);
+            }
+            gameObject.SetActive(false);
         }
         //etc.
     }
