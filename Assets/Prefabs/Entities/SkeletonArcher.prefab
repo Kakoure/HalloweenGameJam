@@ -183,6 +183,8 @@ MonoBehaviour:
     cooldownTime: 1
   bulletSprite: {fileID: 21300000, guid: 2e7bee173c68a504eb8c497494006b7f, type: 3}
   deadZone: 0.1
+  hitstun:
+    cooldownTime: 0.3
 --- !u!114 &674768061030231088
 MonoBehaviour:
   m_ObjectHideFlags: 0

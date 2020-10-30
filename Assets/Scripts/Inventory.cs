@@ -127,6 +127,9 @@ public class Inventory : MonoBehaviour
                 case 1:
                     anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Sword Anim Controller") as RuntimeAnimatorController;
                     break;
+                case 2:
+                    anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Bow Anim Controller") as RuntimeAnimatorController;
+                    break;
                 default:
                     anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Anim Controller") as RuntimeAnimatorController;
                     break;

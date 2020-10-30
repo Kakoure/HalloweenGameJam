@@ -22,6 +22,8 @@ public class Skeleton : Entity
     public Sprite bulletSprite;
     public float deadZone;
     private Animator anim;
+    [Tooltip("Time disabled after getting hit")]
+    public Cooldown hitstun;
     public Vector2 Wander()
     {
         return UnityEngine.Random.insideUnitCircle * wander;
@@ -35,9 +37,14 @@ public class Skeleton : Entity
         rb = GetComponent<Rigidbody2D>();
         var i = Wander();
         seeker = () => i;
+        
         anim = GetComponent<Animator>();
     }
-
+    public override bool DealDamage(int damage, float force, Vector2 from)
+    {
+        hitstun.Use();
+       return base.DealDamage(damage, force, from);      
+    }
     Func<Vector2> seeker;
     Transform target = null;
     // Update is called once per frame
@@ -121,8 +128,10 @@ public class Skeleton : Entity
                 dir += -vec.normalized * dist2;
             }
         }
-
-        rb.velocity = dir.normalized * speed;
+        if (hitstun.IsReady)
+        {
+            rb.velocity = dir.normalized * speed;
+        }
 
     }
 }

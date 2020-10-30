@@ -58,6 +58,10 @@ public partial class PlayerMove : MonoBehaviour
             anim.SetTrigger("Dodge");
            
         }
+        //Set looking vals
+        Vector2 lookDir = (CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.gameObject.transform.position).normalized;
+        anim.SetFloat("aimX", lookDir.x);
+        anim.SetFloat("aimY", lookDir.y);
     }
 
     private void FixedUpdate()
