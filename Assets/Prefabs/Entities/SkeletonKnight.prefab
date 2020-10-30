@@ -64,9 +64,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: dc4a0ce52e3735e4d845a81c43591476, type: 3}
     m_FontSize: 300
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 300
@@ -259,6 +259,8 @@ MonoBehaviour:
   speed: 3
   behaviour: {fileID: 6604781519918130573}
   fireArrows: 0
+  arrowCooldown:
+    cooldownTime: 0
   arrowSettings:
     damage: 0
     speed: 0
@@ -267,6 +269,8 @@ MonoBehaviour:
     Bullet: {fileID: 0}
   seekTimer:
     cooldownTime: 1
+  bulletSprite: {fileID: 0}
+  deadZone: 0.1
 --- !u!114 &6604781519918130573
 MonoBehaviour:
   m_ObjectHideFlags: 0
