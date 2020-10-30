@@ -45,6 +45,36 @@ public class Skeleton : Entity
         hitstun.Use();
        return base.DealDamage(damage, force, from);      
     }
+    public override void Die()
+    {
+        //For archer while no sprite
+        if (fireArrows)
+        {
+            base.Die();
+            return;
+        }
+
+        //For skele warror
+        if (hp <= 0)
+        {
+            anim.SetTrigger("Dead");
+        }
+        Neutralize();
+        Invoke("Disappear", 2f);
+    }
+    //Make slime stop attacking, corpse sits there for a bit
+    private void Neutralize()
+    {
+        hitstun.Use(3f);
+        foreach (Collider2D col in GetComponents<Collider2D>())
+        {
+            col.enabled = false;
+        }
+    }
+    private void Disappear()
+    {
+        gameObject.SetActive(false);
+    }
     Func<Vector2> seeker;
     Transform target = null;
     // Update is called once per frame
