@@ -15,6 +15,7 @@ namespace Items
         public void Start()
         {
             throwJar = new FireProjectile(null, itemMass, Mathf.Sqrt(massConstant / itemMass), .5f);
+            id = ItemID.Jam;
         }
 
 

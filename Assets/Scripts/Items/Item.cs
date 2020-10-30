@@ -7,6 +7,16 @@ using UnityEngine;
 
 namespace Items
 {
+    public enum ItemID //So There is a single place to find and set id values
+    {
+        Unarmed,
+        Sword,
+        Bow,
+        Staff,
+        Jam
+
+    }
+
     //The Item class defines general 
     [Serializable]
     public abstract class Item : MonoBehaviour , IClickable
@@ -17,7 +27,8 @@ namespace Items
         public abstract Sprite Sprite { get; }
         public Entity Owner { get; protected set; } = null;
         public int Mass { get; protected set; }
-
+        public int ID { get { return (int)id; } protected set { id = (ItemID)value; } }
+        protected ItemID id;
         public Item(int mass)
         {
             this.Mass = mass;

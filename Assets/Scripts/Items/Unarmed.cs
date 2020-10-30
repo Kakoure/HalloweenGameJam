@@ -19,6 +19,7 @@ namespace Items
         private void Start()
         {
             _sprite = GetComponent<SpriteRenderer>().sprite;
+            id = ItemID.Unarmed;
         }
 
         public override void AltFire(Transform player, bool down)

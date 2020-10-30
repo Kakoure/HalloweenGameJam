@@ -62,6 +62,7 @@ namespace Items
             movement = Player.Instance.GetComponent<PlayerMove>();
             defSpeed = movement.speed;
             fireArrow = new FireProjectile(CameraReference.Instance.bulletGeneric, 0, 0, 0);
+            id = ItemID.Bow;
         }
 
         public override void AltFire(Transform player, bool down)

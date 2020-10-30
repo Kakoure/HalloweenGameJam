@@ -54,6 +54,7 @@ public class Spell : Weapon
     void Start()
     {
         _sprite = GetComponent<SpriteRenderer>().sprite;
+        id = ItemID.Staff;
     }
 
     // Update is called once per frame
