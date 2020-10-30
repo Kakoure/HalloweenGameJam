@@ -8637,7 +8637,7 @@ MonoBehaviour:
   arcRadians: 0.5
   damage: 3
   force: 10
-  lungeForce: 0
+  lungeForce: 3
 --- !u!4 &1685813612 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3916141102960055223, guid: 755846a13a77f0540bc6d48ec830746f,
