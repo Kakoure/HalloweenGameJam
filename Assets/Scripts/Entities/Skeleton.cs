@@ -21,7 +21,7 @@ public class Skeleton : Entity
     public Cooldown seekTimer;
     public Sprite bulletSprite;
     public float deadZone;
-
+    private Animator anim;
     public Vector2 Wander()
     {
         return UnityEngine.Random.insideUnitCircle * wander;
@@ -35,6 +35,7 @@ public class Skeleton : Entity
         rb = GetComponent<Rigidbody2D>();
         var i = Wander();
         seeker = () => i;
+        anim = GetComponent<Animator>();
     }
 
     Func<Vector2> seeker;
@@ -63,6 +64,34 @@ public class Skeleton : Entity
             bul.GetComponent<SpriteRenderer>().sprite = bulletSprite;
             arrowCooldown.Use();
             stopWhileFireing.Use();
+        }
+
+        //Anim updates
+        if(anim != null)
+        {
+            if(rb.velocity.sqrMagnitude > .05f)
+            {
+                anim.SetBool("isMoving", true);
+                
+            } else
+            {
+                anim.SetBool("isMoving", false);
+            }
+            if (target != null)
+            {
+                Vector2 dist = target.position - transform.position;
+                float absDist = dist.magnitude;
+                if (absDist < 1.8f)
+                {
+                    anim.SetTrigger("Attack");
+                }
+                anim.SetFloat("xInput", dist.normalized.x);
+                anim.SetFloat("yInput", dist.normalized.y);
+            } else
+            {
+                anim.SetFloat("xInput", rb.velocity.normalized.x);
+                anim.SetFloat("yInput", rb.velocity.normalized.y);
+            }
         }
     }
     private void FixedUpdate()
