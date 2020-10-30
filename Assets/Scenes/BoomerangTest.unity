@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 1081817173}
   - component: {fileID: 1081817175}
   - component: {fileID: 1081817176}
+  - component: {fileID: 1081817177}
   m_Layer: 0
   m_Name: Joker
   m_TagString: Untagged
@@ -237,17 +238,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c933302076c8421468dea0073aeac50e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHP: 1000
+  hp: 1000
+  healthBar: {fileID: 1081817177}
   p1: {fileID: 1750526216}
   p2: {fileID: 472882190}
-  testTarget: {fileID: 0}
-  boomerangRadius: 4
-  boomerangTime: 1
+  testTarget: {fileID: 1369948153}
+  boomerangRadius: 6
+  boomerangTime: 1.5
+  shotSpread: 20
+  shotDamage: 10
+  shotKnockback: 1
+  shotSpeed: 6
+  shotSprite: {fileID: 21300000, guid: de898bd3addea94468ca9a15768eb5aa, type: 3}
   boomerangTimer:
     cooldownTime: 2
   altTimer:
     cooldownTime: 2
   mainTimer:
     cooldownTime: 8
+  teleportHP1: 0
+  secondTeleport: {fileID: 1081817174}
+  teleportHP2: 0
+  thirdTeleport: {fileID: 1369948153}
 --- !u!4 &1081817174
 Transform:
   m_ObjectHideFlags: 0
@@ -324,6 +337,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1081817177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081817172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fc84635b13a6e4e8726eee0092df9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chainLink: {fileID: 0}
 --- !u!1 &1320510645
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +361,7 @@ GameObject:
   - component: {fileID: 1320510648}
   - component: {fileID: 1320510647}
   - component: {fileID: 1320510646}
+  - component: {fileID: 1320510649}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -407,6 +434,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1320510649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320510645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e4a1af73b555a40b9d01187e5bb1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 1320510647}
+  canvas: {fileID: 0}
+  hitMarker: {fileID: 820874680831379781, guid: 5ab1ab4fefcbb1a41aded6d09e348d95,
+    type: 3}
+  bulletGeneric: {fileID: 883646783086878824, guid: bb9dfae2a93d88346859ad45ce8871c4,
+    type: 3}
+  damageConstant: 2
 --- !u!1 &1369948152
 GameObject:
   m_ObjectHideFlags: 0
