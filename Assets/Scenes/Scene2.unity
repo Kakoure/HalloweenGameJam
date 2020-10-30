@@ -2461,7 +2461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1732572805}
-  canvas: {fileID: 0}
+  canvas: {fileID: 907333301}
   hitMarker: {fileID: 820874680831379781, guid: 5ab1ab4fefcbb1a41aded6d09e348d95,
     type: 3}
   bulletGeneric: {fileID: 883646783086878824, guid: bb9dfae2a93d88346859ad45ce8871c4,
@@ -15539,7 +15539,7 @@ PrefabInstance:
     - target: {fileID: 9161909879284659548, guid: 755846a13a77f0540bc6d48ec830746f,
         type: 3}
       propertyPath: lungeForce
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3916141102960055217, guid: 755846a13a77f0540bc6d48ec830746f,
         type: 3}
@@ -15760,15 +15760,15 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 377278816543342194, guid: e7ec070ab4e74614a9090250c607c005,
-        type: 3}
-      propertyPath: damageKnockbackDur
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 377278816543342216, guid: e7ec070ab4e74614a9090250c607c005,
         type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 31dcbc1c2fffc774f98c23767eae9f94, type: 2}
+    - target: {fileID: 377278816543342194, guid: e7ec070ab4e74614a9090250c607c005,
+        type: 3}
+      propertyPath: damageKnockbackDur
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7ec070ab4e74614a9090250c607c005, type: 3}

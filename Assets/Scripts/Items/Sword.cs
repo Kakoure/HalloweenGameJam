@@ -112,7 +112,7 @@ public class Sword : Weapon
         
         Path lungePath = LinePath(lungeConverter, lookDir);
         Player.Instance.pm.SetPath(Boomerang.Mult(Player.Instance.pm.speed, lungePath), .5f);
-        Player.Instance.damageInvuln.Use(.2f);
+        Player.Instance.damageInvuln.Use();
 
 
         yield return new WaitForSeconds(.2f);
