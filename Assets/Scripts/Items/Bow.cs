@@ -46,7 +46,6 @@ namespace Items
                 }
                 else
                 {
-                    chargeTime = Time.time - chargeTime;
                     movement.speed = defSpeed;
                 }
                 _isCharging = value;
@@ -86,6 +85,8 @@ namespace Items
             {
                 if (!ChargingState) return;
 
+                chargeTime = Time.time - this.chargeTime;
+
                 //release and fire
                 ChargingState = false;
                 playerAnim.SetBool("isAiming", false);
@@ -103,7 +104,11 @@ namespace Items
 
                 var i = fireArrow.Execute(player, out _);
 
-                SetUseTime(chargeTime < fullCharge ? cooldownTime : fullChargeCooldown);
+                float cooldown = chargeTime < fullCharge ? cooldownTime : fullChargeCooldown;
+                Debug.Log(cooldown);
+                Debug.Log(chargeTime);
+                Debug.Log(chargeTime < fullCharge);
+                SetUseTime(cooldown);
             }
         }
 
