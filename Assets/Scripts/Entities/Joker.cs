@@ -7,11 +7,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.iOS;
 using static Boomerang;
 
 public partial class Joker : Entity
 {
+    public UnityEvent onDeath;
+
     public BoomerangProj p1;
     private Boomerang b1;
     public BoomerangProj p2;
@@ -218,6 +221,9 @@ public partial class Joker : Entity
         boomerangCycle = null;
         altCycle = null;
         boomerangTimer.Use(Mathf.Infinity);
+
+        onDeath.Invoke();
+        Destroy(this);
     }
 }
 
