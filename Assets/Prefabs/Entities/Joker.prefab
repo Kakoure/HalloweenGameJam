@@ -31,7 +31,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4214909591308515924}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 137.65, y: -12.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c933302076c8421468dea0073aeac50e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 100
-  hp: 100
+  MaxHP: 500
+  hp: 500
   healthBar: {fileID: 4214909591308515933}
   p1: {fileID: 0}
   p2: {fileID: 0}
@@ -61,7 +61,7 @@ MonoBehaviour:
   boomerangRadius: 6
   boomerangTime: 1.5
   shotSpread: 20
-  shotDamage: 10
+  shotDamage: 15
   shotKnockback: 1
   shotSpeed: 6
   shotPrefab: {fileID: 9029948078912441039, guid: 641be07ab27295a46bbfa9a4cb010de9,
@@ -76,14 +76,14 @@ MonoBehaviour:
     cooldownTime: 2
   mainTimer:
     cooldownTime: 8
-  teleportHP1: 75
+  teleportHP1: 375
   firstTeleport: {fileID: 0}
-  teleportHP2: 50
+  teleportHP2: 250
   secondTeleport: {fileID: 0}
-  teleportHP3: 25
+  teleportHP3: 125
   thirdTeleport: {fileID: 0}
-  teleportFromTime: 1
-  teleportToTime: 1
+  teleportFromTime: 3
+  teleportToTime: 3
   defaultAttackTime: 2
   fireTime: 1
   windupTime: 1
@@ -224,7 +224,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   secondPhaseHp: 500
-  secondPhase: {fileID: 21300000, guid: 8c2a735d414d8004ebbfd415deae0bc2, type: 3}
+  secondPhase: {fileID: 21300000, guid: 6dae14a3295d9d645bafeafa8a1c47c1, type: 3}
   img: {fileID: 0}
 --- !u!114 &4214909591308515932
 MonoBehaviour:
