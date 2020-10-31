@@ -212,8 +212,7 @@ public partial class Joker : Entity
         //death Animation
 
 
-
-        Destroy(this);
+        base.Die();
     }
 }
 
