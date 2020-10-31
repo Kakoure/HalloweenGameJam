@@ -3,6 +3,7 @@ using Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -210,9 +211,8 @@ public partial class Joker : Entity
     public override void Die()
     {
         //death Animation
-
-
-        base.Die();
+        anim.SetTrigger("Dead");
+        StartCoroutine(FadeAway(3f));
     }
 }
 
