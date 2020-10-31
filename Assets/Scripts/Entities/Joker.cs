@@ -137,11 +137,13 @@ public partial class Joker : Entity
         {
             Cycle c;
 
+
             if (hp > teleportHP2) c = Burst6;
             else
             {
                 c = Burst8(0);
                 anim.SetBool("Angry", true);
+
             }
 
             boomerangCycle = TPFrom(teleport.position, c);

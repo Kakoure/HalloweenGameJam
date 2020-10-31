@@ -220,7 +220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6356b14e2f8c00245bb31f730ac2f7fe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9ea71239f3bbf6b45bd09b1c0b3a49a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -352,12 +352,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8946aadebe61148b7f6bd0dab31734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 100
-  hp: 100
+  MaxHP: 125
+  hp: 125
   healthBar: {fileID: 4226414351105399903}
   chaseDistance: 15
   aggressiveDist: 4
-  jumpStr: 15
+  jumpStr: 10
   passiveStr: 5
   invalidAttemptCooldown: 0.05
   jumpAggressive:
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742bd5c33e58d0344bb0c81041fdd381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 15
   force: 10
 --- !u!114 &4226414351105399903
 MonoBehaviour:

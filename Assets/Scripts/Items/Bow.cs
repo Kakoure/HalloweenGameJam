@@ -19,9 +19,11 @@ namespace Items
         public Sprite arrowSprite;
 
         public int baseDamage;
+        public int chargedDamage;
         public float baseSpeed;
         public float knockback;
         public float fullCharge;
+        public float fullChargeCooldown;
         public float slowMoveSpeedMultiplier;
 
         private float defSpeed;
@@ -101,13 +103,13 @@ namespace Items
 
                 var i =fireArrow.Execute(player, out _);
 
-                SetUseTime();
+                SetUseTime(chargeTime < fullCharge ? cooldownTime : fullChargeCooldown);
             }
         }
 
         public int GetDamage(float t)
         {
-            return t < fullCharge ? baseDamage : 2 * baseDamage;
+            return t < fullCharge ? baseDamage : chargedDamage;
         }
         public float GetKnockback(float t)
         {

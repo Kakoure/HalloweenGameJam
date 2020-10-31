@@ -121,7 +121,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: b338e9d98f2f53c409e7a1df4cbad965, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 377278816543342196}
-  speed: 5
+  speed: 4
   diveDur: 1
   diveCoef: 1
   jumpCooldown:
@@ -299,8 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3776a26cf3a8d54a8118373eaaf03cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 100
-  hp: 100
+  MaxHP: 200
+  hp: 200
   healthBar: {fileID: 377278816543342197}
   damageKnockbackDur: 0.25
   damageKnockbackCoef: 1
