@@ -16,6 +16,9 @@ namespace Items
         public abstract Rigidbody2D Rigidbody { get; }
         public HealthBar healthBar;
 
+        public AudioClip hurtSound;
+        public AudioClip deathSound;
+        private AudioSource audioSrc;
         private SpriteRenderer sprRend;
         //return success
         public virtual bool DealDamage(int damage, float force, Vector2 from)
@@ -28,11 +31,18 @@ namespace Items
             //hit marker
             CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
 
+            
+
             if (hp <= 0) {
                 Die();
             }
             else {
                 StartCoroutine("DamageFlash");
+                //If not dead play hurt
+                if (hurtSound != null)
+                {
+                    audioSrc.PlayOneShot(hurtSound);
+                }
             }
 
             //apply impulse
@@ -43,7 +53,13 @@ namespace Items
         public virtual void Die()
         {
             if (hp <= 0)
+            {
                 gameObject.SetActive(false);
+                if (deathSound != null)
+                {
+                    audioSrc.PlayOneShot(deathSound);
+                }
+            }
         }
         protected virtual void ApplyImpulse(float force, Vector2 from)
         {
@@ -56,6 +72,7 @@ namespace Items
         {
             healthBar.SetHealth(hp, MaxHP);
             sprRend = GetComponent<SpriteRenderer>();
+            audioSrc = GetComponent<AudioSource>();
         }
 
         private IEnumerator DamageFlash()
