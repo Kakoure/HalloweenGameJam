@@ -213,6 +213,11 @@ public partial class Joker : Entity
         //death Animation
         anim.SetTrigger("Dead");
         StartCoroutine(FadeAway(3f));
+
+        mainCycle = null;
+        boomerangCycle = null;
+        altCycle = null;
+        boomerangTimer.Use(Mathf.Infinity);
     }
 }
 
