@@ -19,6 +19,7 @@ namespace Items
         public Sprite arrowSprite;
 
         public int baseDamage;
+        public int chargedDamage;
         public float baseSpeed;
         public float knockback;
         public float fullCharge;
@@ -108,7 +109,7 @@ namespace Items
 
         public int GetDamage(float t)
         {
-            return t < fullCharge ? baseDamage : 2 * baseDamage;
+            return t < fullCharge ? baseDamage : chargedDamage;
         }
         public float GetKnockback(float t)
         {
