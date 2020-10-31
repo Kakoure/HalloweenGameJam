@@ -9238,6 +9238,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dist: 3
   target: {fileID: 1722486657}
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
   allChildren: 1
   objects: []
 --- !u!4 &1837182533
@@ -9389,6 +9392,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dist: 3
   target: {fileID: 1942926975}
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
   allChildren: 0
   objects:
   - {fileID: 1130907237}

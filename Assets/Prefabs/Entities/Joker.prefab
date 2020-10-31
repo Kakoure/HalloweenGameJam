@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 4214909591308515928}
   - component: {fileID: 4214909591308515929}
   - component: {fileID: 4214909591308515926}
-  - component: {fileID: 4214909591308515930}
   - component: {fileID: 4214909591308515933}
   - component: {fileID: 4214909591308515932}
-  - component: {fileID: -2120131381537979815}
   - component: {fileID: 8998481040930524654}
+  - component: {fileID: -6291477114360114327}
+  - component: {fileID: 5722959552992740413}
   m_Layer: 9
   m_Name: Joker
   m_TagString: Monster
@@ -82,7 +82,7 @@ MonoBehaviour:
   secondTeleport: {fileID: 0}
   teleportHP3: 150
   thirdTeleport: {fileID: 0}
-  teleportFromTime: 1
+  teleportFromTime: 1.5
   teleportToTime: 1
   defaultAttackTime: 2
   fireTime: 1
@@ -153,32 +153,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4214909591308515930
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4214909591308515924}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2}
-  m_EdgeRadius: 0
 --- !u!114 &4214909591308515933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +215,22 @@ MonoBehaviour:
   damage: 20
   force: 1
   isActive: 1
---- !u!95 &
+--- !u!111 &8998481040930524654
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4214909591308515924}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &-6291477114360114327
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -260,18 +249,53 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!111 &8998481040930524654
-Animation:
+--- !u!60 &5722959552992740413
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4214909591308515924}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.5984344, y: -0.24255085}
+      - {x: 1.5857086, y: 0.129179}
+      - {x: 1.2583466, y: 0.31720543}
+      - {x: 0.7856903, y: 0.14613247}
+      - {x: 0.64224243, y: -0.10888958}
+      - {x: 0.40278625, y: 0.118971825}
+      - {x: 0.37573242, y: 0.74221325}
+      - {x: 0.59376526, y: 0.69106007}
+      - {x: 0.6987457, y: 0.89316654}
+      - {x: 0.41505432, y: 1.2116671}
+      - {x: 0.39892578, y: 1.4679012}
+      - {x: 0.20211792, y: 1.5793972}
+      - {x: -0.1433258, y: 1.210577}
+      - {x: -0.3473053, y: 1.2837954}
+      - {x: -0.7073517, y: 0.9407692}
+      - {x: -0.6717682, y: 0.7523594}
+      - {x: -0.37417603, y: 0.751688}
+      - {x: -0.38594055, y: 0.2181797}
+      - {x: -0.49282837, y: -0.069826126}
+      - {x: -0.8342438, y: 0.10574341}
+      - {x: -1.3184967, y: 0.303051}
+      - {x: -1.5183105, y: 0.1987791}
+      - {x: -1.6238861, y: -0.2096672}
+      - {x: -1.204361, y: -0.49146175}
+      - {x: 1.1736603, y: -0.58684635}
