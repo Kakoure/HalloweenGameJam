@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742bd5c33e58d0344bb0c81041fdd381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 20
   force: 10
 --- !u!114 &4765399477202076750
 MonoBehaviour:
@@ -164,12 +164,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2444c4c32c48a4d4f9809f9698c8a290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 100
-  hp: 100
+  MaxHP: 175
+  hp: 175
   healthBar: {fileID: 7995943928751269476}
   seekRadius: 10
   wander: 2
-  speed: 3
+  speed: 2.5
   behaviour: {fileID: 6604781519918130573}
   fireArrows: 0
   arrowCooldown:
