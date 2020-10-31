@@ -82,8 +82,8 @@ MonoBehaviour:
   secondTeleport: {fileID: 0}
   teleportHP3: 125
   thirdTeleport: {fileID: 0}
-  teleportFromTime: 3
-  teleportToTime: 3
+  teleportFromTime: 1
+  teleportToTime: 1
   defaultAttackTime: 2
   fireTime: 1
   windupTime: 1

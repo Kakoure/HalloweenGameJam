@@ -43,6 +43,7 @@ public partial class Joker
     {
         //tpFromAnimationStart
         anim.SetTrigger("Teleporting");
+        anim.SetBool("Juggling", false);
         self = TPAndStart(location, main);
 
         return teleportFromTime;
@@ -302,9 +303,13 @@ public partial class Joker
 
        if (++counter < 18)
        {
-           //not actually recursion btw
-           action = Fire18(counter);
-
+           if (counter == 17)
+           {
+               anim.SetTrigger("Release");
+           }
+               //not actually recursion btw
+               action = Fire18(counter);
+          
            return timeBetweenShots18;
        }
        else
