@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7009725180030455758
+--- !u!1 &7444088649892772709
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7009725180030455756}
-  - component: {fileID: 7009725180030455754}
-  - component: {fileID: 7884638827966077448}
-  - component: {fileID: 7884638828430525690}
-  - component: {fileID: 7884638828430525684}
+  - component: {fileID: 7444088649892772711}
+  - component: {fileID: 7444088649892772705}
+  - component: {fileID: 7737995578173828771}
+  - component: {fileID: 7737995578173828799}
+  - component: {fileID: 7737995578523070545}
+  - component: {fileID: 7737995578523070559}
   m_Layer: 11
-  m_Name: Bow
+  m_Name: Bow 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7009725180030455756
+--- !u!4 &7444088649892772711
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7009725180030455758}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 7444088649892772709}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 17.33, y: 1.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7009725180030455754
+--- !u!212 &7444088649892772705
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7009725180030455758}
+  m_GameObject: {fileID: 7444088649892772709}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -83,13 +84,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &7884638827966077448
+--- !u!60 &7737995578173828771
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7009725180030455758}
+  m_GameObject: {fileID: 7444088649892772709}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -121,13 +122,34 @@ PolygonCollider2D:
       - {x: 0.62690926, y: 0.6256423}
       - {x: 0.419693, y: 0.6256908}
       - {x: 0.25121498, y: 0.45350873}
---- !u!60 &7884638828430525690
+--- !u!114 &7737995578173828799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7444088649892772709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bf339f8bc54774da25568c2bc38969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 1.5
+  damage: 15
+  force: 5
+  explosionDamage: 15
+  explosionForce: 5
+  explosionRadius: 2
+  spd: 6
+  fireball: {fileID: 7254974616750928701, guid: c938f609277e2c74681cd03060d2955b,
+    type: 3}
+--- !u!60 &7737995578523070545
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7009725180030455758}
+  m_GameObject: {fileID: 7444088649892772709}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -161,13 +183,13 @@ PolygonCollider2D:
     - - {x: 0.25, y: 0.083333336}
       - {x: -0.125, y: -0.2916667}
       - {x: -0.083333336, y: -0.33333334}
---- !u!114 &7884638828430525684
+--- !u!114 &7737995578523070559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7009725180030455758}
+  m_GameObject: {fileID: 7444088649892772709}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 008deb65a8246ac448ad472cf9b06dec, type: 3}
@@ -175,12 +197,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownTime: 3
   arrowSprite: {fileID: 21300000, guid: de898bd3addea94468ca9a15768eb5aa, type: 3}
-  baseDamage: 15
-  chargedDamage: 45
+  baseDamage: 50
+  chargedDamage: 0
   baseSpeed: 10
   knockback: 3
   fullCharge: 1
-  fullChargeCooldown: 0
+  fullChargeCooldown: 1
   slowMoveSpeedMultiplier: 0.25
   fireArrow:
     damage: 0
