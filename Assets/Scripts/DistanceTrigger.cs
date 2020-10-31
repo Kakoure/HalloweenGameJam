@@ -7,6 +7,7 @@ public class DistanceTrigger : MonoBehaviour
 {
     public float dist;
     public Transform target;
+    public UnityEvent onTrigger;
 
     public bool allChildren;
     [Tooltip("If allChildren is on then this is irrelevent")]
@@ -31,6 +32,8 @@ public class DistanceTrigger : MonoBehaviour
                     t.gameObject.SetActive(true);
                 }
             }
+
+            onTrigger.Invoke();
 
             Destroy(this);
         }
