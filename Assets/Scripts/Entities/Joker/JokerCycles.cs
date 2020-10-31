@@ -218,7 +218,7 @@ public partial class Joker
         if (++counter < 6)
         {
             //not actually recursion btw
-            action = PrepareAttack(Fire6(counter));
+            action = Fire6(counter);
 
             return TimeInBetweenShots;
         }
@@ -293,7 +293,7 @@ public partial class Joker
        if (++counter < 18)
        {
            //not actually recursion btw
-           action = PrepareAttack(Fire18(counter));
+           action = Fire18(counter);
 
            return timeBetweenShots18;
        }
@@ -313,8 +313,8 @@ public partial class Joker
         //summon two slimes on collision
         m.onCollision = () =>
         {
-            Instantiate(slimePrefab, m.transform.position, Quaternion.identity);
-            Instantiate(slimePrefab, m.transform.position, Quaternion.identity);
+            Instantiate(slimePrefab, (Vector2)m.transform.position + Vector2.left * .1f, Quaternion.identity);
+            Instantiate(slimePrefab, (Vector2)m.transform.position + Vector2.right * .1f, Quaternion.identity);
         };
 
         action = Juggle2(0, 0); //next cycle
@@ -337,8 +337,7 @@ public partial class Joker
             if (hp < teleportHP3)
             {
                 //go to teleport
-                Debug.Log("Teleporting");
-                TPFrom(testTarget.transform.position, PrepareAttack(Burst8(0)));
+                action = TPFrom(testTarget.transform.position, PrepareAttack(Burst8(0)));
             }
             else
                 action = PrepareAttack(Burst8(0)); //next Cycle
