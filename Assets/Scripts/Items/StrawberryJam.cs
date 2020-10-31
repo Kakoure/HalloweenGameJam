@@ -26,12 +26,10 @@ namespace Items
 
             if (down)
             {
-                var projectile = throwJar.Execute(player, out _);
-                projectile.GetComponent<SpriteRenderer>().sprite = this.sprite;
-                projectile.GetComponent<Animator>().enabled = false;
-                projectile.onCollision = () => DropAt(projectile.transform.position);
-                Inventory.PopFromSlot(Inventory.Instance.shield);
+                //should pass an instance to the entity that used it...
+                Player.Instance.DealDamage(-healHP, 0, Vector2.zero);
 
+                Inventory.PopFromSlot(Inventory.Instance.shield);
             }
 
         }

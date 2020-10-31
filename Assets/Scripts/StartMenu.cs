@@ -6,20 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
-    public static string sceneName = "Scene2";
+    public static int option;
 
-    public void SetSceneName(string s)
+    public void SetOption(int o)
     {
-        sceneName = s;
+        option = o;
     }
 
-    public void SetWizard() { sceneName = "Wizard"; }
-    public void SetWarrior() { sceneName = "Warrior"; }
+    public string GetScene()
+    {
+        switch (option)
+        {
+            case 1: return "Staff";
+            case 2: return "Sword";
+            case 3: return "Bow";
+            case 4: return "Godmode";
+            case 5: return "Unarmed";
+            default: return "Staff";
+        }
+    }
 
     public void StartGame()
     {
-        if (sceneName == null) return;
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        SceneManager.LoadScene(GetScene(), LoadSceneMode.Single);
     }
 
     // Start is called before the first frame update

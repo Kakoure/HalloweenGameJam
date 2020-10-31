@@ -17,8 +17,7 @@ namespace Items
         protected void SetUseTime() => nextUse = Time.time + cooldownTime;
         protected void SetUseTime(float cooldown)
         {
-            cooldownTime = cooldown;
-            SetUseTime();
+            nextUse = Time.time + cooldownTime;
         }
         public float TimeRemaining() => nextUse - Time.time;
 

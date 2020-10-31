@@ -11,10 +11,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneTemp.unity
     guid: 8973d66bd61d596458f19a1aac45e7e4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Scene2.unity
     guid: f895f3db3ba7b62489d78fb1ae251310
   - enabled: 1
     path: Assets/Scenes/RIP.unity
     guid: 0aeedde9068cb1b428d6b426e5b6c2af
+  - enabled: 1
+    path: Assets/Scenes/final/Staff.unity
+    guid: 59c2038e5be8e85468152e13e38c2a7d
+  - enabled: 1
+    path: Assets/Scenes/final/Sword.unity
+    guid: 5cb53d182d0b0974abca1df992a306e0
+  - enabled: 1
+    path: Assets/Scenes/final/Bow.unity
+    guid: 4513665cac350394e8c54ed619ba4d3c
+  - enabled: 1
+    path: Assets/Scenes/final/Unarmed.unity
+    guid: 1ea81a79c2b656f4a8ba1d0f9d786a29
+  - enabled: 1
+    path: Assets/Scenes/final/Godmode.unity
+    guid: dd91871f153afd148a2aa425c4a802e1
   m_configObjects: {}
