@@ -62,7 +62,7 @@ public class Skeleton : Entity
         Neutralize();
         Invoke("Disappear", 6f);
     }
-    //Make slime stop attacking, corpse sits there for a bit
+
     private void Neutralize()
     {
         hitstun.Use(10f);
@@ -98,10 +98,7 @@ public class Skeleton : Entity
         //fireArrows
         if (target != null && fireArrows && arrowCooldown.IsReady)
         {
-            var bul = arrowSettings.Execute(this.transform, target.position - this.transform.position);
-            bul.GetComponent<SpriteRenderer>().sprite = bulletSprite;
-            arrowCooldown.Use();
-            stopWhileFireing.Use();
+            StartCoroutine("ChannelProjectile");
         }
 
         //Anim updates
@@ -115,7 +112,7 @@ public class Skeleton : Entity
             {
                 anim.SetBool("isMoving", false);
             }
-            if (target != null)
+            if (target != null && !fireArrows)
             {
                 Vector2 dist = target.position - transform.position;
                 float absDist = dist.magnitude;
@@ -125,12 +122,44 @@ public class Skeleton : Entity
                 }
                 anim.SetFloat("xInput", dist.normalized.x);
                 anim.SetFloat("yInput", dist.normalized.y);
-            } else
+            }
+            else if (target != null && fireArrows)
+            {
+                Vector2 dir = target.position - transform.position;
+                dir = dir.normalized;
+                anim.SetFloat("xAim", dir.x);
+                anim.SetFloat("yAim", dir.y);
+            }
+            else
             {
                 anim.SetFloat("xInput", rb.velocity.normalized.x);
                 anim.SetFloat("yInput", rb.velocity.normalized.y);
-            }
+            } 
+            
         }
+    }
+    IEnumerator ChannelProjectile()
+    {
+        arrowCooldown.Use();
+        stopWhileFireing.Use();
+        float duration = 1f;
+        float timeStep = .1f;
+        SpriteRenderer sprRend = GetComponent<SpriteRenderer>();
+        for (float i = 0; i <= 1; i += timeStep / duration)
+        {
+            sprRend.material.SetColor("_FlashColor", Color.white);
+            sprRend.material.SetFloat("_FlashAmount", i);
+            yield return new WaitForSeconds(timeStep);
+        }
+        ShootArrow();
+        sprRend.material.SetFloat("_FlashAmount", 0);
+    }
+    void ShootArrow()
+    {
+        var bul = arrowSettings.Execute(this.transform, target.position - this.transform.position);
+        bul.GetComponent<SpriteRenderer>().sprite = bulletSprite;
+        arrowCooldown.Use();
+        stopWhileFireing.Use();
     }
     private void FixedUpdate()
     {
