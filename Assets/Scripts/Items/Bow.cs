@@ -27,7 +27,7 @@ namespace Items
         public float slowMoveSpeedMultiplier;
 
         private float defSpeed;
-        public FireProjectile fireArrow;
+        public FireProjectile fireArrow; // start
         private PlayerMove movement;
         private Animator playerAnim;
         #region charging
@@ -101,7 +101,7 @@ namespace Items
                 fireArrow.knockBack = kb;
                 fireArrow.speed = speed;
 
-                var i =fireArrow.Execute(player, out _);
+                var i = fireArrow.Execute(player, out _);
 
                 SetUseTime(chargeTime < fullCharge ? cooldownTime : fullChargeCooldown);
             }
