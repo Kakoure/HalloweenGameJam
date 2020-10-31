@@ -201,11 +201,11 @@ public partial class Joker : Entity
     }
     public void DisableHurtbox()
     {
-        GetComponent<DealDamageOnContact>().enabled = false;
+        GetComponent<DealDamageOnContact>().isActive = false;
     }
     public void EnableHurtBox()
     {
-        GetComponent<DealDamageOnContact>().enabled = true;
+        GetComponent<DealDamageOnContact>().isActive = true;
     }
     public override void Die()
     {
