@@ -82,8 +82,8 @@ MonoBehaviour:
   secondTeleport: {fileID: 0}
   teleportHP3: 150
   thirdTeleport: {fileID: 0}
-  teleportFromTime: 3
-  teleportToTime: 3
+  teleportFromTime: 1
+  teleportToTime: 1
   defaultAttackTime: 2
   fireTime: 1
   windupTime: 1
@@ -120,7 +120,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3d2eeacee9d847045ab18bce8c82f174, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -240,7 +240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   force: 1
---- !u!95 &-2120131381537979815
+  isActive: 1
+--- !u!95 &
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0

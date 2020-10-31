@@ -7,9 +7,11 @@ public class DealDamageOnContact : MonoBehaviour
 {
     public int damage;
     public float force;
+    public bool isActive = true;
 
     void OnTriggerStay2D(Collider2D collision)
     {
+        if (isActive)
         if (collision.gameObject.CompareTag("Player"))
         {
             Entity entity = collision.GetComponent<Entity>();

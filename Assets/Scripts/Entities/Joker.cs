@@ -3,6 +3,7 @@ using Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -201,19 +202,17 @@ public partial class Joker : Entity
     }
     public void DisableHurtbox()
     {
-        GetComponent<DealDamageOnContact>().enabled = false;
+        GetComponent<DealDamageOnContact>().isActive = false;
     }
     public void EnableHurtBox()
     {
-        GetComponent<DealDamageOnContact>().enabled = true;
+        GetComponent<DealDamageOnContact>().isActive = true;
     }
     public override void Die()
     {
         //death Animation
-
-
-
-        Destroy(this);
+        anim.SetTrigger("Dead");
+        StartCoroutine(FadeAway(3f));
     }
 }
 
