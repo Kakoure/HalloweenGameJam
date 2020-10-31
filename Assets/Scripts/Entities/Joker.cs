@@ -135,8 +135,16 @@ public partial class Joker : Entity
         {
             Cycle c;
 
-            if (hp > teleportHP2) c = Burst6;
-            else c = Burst8(0);
+            if (hp > teleportHP2)
+            {
+                //phase 1
+                c = Burst6;
+            }
+            else
+            {
+                //phase2
+                c = Burst8(0);
+            }
 
             boomerangCycle = TPFrom(teleport.position, c);
             Debug.Log(teleport);
