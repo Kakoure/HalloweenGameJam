@@ -34,7 +34,7 @@ public class Fireball : Bullet
                 if (col.gameObject.CompareTag("Monster"))
                 {
                     Entity entity = col.GetComponent<Entity>();
-                    bool success = entity.DealDamage(explosionDamage, explosionForce, this.transform.position);
+                    entity?.DealDamage(explosionDamage, explosionForce, this.transform.position);
                 }
             }
         };
