@@ -143,8 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3344fc90e7d645419c4b5d1f9a9b942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSound: {fileID: 0}
   cooldownTime: 0.25
-  radius: 3
+  radius: 1.5
   arcRadians: 1
   damage: 15
   force: 10
