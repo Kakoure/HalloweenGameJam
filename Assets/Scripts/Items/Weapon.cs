@@ -15,6 +15,10 @@ namespace Items
 
         public bool IsReady => Time.time > nextUse;
         protected void SetUseTime() => nextUse = Time.time + cooldownTime;
+        protected void SetUseTime(float cooldown)
+        {
+            cooldownTime = cooldown;
+        }
         public float TimeRemaining() => nextUse - Time.time;
 
         public Weapon(int mass) : base(mass) { }

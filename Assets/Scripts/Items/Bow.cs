@@ -22,6 +22,7 @@ namespace Items
         public float baseSpeed;
         public float knockback;
         public float fullCharge;
+        public float fullChargeCooldown;
         public float slowMoveSpeedMultiplier;
 
         private float defSpeed;
@@ -101,7 +102,7 @@ namespace Items
 
                 var i =fireArrow.Execute(player, out _);
 
-                SetUseTime();
+                SetUseTime(chargeTime < fullCharge ? cooldownTime : fullChargeCooldown);
             }
         }
 
