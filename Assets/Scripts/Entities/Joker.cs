@@ -223,7 +223,6 @@ public partial class Joker : Entity
         boomerangTimer.Use(Mathf.Infinity);
 
         onDeath.Invoke();
-        Destroy(this);
     }
 }
 
