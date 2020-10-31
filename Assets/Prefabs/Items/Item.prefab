@@ -132,12 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bf339f8bc54774da25568c2bc38969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTime: 1
-  damage: 0
-  force: 1
-  explosionDamage: 10
-  explosionForce: 7
-  explosionRadius: 7
-  spd: 7
+  cooldownTime: 1.5
+  damage: 15
+  force: 5
+  explosionDamage: 15
+  explosionForce: 5
+  explosionRadius: 2
+  spd: 6
   fireball: {fileID: 7254974616750928701, guid: c938f609277e2c74681cd03060d2955b,
     type: 3}

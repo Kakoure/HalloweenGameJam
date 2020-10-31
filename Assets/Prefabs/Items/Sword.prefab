@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 0.25
-  radius: 3
+  radius: 1.5
   arcRadians: 1
-  damage: 10
+  damage: 15
   force: 10
   lungeForce: 1

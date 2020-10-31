@@ -175,7 +175,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownTime: 3
   arrowSprite: {fileID: 21300000, guid: de898bd3addea94468ca9a15768eb5aa, type: 3}
-  baseDamage: 50
+  baseDamage: 15
+  chargedDamage: 45
   baseSpeed: 10
   knockback: 3
   fullCharge: 1
