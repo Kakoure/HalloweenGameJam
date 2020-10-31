@@ -299,8 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3776a26cf3a8d54a8118373eaaf03cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 200
-  hp: 200
+  MaxHP: 100
+  hp: 100
   healthBar: {fileID: 377278816543342197}
   damageKnockbackDur: 0.25
   damageKnockbackCoef: 1
