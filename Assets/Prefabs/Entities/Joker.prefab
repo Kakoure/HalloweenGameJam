@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c933302076c8421468dea0073aeac50e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 500
-  hp: 500
+  MaxHP: 600
+  hp: 600
   healthBar: {fileID: 4214909591308515933}
   p1: {fileID: 0}
   p2: {fileID: 0}
@@ -76,11 +76,11 @@ MonoBehaviour:
     cooldownTime: 2
   mainTimer:
     cooldownTime: 8
-  teleportHP1: 375
+  teleportHP1: 450
   firstTeleport: {fileID: 0}
-  teleportHP2: 250
+  teleportHP2: 300
   secondTeleport: {fileID: 0}
-  teleportHP3: 125
+  teleportHP3: 150
   thirdTeleport: {fileID: 0}
   teleportFromTime: 3
   teleportToTime: 3
