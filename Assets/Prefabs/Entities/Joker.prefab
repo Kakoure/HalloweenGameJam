@@ -24,7 +24,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4214909591308515931
 Transform:
   m_ObjectHideFlags: 0
@@ -58,7 +58,18 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: a68688784e39c8146b542143460a7319, type: 3}
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   p1: {fileID: 0}
   p2: {fileID: 0}
   p3: {fileID: 0}
@@ -323,7 +334,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.5
-  m_Pitch: -0.06
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
