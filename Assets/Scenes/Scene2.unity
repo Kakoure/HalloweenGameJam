@@ -22166,15 +22166,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Golden Jam
       objectReference: {fileID: 0}
+    - target: {fileID: 1003380470645261175, guid: 124a57e7ae7915f48b74d107d5bf5bd9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1411919804910689311, guid: 124a57e7ae7915f48b74d107d5bf5bd9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 132.2
+      value: 137.65
       objectReference: {fileID: 0}
     - target: {fileID: 1411919804910689311, guid: 124a57e7ae7915f48b74d107d5bf5bd9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -22
+      value: -12.37
       objectReference: {fileID: 0}
     - target: {fileID: 1411919804910689311, guid: 124a57e7ae7915f48b74d107d5bf5bd9,
         type: 3}
