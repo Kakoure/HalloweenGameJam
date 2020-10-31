@@ -51,12 +51,14 @@ public partial class Joker : Entity
     public float phaseTime = 8;
 
     FireProjectile fire;
+    Animator anim;
 
     public bool IsInPhaseTwo => hp <= 500;
 
     public override void Awake()
     {
         base.Awake();
+        anim = GetComponent<Animator>();
         //_rb = GetComponent<Rigidbody2D>();
     }
     private int teleportHP;
@@ -136,7 +138,11 @@ public partial class Joker : Entity
             Cycle c;
 
             if (hp > teleportHP2) c = Burst6;
-            else c = Burst8(0);
+            else
+            {
+                c = Burst8(0);
+                anim.SetBool("Angry", true);
+            }
 
             boomerangCycle = TPFrom(teleport.position, c);
             Debug.Log(teleport);
@@ -190,6 +196,14 @@ public partial class Joker : Entity
             return false;
         else
             return base.DealDamage(damage, force, from);
+    }
+    public void DisableHurtbox()
+    {
+        GetComponent<DealDamageOnContact>().enabled = false;
+    }
+    public void EnableHurtBox()
+    {
+        GetComponent<DealDamageOnContact>().enabled = true;
     }
     public override void Die()
     {

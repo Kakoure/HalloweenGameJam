@@ -42,6 +42,7 @@ public partial class Joker
     Cycle TPFrom(Vector2 location, Cycle main) => (ref Cycle self) =>
     {
         //tpFromAnimationStart
+        anim.SetTrigger("Teleporting");
         self = TPAndStart(location, main);
 
         return teleportFromTime;
@@ -57,7 +58,7 @@ public partial class Joker
         self = main;
 
         //tpTo animation start here
-
+        anim.SetTrigger("TeleportExit");
 
         return teleportToTime;
     };
@@ -67,7 +68,7 @@ public partial class Joker
     Cycle AttackPrep(float time, Cycle next) => (ref Cycle self) =>
     {
         //do attack prep here
-
+        anim.SetTrigger("Preparing");
 
         self = next;
 
@@ -187,12 +188,12 @@ public partial class Joker
 
     #endregion
 
-    const float defaultPrepDuration = .5f;
+    const float defaultPrepDuration = 1f;
 
     Cycle PrepareAttack(Cycle next, float duration = defaultPrepDuration) => (ref Cycle action) =>
     {
         //put prepare code here
-
+        anim.SetTrigger("Preparing");
         action = next;
 
         return duration;
@@ -201,6 +202,7 @@ public partial class Joker
     //entry point
     float Burst6(ref Cycle action)
     {
+        anim.SetTrigger("Release");
         FireAt(Vector2.up, 5, 60);
 
         //next cycler;
@@ -213,6 +215,8 @@ public partial class Joker
     private float TimeAfterShots => fiveSecondIntervals - 6 * TimeInBetweenShots;
     Cycle Fire6(int counter) => (ref Cycle action) =>
     {
+
+        anim.SetTrigger("Release");
         fire.Execute(transform, testTarget.position - transform.position);
 
         if (++counter < 6)
@@ -261,11 +265,16 @@ public partial class Joker
         p2.Fire(this.transform.position, Polar(RadialFunc, 2 * Mathf.PI / 3 + del, 2 * Mathf.PI / 3), juggleTime1);
         p3.Fire(this.transform.position, Polar(RadialFunc, 4 * Mathf.PI / 3 + del, 2 * Mathf.PI / 3), juggleTime1);
 
+        anim.SetBool("Juggling", true);
+
         if (++counter < 4)
             action = Juggle1(del + Mathf.PI / 6, counter);
         else
-            action = PrepareAttack(Burst6); //next Cycle
+        {
 
+            anim.SetBool("Juggling", false);
+            action = PrepareAttack(Burst6); //next Cycle
+        }
 
         return juggleTime1;
     };
@@ -274,6 +283,7 @@ public partial class Joker
     //second entry point
     Cycle Burst8(int counter) => (ref Cycle action) =>
     {
+        anim.SetTrigger("Release");
         FireAt(Vector2.up, 7, 45);
 
         if (++counter < 2)
@@ -309,6 +319,7 @@ public partial class Joker
     private FireProjectile fireBall; // start
     float ThrowBall(ref Cycle action)
     {
+        anim.SetTrigger("Release");
         var m = fireBall.Execute(this.transform, testTarget.position - this.transform.position);
         //summon two slimes on collision
         m.onCollision = () =>
@@ -330,10 +341,13 @@ public partial class Joker
         p3.Fire(this.transform.position, Polar(RadialFunc, Mathf.PI + del, Mathf.PI / 2), juggleTime2);
         p4.Fire(this.transform.position, Polar(RadialFunc, 3 * Mathf.PI / 2 + del, Mathf.PI / 2), juggleTime2);
 
+        anim.SetBool("Juggling", true);
+
         if (++counter < 6)
             action = Juggle2(del + Mathf.PI / 6, counter);
         else
         {
+            anim.SetBool("Juggling", false);
             if (hp < teleportHP3)
             {
                 //go to teleport
