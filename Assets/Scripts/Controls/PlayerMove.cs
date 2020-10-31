@@ -16,6 +16,9 @@ public partial class PlayerMove : MonoBehaviour
     public float diveCoef;
     public Cooldown jumpCooldown;
 
+    public Cooldown walkSoundCooldown;
+    public AudioClip[] walkSounds;
+
     private Animator anim;
 
     private void Start()
@@ -89,6 +92,11 @@ public partial class PlayerMove : MonoBehaviour
             }
 
             rb.velocity = Vector2.ClampMagnitude(new Vector2(xAxis, yAxis), 1) * speed;
+            if (rb.velocity.sqrMagnitude > .1f && walkSoundCooldown.IsReady)
+            {
+                player.PlaySound(walkSounds[UnityEngine.Random.Range(0, walkSounds.Length)]);
+                walkSoundCooldown.Use();
+            }
         }
         else
         {

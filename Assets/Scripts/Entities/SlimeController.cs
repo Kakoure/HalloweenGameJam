@@ -14,6 +14,8 @@ public class SlimeController : Entity
     public float aggressiveDist;
     public float jumpStr;
     public float passiveStr;
+    public AudioClip jumpSound;
+    public AudioClip landSound;
     private float actionTime = 0;
     private Player target = null;
 
@@ -67,6 +69,7 @@ public class SlimeController : Entity
     {
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(.5f);
+        audioSrc.PlayOneShot(jumpSound);
         Jump(target.transform.position, jumpStr, true);
     }
     private void JumpWalkAction()
@@ -106,12 +109,13 @@ public class SlimeController : Entity
     }
     public override void Die()
     {
-        if(hp <= 0)
+        if (hp <= 0)
         {
             anim.SetBool("Dead", true);
+            audioSrc.PlayOneShot(deathSound);
+            Neutralize();
+            Invoke("Disappear", 6f);
         }
-        Neutralize();
-        Invoke("Disappear", 6f);
     }
     //Make slime stop attacking, corpse sits there for a bit
     private void Neutralize()

@@ -89,6 +89,7 @@ namespace Items
                 //release and fire
                 ChargingState = false;
                 playerAnim.SetBool("isAiming", false);
+                Player.Instance.PlaySound(useSound);
                 Vector2 lookDir = (CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.gameObject.transform.position).normalized;
                 playerAnim.SetFloat("xInput", lookDir.x);
                 playerAnim.SetFloat("yInput", lookDir.y);

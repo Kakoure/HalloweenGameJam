@@ -170,7 +170,7 @@ MonoBehaviour:
   hp: 175
   healthBar: {fileID: 7995943928751269476}
   hurtSound: {fileID: 8300000, guid: ea425ecdd1c2c4346becc925e09f6e53, type: 3}
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 506bcae647454ec4a9de416935e5e4dc, type: 3}
   seekRadius: 10
   wander: 2
   speed: 2.5
@@ -192,6 +192,7 @@ MonoBehaviour:
   deadZone: 0.1
   hitstun:
     cooldownTime: 0.15
+  attackSound: {fileID: 8300000, guid: 9cd0f0455e0644748b47176028a87baa, type: 3}
 --- !u!114 &6604781519918130573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +295,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

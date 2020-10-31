@@ -54,6 +54,13 @@ public partial class Joker : Entity
     public float windupTime = 1;
     public float phaseTime = 8;
 
+    public AudioClip attackSound;
+    public AudioClip teleFromSound;
+    public AudioClip teleToSound;
+    public AudioClip laughSound;
+    public AudioClip juggleSound;
+
+
     FireProjectile fire;
     Animator anim;
 
@@ -215,6 +222,7 @@ public partial class Joker : Entity
     {
         //death Animation
         anim.SetTrigger("Dead");
+        audioSrc.PlayOneShot(deathSound);
         StartCoroutine(FadeAway(3f));
 
         mainCycle = null;
@@ -223,6 +231,14 @@ public partial class Joker : Entity
         boomerangTimer.Use(Mathf.Infinity);
 
         onDeath.Invoke();
+    }
+    public void playAttackSound()
+    {
+        audioSrc.PlayOneShot(attackSound);
+    }
+    public void playLaughSound()
+    {
+        audioSrc.PlayOneShot(laughSound);
     }
 }
 

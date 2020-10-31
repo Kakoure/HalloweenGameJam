@@ -357,11 +357,13 @@ MonoBehaviour:
   hp: 125
   healthBar: {fileID: 4226414351105399903}
   hurtSound: {fileID: 8300000, guid: 99e575b442912c545a54a0b0143f0e75, type: 3}
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 38837253affe193419048714ae8649d3, type: 3}
   chaseDistance: 15
   aggressiveDist: 4
   jumpStr: 10
   passiveStr: 5
+  jumpSound: {fileID: 8300000, guid: aec7e38613724f64aad30c55d9f61d06, type: 3}
+  landSound: {fileID: 8300000, guid: 467fb81b0a6608241bef534be84dcd01, type: 3}
   invalidAttemptCooldown: 0.05
   jumpAggressive:
     cooldown: 1

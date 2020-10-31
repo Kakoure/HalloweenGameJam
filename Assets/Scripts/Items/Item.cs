@@ -28,7 +28,7 @@ namespace Items
         public Entity Owner { get; protected set; } = null;
         public int Mass { get; protected set; }
         public int ID { get { return (int)id; } protected set { id = (ItemID)value; } }
-
+        public AudioClip useSound;
         //this looks like it should be readonly static as opposed to being assigned on start
         protected ItemID id;
 

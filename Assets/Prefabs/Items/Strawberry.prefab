@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7917768302391184119}
   - component: {fileID: 7047507274863099149}
   m_Layer: 11
-  m_Name: Strawberry 1
+  m_Name: Strawberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12bbf0c18e925b4e8819c74cc60f1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSound: {fileID: 8300000, guid: bd78e4293e7ec494cb52b1fefbadebcd, type: 3}
   sprite: {fileID: 21300000, guid: cc6c528f135bfa34ab7f205fc309faa3, type: 3}
   throwJar:
     damage: 5

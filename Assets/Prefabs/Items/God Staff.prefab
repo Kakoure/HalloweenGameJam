@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bf339f8bc54774da25568c2bc38969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSound: {fileID: 8300000, guid: aeccfe9669a123f439848611d3d33f6e, type: 3}
   cooldownTime: 1.5
   damage: 100
   force: 5

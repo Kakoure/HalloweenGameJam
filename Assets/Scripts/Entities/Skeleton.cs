@@ -24,6 +24,7 @@ public class Skeleton : Entity
     private Animator anim;
     [Tooltip("Time disabled after getting hit")]
     public Cooldown hitstun;
+    public AudioClip attackSound;
     public Vector2 Wander()
     {
         return UnityEngine.Random.insideUnitCircle * wander;
@@ -58,6 +59,7 @@ public class Skeleton : Entity
         if (hp <= 0)
         {
             anim.SetTrigger("Dead");
+            audioSrc.PlayOneShot(deathSound);
         }
         Neutralize();
         Invoke("Disappear", 6f);
@@ -119,6 +121,7 @@ public class Skeleton : Entity
                 if (absDist < 1.8f)
                 {
                     anim.SetTrigger("Attack");
+                    
                 }
                 anim.SetFloat("xInput", dist.normalized.x);
                 anim.SetFloat("yInput", dist.normalized.y);
@@ -158,6 +161,7 @@ public class Skeleton : Entity
     {
         var bul = arrowSettings.Execute(this.transform, target.position - this.transform.position);
         bul.GetComponent<SpriteRenderer>().sprite = bulletSprite;
+        audioSrc.PlayOneShot(attackSound);
         arrowCooldown.Use();
         stopWhileFireing.Use();
     }
@@ -193,5 +197,9 @@ public class Skeleton : Entity
             rb.velocity = dir.normalized * speed;
         }
 
+    }
+    public void playAttackSound()
+    {
+        audioSrc.PlayOneShot(attackSound);
     }
 }

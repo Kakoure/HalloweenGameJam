@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+
     //a single inventory slot
     [System.Serializable]
     public class InventorySlot
@@ -14,6 +15,7 @@ public class Inventory : MonoBehaviour
         public Image img;
         [SerializeField]
         private Item item;
+        
 
         public Item Item 
         { 
@@ -40,6 +42,7 @@ public class Inventory : MonoBehaviour
     {
         slot.Item = item;
         EvaluateAnimWeaponID();
+        Player.Instance.PlaySound(Player.Instance.equipSound);
     }
 
     public static Item PopFromSlot(InventorySlot slot)

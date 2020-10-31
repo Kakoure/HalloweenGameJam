@@ -24,6 +24,8 @@ class Player : Entity
     public Cooldown damageInvuln;
     [Tooltip("Ammount of time player spends invulurable in dodge state")]
     public Cooldown dodgeInvuln;
+    public AudioClip attackSound;
+    public AudioClip equipSound;
 
     public bool IsInvuln => !dodgeInvuln.IsReady || !damageInvuln.IsReady;
 
@@ -42,7 +44,10 @@ class Player : Entity
 
         hp -= damage;
         hp = Mathf.Clamp(hp, 0, MaxHP); //make sure that the player is not overhealed
-
+        if (damage > 0)
+        {
+            audioSrc.PlayOneShot(hurtSound);
+        }
         //updates the healthbar
         healthBar.SetHealth(hp, MaxHP);
         CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
@@ -85,6 +90,13 @@ class Player : Entity
     {
         base.Start();
     }
-
+    public void PlaySound(AudioClip sound)
+    {
+        audioSrc.PlayOneShot(sound);
+    }
+    public void PlayAttackSound()
+    {
+        audioSrc.PlayOneShot(attackSound);
+    }
     int exp;
 }

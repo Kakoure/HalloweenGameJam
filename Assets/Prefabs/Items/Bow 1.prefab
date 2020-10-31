@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008deb65a8246ac448ad472cf9b06dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSound: {fileID: 8300000, guid: a89b08560de69514cb9e6cbfcd8492f7, type: 3}
   cooldownTime: 1.5
   arrowSprite: {fileID: 21300000, guid: de898bd3addea94468ca9a15768eb5aa, type: 3}
   baseDamage: 15

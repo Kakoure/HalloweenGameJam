@@ -39,6 +39,7 @@ namespace Items
         {
             if (down)
             {
+                Player.Instance.PlaySound(useSound);
                 //should pass an instance to the entity that used it...
                 Player.Instance.DealDamage(-healHP, 0, Vector2.zero);
 

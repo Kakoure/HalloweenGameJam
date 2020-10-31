@@ -43,6 +43,7 @@ public partial class Joker
     {
         //tpFromAnimationStart
         anim.SetTrigger("Teleporting");
+        audioSrc.PlayOneShot(teleFromSound);
         anim.SetBool("Juggling", false);
         self = TPAndStart(location, main);
 
@@ -60,6 +61,7 @@ public partial class Joker
 
         //tpTo animation start here
         anim.SetTrigger("TeleportExit");
+        audioSrc.PlayOneShot(teleToSound);
 
         return teleportToTime;
     };
@@ -70,6 +72,7 @@ public partial class Joker
     {
         //do attack prep here
         anim.SetTrigger("Preparing");
+        audioSrc.PlayOneShot(laughSound);
 
         self = next;
 
@@ -267,6 +270,7 @@ public partial class Joker
         p3.Fire(this.transform.position, Polar(RadialFunc, 4 * Mathf.PI / 3 + del, 2 * Mathf.PI / 3), juggleTime1);
 
         anim.SetBool("Juggling", true);
+        audioSrc.PlayOneShot(juggleSound);
 
         if (++counter < 4)
             action = Juggle1(del + Mathf.PI / 6, counter);
@@ -347,6 +351,7 @@ public partial class Joker
         p4.Fire(this.transform.position, Polar(RadialFunc, 3 * Mathf.PI / 2 + del, Mathf.PI / 2), juggleTime2);
 
         anim.SetBool("Juggling", true);
+        audioSrc.PlayOneShot(juggleSound);
 
         if (++counter < 6)
             action = Juggle2(del + Mathf.PI / 6, counter);
@@ -364,5 +369,6 @@ public partial class Joker
 
         return juggleTime1;
     };
+
 }
 

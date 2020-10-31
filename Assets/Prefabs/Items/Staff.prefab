@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2114067151}
   - component: {fileID: 2114067155}
   m_Layer: 11
-  m_Name: Item
+  m_Name: Staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bf339f8bc54774da25568c2bc38969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSound: {fileID: 8300000, guid: aeccfe9669a123f439848611d3d33f6e, type: 3}
   cooldownTime: 1.5
   damage: 15
   force: 5

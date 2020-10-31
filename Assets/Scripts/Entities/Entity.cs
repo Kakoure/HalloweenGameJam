@@ -18,7 +18,7 @@ namespace Items
 
         public AudioClip hurtSound;
         public AudioClip deathSound;
-        private AudioSource audioSrc;
+        protected AudioSource audioSrc;
         private SpriteRenderer sprRend;
         //return success
         public virtual bool DealDamage(int damage, float force, Vector2 from)

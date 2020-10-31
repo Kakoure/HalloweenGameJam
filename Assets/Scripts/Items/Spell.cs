@@ -39,6 +39,7 @@ public class Spell : Weapon
             bullet.explosionDamage = explosionDamage;
             bullet.explosionForce = explosionForce;
             bullet.explosionRadius = explosionRadius;
+            Player.Instance.PlaySound(useSound);
 
             SetUseTime();
         }
