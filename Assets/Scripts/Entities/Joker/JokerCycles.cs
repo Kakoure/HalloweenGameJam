@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
@@ -36,19 +37,18 @@ public partial class Joker
 
     #endregion
 
-    //all of this is irrelevent
     #region Cycles
 
-    Cycle TPFrom(Transform location, Cycle main) => (ref Cycle self) =>
+    Cycle TPFrom(Vector2 location, Cycle main) => (ref Cycle self) =>
     {
         //tpFromAnimationStart
         self = TPAndStart(location, main);
 
         return teleportFromTime;
     };
-    Cycle TPAndStart(Transform location, Cycle main) => (ref Cycle self) =>
+    Cycle TPAndStart(Vector2 location, Cycle main) => (ref Cycle self) =>
     {
-        transform.position = location.position;
+        transform.position = location;
 
         boomerangTimer.Use();
         altTimer.Use();
@@ -61,6 +61,8 @@ public partial class Joker
 
         return teleportToTime;
     };
+
+    //everything below this is kinda irrelevent
 
     Cycle AttackPrep(float time, Cycle next) => (ref Cycle self) =>
     {
@@ -178,12 +180,23 @@ public partial class Joker
     {
         this.FireAt(testTarget.position);
 
-        action = AttackPrep(prepTime, FireAtTarget);
+        action = AttackPrep(windupTime, FireAtTarget);
 
         return fireTime;
     }
 
     #endregion
+
+    const float defaultPrepDuration = .5f;
+
+    Cycle PrepareAttack(Cycle next, float duration = defaultPrepDuration) => (ref Cycle action) =>
+    {
+        //put prepare code here
+
+        action = next;
+
+        return duration;
+    };
 
     //entry point
     float Burst6(ref Cycle action)
@@ -191,7 +204,7 @@ public partial class Joker
         FireAt(Vector2.up, 5, 60);
 
         //next cycler;
-        action = Fire6(0);
+        action = PrepareAttack(Fire6(0));
 
         return fiveSecondIntervals;
     }
@@ -212,7 +225,8 @@ public partial class Joker
         else
         {
             //next cycler
-            action = Juggle1(0, 0);
+            //dont prepare juggling
+            action = PrepareAttack(Juggle1(0, 0));
 
             return TimeAfterShots;
         }
@@ -250,23 +264,24 @@ public partial class Joker
         if (++counter < 4)
             action = Juggle1(del + Mathf.PI / 6, counter);
         else
-            action = Burst6; //next Cycle
+            action = PrepareAttack(Burst6); //next Cycle
 
 
         return juggleTime1;
     };
 
     //phase2
+    //second entry point
     Cycle Burst8(int counter) => (ref Cycle action) =>
     {
         FireAt(Vector2.up, 7, 45);
 
         if (++counter < 2)
-            action = Burst8(counter);
+            action = PrepareAttack(Burst8(counter));
         else
-            action = null;// next cycle
+            action = PrepareAttack(Fire18(0));// next cycle
 
-        return fiveSecondIntervals;
+        return fiveSecondIntervals / 2;
     };
 
     private float timeBetweenShots18 => (fiveSecondIntervals - timeAfterBurst18) / 18;
@@ -285,7 +300,7 @@ public partial class Joker
        else
        {
            //next cycler
-           action = null;
+           action = PrepareAttack(ThrowBall);
 
            return timeAfterBurst18;
        }
@@ -298,11 +313,11 @@ public partial class Joker
         //summon two slimes on collision
         m.onCollision = () =>
         {
-            Instantiate(slimePrefab, m.transform.position, Quaternion.identity);
-            Instantiate(slimePrefab, m.transform.position, Quaternion.identity);
+            Instantiate(slimePrefab, (Vector2)m.transform.position + Vector2.left * .1f, Quaternion.identity);
+            Instantiate(slimePrefab, (Vector2)m.transform.position + Vector2.right * .1f, Quaternion.identity);
         };
 
-        action = null; //next cycle
+        action = Juggle2(0, 0); //next cycle
 
         return fiveSecondIntervals;
     }
@@ -310,16 +325,23 @@ public partial class Joker
     float juggleTime2 = 1;
     Cycle Juggle2(float del, int counter) => (ref Cycle action) =>
     {
-        p1.Fire(this.transform.position, Polar(RadialFunc, 0 + del, Mathf.PI / 2), juggleTime1);
-        p2.Fire(this.transform.position, Polar(RadialFunc, Mathf.PI / 2 + del, Mathf.PI / 2), juggleTime1);
-        p3.Fire(this.transform.position, Polar(RadialFunc, Mathf.PI + del, Mathf.PI / 2), juggleTime1);
-        p4.Fire(this.transform.position, Polar(RadialFunc, 3 * Mathf.PI / 2 + del, Mathf.PI / 2), juggleTime1);
+        p1.Fire(this.transform.position, Polar(RadialFunc, 0 + del, Mathf.PI / 2), juggleTime2);
+        p2.Fire(this.transform.position, Polar(RadialFunc, Mathf.PI / 2 + del, Mathf.PI / 2), juggleTime2);
+        p3.Fire(this.transform.position, Polar(RadialFunc, Mathf.PI + del, Mathf.PI / 2), juggleTime2);
+        p4.Fire(this.transform.position, Polar(RadialFunc, 3 * Mathf.PI / 2 + del, Mathf.PI / 2), juggleTime2);
 
         if (++counter < 6)
             action = Juggle2(del + Mathf.PI / 6, counter);
         else
-            action = Burst6; //next Cycle
-
+        {
+            if (hp < teleportHP3)
+            {
+                //go to teleport
+                action = TPFrom(testTarget.transform.position, PrepareAttack(Burst8(0)));
+            }
+            else
+                action = PrepareAttack(Burst8(0)); //next Cycle
+        }
 
         return juggleTime1;
     };
