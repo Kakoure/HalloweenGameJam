@@ -6,6 +6,11 @@ namespace Items
 {
     public class StrawberryJam : Item
     {
+        public static readonly ItemID itemID = ItemID.Jam;
+        public override ItemID ID => itemID;
+        public static readonly string itemName;
+        public override string Name => itemName;
+
         public static int itemMass = 1;
 
         public Sprite sprite;
@@ -16,7 +21,6 @@ namespace Items
         public void Start()
         {
             throwJar = new FireProjectile(null, itemMass, Mathf.Sqrt(massConstant / itemMass), .5f);
-            id = ItemID.Jam;
         }
 
 

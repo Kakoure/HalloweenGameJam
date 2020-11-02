@@ -15,6 +15,9 @@ namespace Items
     public class Bow : Weapon, IDamageTaken
     {
         static int bowMass = 1;
+        public static ItemID itemID = ItemID.Bow;
+        public static string itemName = "Bow";
+        public override string Name => itemName;
 
         public Sprite arrowSprite;
 
@@ -56,13 +59,14 @@ namespace Items
 
         private Sprite _sprite;
         public override Sprite Sprite => _sprite;
+        public static readonly ItemID id = ItemID.Bow;
+        public override ItemID ID => id;
 
         private void Start()
         {
             _sprite = GetComponent<SpriteRenderer>().sprite;
             movement = Player.Instance.GetComponent<PlayerMove>();
             defSpeed = movement.speed;
-            id = ItemID.Bow;
             playerAnim = Player.Instance.GetComponent<Animator>();
         }
 
@@ -106,9 +110,6 @@ namespace Items
                 var i = fireArrow.Execute(player, out _);
 
                 float cooldown = chargeTime < fullCharge ? cooldownTime : fullChargeCooldown;
-                Debug.Log(cooldown);
-                Debug.Log(chargeTime);
-                Debug.Log(chargeTime < fullCharge);
                 SetUseTime(cooldown);
             }
         }

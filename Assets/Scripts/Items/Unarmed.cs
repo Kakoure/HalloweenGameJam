@@ -5,10 +5,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using CooldownTimer;
 using static Boomerang;
+
 namespace Items
 {
     public class Unarmed : Weapon
     {
+        public static readonly ItemID itemID = ItemID.Unarmed;
+        public override ItemID ID => itemID;
+        public static readonly string itemName = "Unarmed";
+        public override string Name => itemName;
+
         public float radius;
         public float arcRadians; //sq
         public int damage;
@@ -17,15 +23,14 @@ namespace Items
         private Sprite _sprite;
 
         private Cooldown comboReset;
+        //integral is approximately one but because Unity essencially does remann sum, it is likely more
+        Converter lungeConverter = f => f < .1f ? 0f : Mathf.Max(0, (2 - Mathf.Pow(1.5f * f, 2))); 
         //Initalized in start
-        Converter lungeConverter = f => f < .1f ? 0f : Mathf.Max(0, (2 - Mathf.Pow((f + .5f), 2)));
         public override Sprite Sprite => _sprite;
 
         private void Start()
         {
             _sprite = GetComponent<SpriteRenderer>().sprite;
-            id = ItemID.Unarmed;
-            lungeConverter = f => f < .3f ? 0f : lungeForce * Mathf.Max(0, (2 - Mathf.Pow((f + .3f), 2)));
         }
 
         public override void AltFire(Transform player, bool down)
@@ -44,11 +49,17 @@ namespace Items
             SetUseTime();
         }
 
+        protected override void DropItem(out bool success)
+        {
+            success = false;
+        }
+
         public Unarmed() : base(1)
         {
 
         }
-        private void HitScan()
+        //common
+        private void HitScan() //overlap circle not hitscan but whatever
         {
             Transform player = Player.Instance.gameObject.transform;
             var collisions = Physics2D.OverlapCircleAll(player.position, radius);
@@ -56,11 +67,11 @@ namespace Items
             {
                 if (col.gameObject.CompareTag("Monster"))
                 {
-
+                    //check the arc
                     Vector2 disp = col.transform.position - player.position;
                     Vector2 cDisp = CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - player.position;
                     double arc = Mathf.Atan2(disp.x, disp.y) - Math.Atan2(cDisp.x, cDisp.y);
-                    if (arc * arc < arcRadians * arcRadians)
+                    if (Math.Abs(arc) < Mathf.Abs(arcRadians))
                     {
                         //deal damage
                         Entity entity = col.GetComponent<Entity>();
@@ -69,10 +80,9 @@ namespace Items
                 }
             }
         }
+        //common
         private IEnumerator AttackSequence()
         {
-            Debug.Log("You swing your fists");
-
             Vector2 lookDir = (CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.gameObject.transform.position).normalized;
 
             Animator anim = Player.Instance.GetComponent<Animator>();
@@ -96,13 +106,10 @@ namespace Items
             Path lungePath = LinePath(lungeConverter, lookDir);
             Player.Instance.pm.SetPath(Boomerang.Mult(Player.Instance.pm.speed, lungePath), .25f);
 
-
-
             yield return new WaitForSeconds(.1f);
             HitScan();
             yield return new WaitForSeconds(.1f);
             HitScan();
-            
         }
     }
 }

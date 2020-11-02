@@ -104,7 +104,7 @@ public class Inventory : MonoBehaviour
     private Item unarmed;
     public InventorySlot weapon;
     public InventorySlot shield;
-    private int currentWepID;
+    private ItemID currentWepID;
 
     private void Awake()
     {
@@ -125,12 +125,12 @@ public class Inventory : MonoBehaviour
         Animator anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         if(anim != null && Instance.currentWepID != CurrentWeapon.ID)
         {
-            switch (CurrentWeapon.ID)
+            switch (CurrentWeapon.ID) //you can switch enums
             {
-                case 1:
+                case ItemID.Sword:
                     anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Sword Anim Controller") as RuntimeAnimatorController;
                     break;
-                case 2:
+                case ItemID.Bow:
                     anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Bow Anim Controller") as RuntimeAnimatorController;
                     break;
                 default:

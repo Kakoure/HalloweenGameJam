@@ -13,24 +13,32 @@ namespace Items
         Sword,
         Bow,
         Staff,
-        Jam
-
+        Jam,
+        SIZE, //i just like to do this
     }
 
     //The Item class defines general 
     [Serializable]
-    public abstract class Item : MonoBehaviour , IClickable
+    public abstract partial class Item : MonoBehaviour, IClickable
     {
         public static readonly int massConstant = 100;
         public static readonly float kbConst = 1.5f;
 
         public abstract Sprite Sprite { get; }
+        public abstract ItemID ID { get; }
+        public abstract string Name { get; }
         public Entity Owner { get; protected set; } = null;
-        public int Mass { get; protected set; }
-        public int ID { get { return (int)id; } protected set { id = (ItemID)value; } }
+        public int Mass { get; protected set; } //letting mass be a modifiable value
+        /*
+        public int ID 
+        { 
+            get => (int)id; 
+            protected set => id = (ItemID)value;
+        }
+        protected ItemID id;
+        */
         public AudioClip useSound;
         //this looks like it should be readonly static as opposed to being assigned on start
-        protected ItemID id;
 
         public Item(int mass)
         {
@@ -49,13 +57,6 @@ namespace Items
 
 
         //abstract
-        /*
-        public abstract void Eat(out int saturation);
-        public abstract void Apply(Item other);
-        public abstract void Throw(float momentum, ref int damage, Collision2D collision);
-        public abstract void Wield(out bool success);
-        public abstract void UnWield(out bool success);
-        */
         public abstract void Fire(Transform player, bool down);
         public abstract void AltFire(Transform player, bool down);
         protected virtual void DropItem(out bool success)
@@ -99,6 +100,6 @@ namespace Items
             {
                 col.enabled = true;
             }
-}
+        }
     }
 }

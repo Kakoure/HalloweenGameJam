@@ -12,18 +12,21 @@ public class Boomerang : MonoBehaviour
     public static Converter Mult(float c, Converter p) => f => c * p(f);
 
     //turns converter into a polar function from theta = [0, pi] (180 degrees)
+    //note does not work as intended. swapped sin and cos
+    [Obsolete]
     public static Path Polar180(Converter r) => f =>
     {
         float rad = r(f);
         float thet = f * PI;
         return new Vector2(rad * Mathf.Sin(thet), rad * Cos(thet)); //im so dumb I cant change it though
     };
-    public static Path Polar(Converter r, float l, float del) => f =>
+    //this one works though
+    public static Path Polar(Converter r, float del, float l) => f =>
     {
         float rad = r(f);
-        float thet = f * del + l;
+        float thet = f * l + del;
 
-        return new Vector2(rad * Cos(thet), rad * Sin(thet)); //im so dumb I cant change it though
+        return new Vector2(rad * Cos(thet), rad * Sin(thet));
     };
 
     public static Path Negx(Path p) => f =>
