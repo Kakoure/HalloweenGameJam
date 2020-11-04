@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Experimental.ParticleSystemJobs;
 using static UnityEngine.Mathf;
 
 public class Boomerang : MonoBehaviour

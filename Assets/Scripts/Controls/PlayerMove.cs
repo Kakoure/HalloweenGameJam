@@ -40,11 +40,12 @@ public partial class PlayerMove : MonoBehaviour
         yAxis = Input.GetAxis("Vertical");
         dodge = Input.GetButtonDown("Jump");
 
+        //Check Raw inputs, keyboard only
+        xAxisRaw = Input.GetAxisRaw("Horizontal");
+        yAxisRaw = Input.GetAxisRaw("Vertical");
+
         if (dodge && jumpCooldown.IsReady)
         {
-            //Check Raw inputs, keyboard only
-            xAxisRaw = Input.GetAxisRaw("Horizontal");
-            yAxisRaw = Input.GetAxisRaw("Vertical");
             //Store last control input for anim facing dir
             if (xAxisRaw != 0 || yAxisRaw != 0)
             {
@@ -71,9 +72,8 @@ public partial class PlayerMove : MonoBehaviour
     {
         if (PathEnd)
         {
-            //Check Raw inputs, keyboard only
-            xAxisRaw = Input.GetAxisRaw("Horizontal");
-            yAxisRaw = Input.GetAxisRaw("Vertical");
+            //always check input on Update then use input values on FixedUpdate
+
             //Store last control input for anim facing dir
             if (xAxisRaw != 0 || yAxisRaw != 0)
             {

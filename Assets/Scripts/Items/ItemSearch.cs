@@ -34,10 +34,10 @@ namespace Items
     partial class Item
     {
         //used for loading screen
-        static readonly List<Type> allItems = new List<Type>();
+        static readonly Type[] itemList = new Type[(int)ItemID.SIZE];
 
         //given ItemID, should be able to find item name
-        static readonly SortedDictionary<ItemID, string> nameDictionary = new SortedDictionary<ItemID, string>();
+        static readonly string[] itemNames = new string[(int)ItemID.SIZE];
 
         //directory of all items - ends with a /
         static readonly string itemsDirectory = "Data/Items/";
@@ -73,8 +73,16 @@ namespace Items
                     {
                         //item with valid name and ID
                         //any item without a valid name and (net) id will not be loaded
-                        allItems.Add(type);
-                        nameDictionary.Add((ItemID)id.GetValue(null), (string)name.GetValue(null));
+                        int itemID = (int)id.GetValue(null);
+                        string itemName = (string)name.GetValue(null);
+                        if (itemList[itemID] != null)
+                        {
+                            Debug.LogError($"itemID {(ItemID)itemID} has a clash between {itemName} and {itemNames[itemID]}");
+                            continue;
+                        }
+                        itemList[itemID] = type;
+                        itemNames[itemID] = itemName;
+                        //nameDictionary.Add((ItemID)id.GetValue(null), (string)name.GetValue(null));
                     }
                 }
             }
@@ -83,13 +91,13 @@ namespace Items
         }
         private static void LoadItemResources()
         {
-
+            //ItemID.
         }
 
         // end with a /
         public static string GetItemPath(ItemID id)
         {
-            return itemsDirectory + nameDictionary[id] + "/";
+            return itemsDirectory + itemNames[(int)id] + "/";
         }
 
         public static void LoadResources()
