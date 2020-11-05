@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Items
 {
+    public static class ItemIDExtend
+    {
+        public static int Value(this ItemID id)
+        {
+            return (int)id;
+        }
+    }
+
     public enum ItemID //So There is a single place to find and set id values
     {
         Unarmed,

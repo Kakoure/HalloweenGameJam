@@ -10,7 +10,7 @@ using UnityEngine.WSA;
 namespace Items
 {
     [System.AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
-    public class LoadResource : Attribute
+    public class LoadResourceAttribute: Attribute
     {
         Action<UnityEngine.Object> assigner;
         Type type;
@@ -23,7 +23,7 @@ namespace Items
             assigner(o);
         }
 
-        public LoadResource(string name, Type systemTypeInstance, Action<UnityEngine.Object> assigner)
+        public LoadResourceAttribute(string name, Type systemTypeInstance, Action<UnityEngine.Object> assigner)
         {
             this.assigner = assigner;
             this.type = systemTypeInstance;
@@ -43,7 +43,7 @@ namespace Items
         static readonly string itemsDirectory = "Data/Items/";
 
         static readonly string nameField = "itemName";
-        static readonly string idField = "itemID";
+        static readonly string idField = "id";
 
         //since the game jam is over, im allowed to write clean code
         public static void LoadItems()
@@ -91,7 +91,21 @@ namespace Items
         }
         private static void LoadItemResources()
         {
-            //ItemID.
+            for (int id = 0; id < (int)ItemID.SIZE; id++)
+            {
+                Type item = itemList[id];
+
+                if (item == null) continue;
+                var attributes = item.GetCustomAttributes<LoadResourceAttribute>();
+
+                foreach (var att in attributes)
+                {
+                    //load resources according to the LoadResource attributes
+                    string dataDirectory = GetItemPath(id);
+
+                    att.Load(dataDirectory);
+                }
+            }
         }
 
         // end with a /
@@ -99,10 +113,6 @@ namespace Items
         {
             return itemsDirectory + itemNames[(int)id] + "/";
         }
-
-        public static void LoadResources()
-        {
-
-        }
+        public static string GetItemPath(int id) => GetItemPath((ItemID)id);
     }
 }

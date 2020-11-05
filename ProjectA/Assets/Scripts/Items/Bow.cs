@@ -15,9 +15,11 @@ namespace Items
     public class Bow : Weapon, IDamageTaken
     {
         static int bowMass = 1;
-        public static ItemID itemID = ItemID.Bow;
-        public static string itemName = "Bow";
+        public static readonly ItemID id = ItemID.Bow;
+        public override ItemID ID => id;
+        public static readonly string itemName = "Bow";
         public override string Name => itemName;
+        public static Sprite projectileSprite;
 
         public Sprite arrowSprite;
 
@@ -59,8 +61,6 @@ namespace Items
 
         private Sprite _sprite;
         public override Sprite Sprite => _sprite;
-        public static readonly ItemID id = ItemID.Bow;
-        public override ItemID ID => id;
 
         private void Start()
         {
