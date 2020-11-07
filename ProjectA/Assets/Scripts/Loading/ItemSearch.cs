@@ -9,28 +9,6 @@ using UnityEngine.WSA;
 
 namespace Items
 {
-    [System.AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
-    public class LoadResourceAttribute: Attribute
-    {
-        Action<UnityEngine.Object> assigner;
-        Type type;
-        string name;
-
-        //folderPath ends with /
-        public void Load(string folderPath)
-        {
-            UnityEngine.Object o = Resources.Load(folderPath + name, type);
-            assigner(o);
-        }
-
-        public LoadResourceAttribute(string name, Type systemTypeInstance, Action<UnityEngine.Object> assigner)
-        {
-            this.assigner = assigner;
-            this.type = systemTypeInstance;
-            this.name = name;
-        }
-    }
-
     partial class Item
     {
         //used for loading screen
@@ -96,14 +74,15 @@ namespace Items
                 Type item = itemList[id];
 
                 if (item == null) continue;
-                var attributes = item.GetCustomAttributes<LoadResourceAttribute>();
+                var attributes = item.GetCustomAttributes<LoadResourceToFieldAttribute>();
 
                 foreach (var att in attributes)
                 {
                     //load resources according to the LoadResource attributes
                     string dataDirectory = GetItemPath(id);
 
-                    att.Load(dataDirectory);
+                    //load the resource
+                    att.Load(dataDirectory, item);
                 }
             }
         }
