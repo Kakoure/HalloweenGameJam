@@ -1,22 +1,29 @@
 ﻿using Items;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static Inventory.InventorySlot;
 
-public class Inventory : MonoBehaviour
+public partial class Inventory : MonoBehaviour
 {
-
     //a single inventory slot
     [System.Serializable]
     public class InventorySlot
     {
+        public enum SlotType
+        { 
+            Inventory = 0,
+            Shield,
+            Weapon,
+        }
+
         //[NonSerialized]
         public Sprite standardSprite;
         [SerializeField]
         public Image img;
         [SerializeField]
         private Item item;
-        
-
         public Item Item 
         { 
             get
@@ -30,62 +37,162 @@ public class Inventory : MonoBehaviour
                 this.item = value;
             }
         }
+
+        [NonSerialized]
+        public SlotType slotType = SlotType.Inventory;
     }
 
     public static Inventory Instance { get; private set; }
 
-    public static void AssignTo(Item item, int slot)
+    //replace these with methods
+    private static void AssignTo(Item item, int slot)
     {
         AssignTo(item, Instance.inventorySlots[slot]);
     }
-    public static void AssignTo(Item item, InventorySlot slot)
+    private static void AssignTo(Item item, InventorySlot slot)
     {
         slot.Item = item;
         EvaluateAnimWeaponID();
         Player.Instance.PlaySound(Player.Instance.equipSound);
     }
 
-    public static Item PopFromSlot(InventorySlot slot)
+    //replace with methods
+    private static Item PopFromSlot(InventorySlot slot)
     {
         Item tmp = slot.Item;
         slot.Item = null;
         EvaluateAnimWeaponID();
         return tmp;
     }
-    public static Item PopFromSlot(Transform slot)
+    private static Item PopFromSlot(Transform slot)
     {
         InventorySlot invSlot = Instance.FindSlot(slot);
         return PopFromSlot(invSlot);
     }
 
-    public static int GetOpenSlot()
+    public static int GetEmptyInventorySlot() => GetEmptyInventorySlot(Instance.inventorySlots.Length);
+    public static int GetEmptyInventorySlot(int upper)
     {
+        while(upper --> 0)
+        {
+            if (Instance.inventorySlots[upper].Item == null)
+                break;
+        }
+        return upper;
+    }
+    public static InventorySlot GetOpenSlot()
+    {
+        if (Instance.weapon.Item == null) return Instance.weapon;
+        if (Instance.shield.Item == null) return Instance.shield;
+
+        InventorySlot slot = null;
         int i = Instance.inventorySlots.Length;
 
         //lol
         while(i --> 0)
         {
-            if (Instance.inventorySlots[i].Item == null) break;
+            if (Instance.inventorySlots[i].Item == null)
+            {
+                slot = Instance.inventorySlots[i];
+                break;
+            }
         }
-        return i;
+        return slot;
+    }
+
+    //index is only used if slotType is Inventory
+    public static InventorySlot GetSlot(SlotType slotType, int index = 0)
+    {
+        switch (slotType)
+        {
+            case SlotType.Inventory:
+                return Instance.inventorySlots[index];
+            case SlotType.Shield:
+                return Instance.shield;
+            case SlotType.Weapon:
+                return Instance.weapon;
+            default:
+                throw new ArgumentException();
+        }
     }
 
     public static Item CurrentWeapon => Instance.weapon.Item ?? Instance.unarmed;
 
-    public void Swap(Transform t1, Transform t2)
+    public static bool Swap(Transform t1, Transform t2)
     {
-        if (t1 == t2) return;
+        if (t1 == t2) return false;
         InventorySlot slot1;
         InventorySlot slot2;
-        slot1 = FindSlot(t1);
-        slot2 = FindSlot(t2);
-        if (slot1 == null) return;
-        if (slot2 == null) return;
+        slot1 = Instance.FindSlot(t1);
+        slot2 = Instance.FindSlot(t2);
+        if (slot1 == null) return false;
+        if (slot2 == null) return false;
 
-        Item i1 = PopFromSlot(slot1);
-        Item i2 = PopFromSlot(slot2);
-        AssignTo(i1, slot2);
-        AssignTo(i2, slot1);
+        return Swap(slot1, slot2);
+    }
+    public static bool Swap(InventorySlot slot1, InventorySlot slot2)
+    {
+        Item i1 = slot1.Item;
+        Item i2 = slot2.Item;
+
+        bool b1 = true, b2 = true;
+        Action a1 = null, a2 = null;
+        i1?.SwapSlot(slot1, slot2, out b1, out a1);
+        i2?.SwapSlot(slot2, slot1, out b2, out a2);
+
+        if (b1 && b2)
+        {
+            //swap slots
+            PopFromSlot(slot1);
+            PopFromSlot(slot2);
+            AssignTo(i1, slot2);
+            AssignTo(i2, slot1);
+
+            //finalize
+            a1?.Invoke();
+            a2?.Invoke();
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public static bool Pickup(InventorySlot slot, Item item)
+    {
+        if (slot.Item != null) return false;
+
+        item.SwapSlot(null, slot, out bool success, out Action f1);
+
+        if (success)
+        {
+            AssignTo(item, slot);
+
+            f1?.Invoke();
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public static bool Drop(InventorySlot slot, Vector2 position)
+    {
+        slot.Item.SwapSlot(slot, null, out bool success, out Action finalize);
+
+        if (success)
+        {
+            Item i = PopFromSlot(slot);
+            i.DropAt(position);
+            finalize?.Invoke();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public InventorySlot FindSlot(Transform t)
@@ -111,15 +218,19 @@ public class Inventory : MonoBehaviour
         if (Instance != null) Debug.LogError("Two instances of the Inventory detected");
         Instance = this;
 
+        //initialize InventorySlots
         for (int i = 0; i < inventorySlots.Length; i++)
         { 
             inventorySlots[i].standardSprite = inventorySlots[i].img.sprite;
         }
         weapon.standardSprite = weapon.img.sprite;
+        weapon.slotType = InventorySlot.SlotType.Weapon;
         shield.standardSprite = shield.img.sprite;
+        shield.slotType = InventorySlot.SlotType.Shield;
         unarmed = GameObject.FindGameObjectWithTag("Unarmed").GetComponent<Item>();
     }
 
+    //TODO make this a method
     private static void EvaluateAnimWeaponID()
     {
         Animator anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();

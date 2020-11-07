@@ -32,8 +32,7 @@ namespace Items
             {
                 //should pass an instance to the entity that used it...
                 Player.Instance.DealDamage(-healHP, 0, Vector2.zero);
-
-                Inventory.PopFromSlot(Inventory.Instance.shield);
+                Inventory.Instance.shield.Item = null;
             }
 
         }
@@ -44,8 +43,7 @@ namespace Items
                 Player.Instance.PlaySound(useSound);
                 //should pass an instance to the entity that used it...
                 Player.Instance.DealDamage(-healHP, 0, Vector2.zero);
-
-                Inventory.PopFromSlot(Inventory.Instance.weapon);
+                Inventory.Instance.weapon.Item = null;
             }
         }
 

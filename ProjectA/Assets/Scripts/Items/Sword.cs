@@ -43,7 +43,7 @@ namespace Items
                 this.DropAt(bullet.transform.position);
                 };
                 bullet.GetComponent<Animator>().enabled = false;
-                Inventory.PopFromSlot(Inventory.Instance.shield);
+                Inventory.Instance.shield = null;
             }
         }
 

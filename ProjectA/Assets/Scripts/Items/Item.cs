@@ -54,47 +54,35 @@ namespace Items
             this.Mass = mass;
         }
 
-        public void DropAt(Vector3 position)
+        public void DropAt(Vector2 position)
         {
             DropItem(out bool success);
             if (!success) return;
-            position.z = 0;
             transform.position = position;
             MakeVisible();
-            //gameObject.SetActive(true);
         }
 
-
-        //abstract
-        public abstract void Fire(Transform player, bool down);
-        public abstract void AltFire(Transform player, bool down);
-        protected virtual void DropItem(out bool success)
+        //pick up the item
+        public void OnClick()
         {
-            success = true;
-        }
+            Inventory.InventorySlot slot = Inventory.GetOpenSlot();
 
-        void IClickable.OnClick()
-        {
-            //pick up the item
-            int slot = Inventory.GetOpenSlot();
+            //tries to put item in inventory slot
+            bool success = Inventory.Pickup(slot, this);
 
-            //check to see if theres an open slot
-            if (slot != -1)
+            if (success)
             {
-                //make the item disappear
-                //gameObject.SetActive(false);
+                //make the item disappear if successful
                 MakeInvisible();
-                //put the item in inventory
-                Inventory.AssignTo(this, slot);
             }
             else
             {
-
+                //do nothing
             }
-
         }
+
         //To remove sprite + collider without deactivating object (so I can use Corutines within items)
-        void MakeInvisible()
+        private void MakeInvisible()
         {
             GetComponent<SpriteRenderer>().enabled = false;
             foreach (Collider2D col in GetComponents<Collider2D>())
@@ -102,7 +90,7 @@ namespace Items
                 col.enabled = false;
             }
         }
-        void MakeVisible()
+        private void MakeVisible()
         {
             GetComponent<SpriteRenderer>().enabled = true;
             foreach (Collider2D col in GetComponents<Collider2D>())

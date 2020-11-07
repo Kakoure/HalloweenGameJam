@@ -71,14 +71,13 @@ class Draggable : MonoBehaviour, IClickable
             if (hitSlot)
             {
                 //place the item in inventory
-                Inventory.Instance.Swap(this.transform, gameObject.transform);
+                Inventory.Swap(this.transform, gameObject.transform);
             }
             else if (!hitInventory)
             {
                 //try to drop this item.
                 Inventory.InventorySlot slot = Inventory.Instance.FindSlot(this.transform);
-                Item i = Inventory.PopFromSlot(slot);
-                i.DropAt(CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition));
+                Inventory.Drop(slot, CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition));
             }
         }
     }
