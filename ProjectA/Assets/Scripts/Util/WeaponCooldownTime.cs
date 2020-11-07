@@ -29,7 +29,7 @@ public class WeaponCooldownTime : MonoBehaviour
             }
             else
             {
-                t.text = string.Format("{0}{1,12:F2}", msg, w.TimeRemaining());
+                t.text = string.Format("{0}{1,-1:F2}", msg, w.TimeRemaining());
             }
         }
     }

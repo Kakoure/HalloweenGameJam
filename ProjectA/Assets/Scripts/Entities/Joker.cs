@@ -157,7 +157,6 @@ public partial class Joker : Entity
             }
 
             boomerangCycle = TPFrom(teleport.position, c);
-            Debug.Log(teleport);
 
             if (teleportHP == teleportHP3) { teleportHP = -1; }
             if (teleportHP == teleportHP2) { teleportHP = teleportHP3; teleport = thirdTeleport; }
