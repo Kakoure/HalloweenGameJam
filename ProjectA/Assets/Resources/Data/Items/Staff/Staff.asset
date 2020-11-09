@@ -14,18 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useSound: {fileID: 0}
   cooldownTime: 1.5
-  damage: 15
-  force: 5
-  explosionDamage: 15
-  explosionForce: 5
-  explosionRadius: 2
-  spd: 6
-  fireball: {fileID: 7254974616750928701, guid: c938f609277e2c74681cd03060d2955b,
-    type: 3}
   fireProjectile:
     damage: 15
     speed: 6
     throwTime: Infinity
-    knockBack: 0
+    knockBack: 5
     Bullet: {fileID: 7254974616750928701, guid: c938f609277e2c74681cd03060d2955b,
       type: 3}
+  explosionDamage: 15
+  explosionForce: 5
+  explosionRadius: 2
+  fireball: {fileID: 7254974616750928701, guid: c938f609277e2c74681cd03060d2955b,
+    type: 3}

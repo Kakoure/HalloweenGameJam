@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4214909591308515931}
   - component: {fileID: 4214909591308515928}
-  - component: {fileID: 4214909591308515929}
   - component: {fileID: 4214909591308515926}
   - component: {fileID: 4214909591308515933}
   - component: {fileID: 4214909591308515932}
@@ -112,19 +111,6 @@ MonoBehaviour:
   juggleSound: {fileID: 8300000, guid: ccd0150d4e35efe46af5b6015f9dada4, type: 3}
   fiveSecondIntervals: 5
   juggleTime1: 1.5
---- !u!114 &4214909591308515929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4214909591308515924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebd18c3d9131e974a988774ee8c1a513, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  joker: {fileID: 4214909591308515928}
 --- !u!212 &4214909591308515926
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -139,6 +125,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

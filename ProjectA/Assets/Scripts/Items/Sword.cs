@@ -16,6 +16,8 @@ namespace Items
         public override ItemID ID => id;
         public static string itemName = "Sword";
         public override string Name => itemName;
+        private static Sprite sprite;
+        public override Sprite Sprite => sprite;
 
         public static int swordMass = 10;
 
@@ -28,15 +30,11 @@ namespace Items
         //fix fireprojectile
         public FireProjectile throwitem;
 
-        //replace
-        private Sprite _sprite;
-
 
         private Cooldown comboReset;
 
         //make static member of weapon
         Converter lungeConverter = f => f < .1f ? 0f : Mathf.Max(0, (2 - Mathf.Pow((f + .5f), 2)));
-        public override Sprite Sprite => _sprite;
 
         public override void AltFire(Transform player, bool down)
         {

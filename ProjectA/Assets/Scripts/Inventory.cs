@@ -116,7 +116,7 @@ public partial class Inventory : MonoBehaviour
         }
     }
 
-    public static Item CurrentWeapon => Instance.weapon.Item == null? Instance.weapon.Item : Instance.unarmed;
+    public static Item CurrentWeapon => Instance.weapon.Item != null? Instance.weapon.Item : Instance.unarmed;
 
     public static bool Swap(Transform t1, Transform t2)
     {
@@ -137,8 +137,8 @@ public partial class Inventory : MonoBehaviour
 
         bool b1 = true, b2 = true;
         Action a1 = null, a2 = null;
-        i1?.SwapSlot(slot1, slot2, out b1, out a1);
-        i2?.SwapSlot(slot2, slot1, out b2, out a2);
+        i1?.SwapSlot(i1)(slot1, slot2, out b1, out a1);
+        i2?.SwapSlot(i1)(slot2, slot1, out b2, out a2);
 
         if (b1 && b2)
         {
@@ -163,7 +163,7 @@ public partial class Inventory : MonoBehaviour
     {
         if (slot.Item != null) return false;
 
-        item.SwapSlot(null, slot, out bool success, out Action f1);
+        item.SwapSlot(item)(null, slot, out bool success, out Action f1);
 
         if (success)
         {
@@ -180,7 +180,7 @@ public partial class Inventory : MonoBehaviour
     }
     public static bool Drop(InventorySlot slot, Vector2 position)
     {
-        slot.Item.SwapSlot(slot, null, out bool success, out Action finalize);
+        slot.Item.SwapSlot(slot.Item)(slot, null, out bool success, out Action finalize);
 
         if (success)
         {
@@ -227,12 +227,15 @@ public partial class Inventory : MonoBehaviour
         weapon.slotType = InventorySlot.SlotType.Weapon;
         shield.standardSprite = shield.img.sprite;
         shield.slotType = InventorySlot.SlotType.Shield;
-
-        //TODO: get Item Generic instead
-        unarmed = GameObject.FindGameObjectWithTag("Unarmed").GetComponent<Item>();
     }
 
-    //TODO make this a method
+    private void Start()
+    {
+        //find the unarmed script by getting the ItemGeneric first
+        unarmed = GameObject.FindGameObjectWithTag("Unarmed").GetComponent<ItemGeneric>().itemObject;
+    }
+
+    //TODO make this a method of Item
     private static void EvaluateAnimWeaponID()
     {
         Animator anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
@@ -253,9 +256,6 @@ public partial class Inventory : MonoBehaviour
            
         }
         Instance.currentWepID = CurrentWeapon.ID;
-    }
-    private void Start()
-    {
     }
 }
 

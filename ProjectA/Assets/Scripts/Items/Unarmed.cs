@@ -11,10 +11,12 @@ namespace Items
     [CreateAssetMenu]
     public class Unarmed : Weapon
     {
-        public static readonly ItemID itemID = ItemID.Unarmed;
-        public override ItemID ID => itemID;
+        public static readonly ItemID id = ItemID.Unarmed;
+        public override ItemID ID => id;
         public static readonly string itemName = "Unarmed";
         public override string Name => itemName;
+        public static Sprite sprite;
+        public override Sprite Sprite => sprite;
 
         public float radius;
         public float arcRadians; //sq
@@ -22,15 +24,11 @@ namespace Items
         public float force;
         public float lungeForce;
 
-        //should be static
-        public Sprite sprite;
-
         private Cooldown comboReset;
         //integral is approximately one but because Unity essencially does remann sum, it is likely more
         //should be protected static member of Weapon
         Converter lungeConverter = f => f < .1f ? 0f : Mathf.Max(0, (2 - Mathf.Pow(1.5f * f, 2))); 
         //Initalized in start
-        public override Sprite Sprite => sprite;
 
         public override void AltFire(Transform player, bool down)
         {
@@ -43,7 +41,9 @@ namespace Items
             if (!down) return;
             if (!IsReady) return;
             if (!Player.Instance.playerMove.PathEnd) return;
-            Owner.StartCoroutine("AttackSequence");
+
+            //need to call the specific coroutine on this object
+            Owner.StartCoroutine(AttackSequence());
             
             SetUseTime();
         }
@@ -57,6 +57,7 @@ namespace Items
         {
 
         }
+
         //common
         private void HitScan() //overlap circle not hitscan but whatever
         {
@@ -67,6 +68,7 @@ namespace Items
                 if (col.gameObject.CompareTag("Monster"))
                 {
                     //check the arc
+                    //this needs fix
                     Vector2 disp = col.transform.position - player.position;
                     Vector2 cDisp = CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - player.position;
                     double arc = Mathf.Atan2(disp.x, disp.y) - Math.Atan2(cDisp.x, cDisp.y);

@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace Items
 {
-    [LoadResourceToFieldInherited("sprite", "Sprite", typeof(Sprite))]
     public static class ItemIDExtend
     {
         public static int Value(this ItemID id)
@@ -28,6 +27,7 @@ namespace Items
         SIZE, //i just like to do this
     }
 
+    [LoadResourceToFieldInherited("sprite", "Sprite", typeof(Sprite))]
     public abstract partial class Item : ScriptableObject, IClickable
     {
         public static readonly int massConstant = 100;
@@ -37,7 +37,7 @@ namespace Items
         public abstract ItemID ID { get; }
         public abstract string Name { get; }
         //since Item no longer inherits from Monobehavior, Owner needs to be used as an alternamtive
-        public ItemGeneric Owner { get; protected set; } = null;
+        public ItemGeneric Owner { get; set; } = null;
         public int Mass { get; protected set; } //letting mass be a modifiable value
         public AudioClip useSound;
         //this looks like it should be readonly static as opposed to being assigned on start

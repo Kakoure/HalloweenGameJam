@@ -48,7 +48,7 @@ class ItemGenericEditor : Editor
             //create a new instance of the Item
             Type itemType = GetItemType();
             var item = CreateInstance(itemType);
-            AssetDatabase.CreateAsset(item, Item.itemsDirectory + Item.GetItemName(itemType) + $"/{itemName}.asset");
+            AssetDatabase.CreateAsset(item, Item.itemsDirectoryAssets + Item.GetItemName(itemType) + $"/{itemName}.asset");
             itemGeneric.itemObject = item as Item;
         }
 
@@ -72,7 +72,7 @@ class ItemGenericEditor : Editor
         if (itemType.IsAbstract || !typeof(Item).IsAssignableFrom(itemType))
         {
             //the type is either abstract or does not inherit from Item
-            Debug.LogError("The Script chosen does not represent a valid Item");
+            Debug.LogError($"The Script {script.name} does not represent a valid Item");
 
             itemGeneric.itemObject = null;
             return null;
@@ -93,7 +93,7 @@ class ItemGenericEditor : Editor
 
         //item is a valid item type
         //string dir = Item.GetItemPath(itemID);
-        string dir = Item.itemsDirectory;
+        string dir = Item.itemsDirectoryAssets;
         dir += Item.GetItemName(itemType) + "/";
 
         //load the appropriate sprite if it exists

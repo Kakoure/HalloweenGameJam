@@ -10,27 +10,26 @@ namespace Items
 {
     public class Spell : Weapon
     {
-        public static ItemID itemID = ItemID.Staff;
-        public override ItemID ID => itemID;
+        public static ItemID id = ItemID.Staff;
+        public override ItemID ID => id;
         public static string itemName = "Staff";
         public override string Name => itemName;
+        public static Sprite sprite;
+        public override Sprite Sprite => sprite;
 
         static readonly int SpellMass = 1;
 
-        public int damage;
-        public float force;
+        public FireProjectile fireProjectile;
         public int explosionDamage;
         public float explosionForce;
         public float explosionRadius;
-        public float spd;
         public GameObject fireball;
 
-        //serialized
-        public FireProjectile fireProjectile;
-
-        //assigned on load
-        private Sprite sprite;
-        public override Sprite Sprite => sprite;
+        private float spd;
+        public override void Initialize()
+        {
+            spd = fireProjectile.speed;
+        }
 
         public override void AltFire(Transform player, bool down)
         {

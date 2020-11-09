@@ -26,6 +26,8 @@ public class CheckClicks : MonoBehaviour
 
             //Raycast using the Graphics Raycaster and mouse click position
             pointerData.position = Input.mousePosition;
+
+            //TODO could try to raycast on a specific layer?
             this.raycaster.Raycast(pointerData, results);
 
             foreach(RaycastResult r in results)

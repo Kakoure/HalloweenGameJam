@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useSound: {fileID: 0}
   cooldownTime: 0.75
-  arrowSprite: {fileID: 0}
   baseDamage: 15
   chargedDamage: 35
   baseSpeed: 10
@@ -22,10 +21,3 @@ MonoBehaviour:
   fullCharge: 0.5
   fullChargeCooldown: 1.5
   slowMoveSpeedMultiplier: 0.25
-  fireArrow:
-    damage: 0
-    speed: 0
-    throwTime: 0
-    knockBack: 0
-    Bullet: {fileID: 1698724928929206556, guid: 0f593a76fb746a94da962b82ca08c71c,
-      type: 3}

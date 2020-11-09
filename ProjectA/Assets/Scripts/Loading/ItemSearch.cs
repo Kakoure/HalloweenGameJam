@@ -17,8 +17,12 @@ namespace Items
         //given ItemID, should be able to find item name
         static readonly string[] itemNames = new string[(int)ItemID.SIZE];
 
+        //start from Assets
         //directory of all items - ends with a /
-        public static readonly string itemsDirectory = "Assets/Resources/Data/Items/";
+        public static readonly string itemsDirectoryAssets = "Assets/Resources/Data/Items/";
+
+        //start from Resources
+        public static readonly string itemsDirectoryResources = "Data/Items/";
 
         static readonly string nameField = "itemName";
         static readonly string idField = "id";
@@ -74,12 +78,13 @@ namespace Items
                 Type item = itemList[id];
 
                 if (item == null) continue;
-                var attributes = item.GetCustomAttributes<LoadResourceToFieldAttribute>();
+                var attributes = item.GetCustomAttributes<LoadingAttribute>(true);
+                
+                //load resources according to the LoadResource attributes
+                string dataDirectory = GetItemPath(id);
 
                 foreach (var att in attributes)
                 {
-                    //load resources according to the LoadResource attributes
-                    string dataDirectory = GetItemPath(id);
 
                     //load the resource
                     att.Load(dataDirectory, item);
@@ -107,7 +112,7 @@ namespace Items
         // end with a /
         public static string GetItemPath(ItemID id)
         {
-            return itemsDirectory + itemNames[(int)id] + "/";
+            return itemsDirectoryResources + itemNames[(int)id] + "/";
         }
         public static string GetItemPath(int id) => GetItemPath((ItemID)id);
     }

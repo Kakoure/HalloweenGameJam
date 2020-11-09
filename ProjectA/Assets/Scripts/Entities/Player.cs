@@ -32,7 +32,7 @@ class Player : Entity
     public bool IsInvuln => !dodgeInvuln.IsReady || !damageInvuln.IsReady;
 
     //deal damage and apply impulse can be merged
-    //also apply impuls for playe ignores force parameter
+    //also apply impulse for player ignores force parameter
     protected override void ApplyImpulse(float force, Vector2 from)
     {
         if (force == 0) return; //if no force return

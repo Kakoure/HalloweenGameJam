@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -8,26 +9,28 @@ using UnityEngine;
 namespace Items
 {
     //these properties are used by LoadAssets to load specific resources such as sprites and assign them to static fields.
+    public abstract class LoadingAttribute : Attribute
+    {
+        public abstract void Load(string floderPath, Type item);
+    }
 
     [System.AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
-    public class LoadResourceToFieldAttribute : Attribute
+    public class LoadResourceToFieldAttribute : LoadingAttribute
     {
         Type type;
         string key;
         string staticFieldName;
 
         //folderPath ends with /
-        public void Load(string folderPath, Type item)
+        public override void Load(string folderPath, Type item)
         {
+            Debug.Log($"Loading {folderPath} for {item}");
+
             //get the resource from the file system
             UnityEngine.Object o = Resources.Load(folderPath + key, type);
 
             //assign the resource to the static field
             var field = item.GetField(staticFieldName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-
-#if DEBUG
-            Debug.Log("DEBUG");
-#endif
 
             //possible errors
             if (field == null) Debug.LogError($"Field {staticFieldName} is not found on Item {item}");
@@ -63,14 +66,14 @@ namespace Items
     }
 
     [System.AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
-    public class LoadResourceToFieldInheritedAttribute : Attribute
+    public class LoadResourceToFieldInheritedAttribute : LoadingAttribute
     {
         Type type;
         string key;
         string staticFieldName;
 
         //folderPath ends with /
-        public void Load(string folderPath, Type item)
+        public override void Load(string folderPath, Type item)
         {
             //get the resource from the file system
             UnityEngine.Object o = Resources.Load(folderPath + key, type);
@@ -78,13 +81,17 @@ namespace Items
             //assign the resource to the static field
             var field = item.GetField(staticFieldName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
 
-#if DEBUG
-            Debug.Log("DEBUG");
-#endif
-
             //possible errors
-            if (field == null) Debug.LogError($"Field {staticFieldName} is not found on Item {item}");
-            if (o == null) Debug.LogError($"Resource {folderPath + key} could not be found");
+            if (field == null)
+            {
+                Debug.LogError($"Field {staticFieldName} is not found on Item {item}");
+                return;
+            }
+            if (o == null)
+            {
+                Debug.LogError($"Resource {folderPath + key} could not be found");
+                return;
+            }
 
             //since field is static this line should not throw null reference.
             //however, if the resource type is wrong, then this line may very well throw an exception
@@ -118,24 +125,20 @@ namespace Items
     //attributes for properties
     //must be at least set property
     [System.AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
-    public class LoadResourceToPropertyAttribute : Attribute
+    public class LoadResourceToPropertyAttribute : LoadingAttribute
     {
         Type type;
         string key;
         string staticPropertyName;
 
         //folderPath ends with /
-        public void Load(string folderPath, Type item)
+        public override void Load(string folderPath, Type item)
         {
             //get the resource from the file system
             UnityEngine.Object o = Resources.Load(folderPath + key, type);
 
             //assign the resource to the static field
             var property = item.GetProperty(staticPropertyName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.SetProperty);
-
-#if DEBUG
-            Debug.Log("DEBUG");
-#endif
 
             //possible errors
             if (property == null) Debug.LogError($"Property {staticPropertyName} is not found on Item {item} or is not a set property");
@@ -171,24 +174,20 @@ namespace Items
     }
 
     [System.AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
-    public class LoadResourceToPropertyInheritedAttribute : Attribute
+    public class LoadResourceToPropertyInheritedAttribute : LoadingAttribute
     {
         Type type;
         string key;
         string staticPropertyName;
 
         //folderPath ends with /
-        public void Load(string folderPath, Type item)
+        public override void Load(string folderPath, Type item)
         {
             //get the resource from the file system
             UnityEngine.Object o = Resources.Load(folderPath + key, type);
 
             //assign the resource to the static field
             var property = item.GetProperty(staticPropertyName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.SetProperty);
-
-#if DEBUG
-            Debug.Log("DEBUG");
-#endif
 
             //possible errors
             if (property == null) Debug.LogError($"Property {staticPropertyName} is not found on Item {item} or is not a set property");

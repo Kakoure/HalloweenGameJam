@@ -13,7 +13,7 @@ namespace Items
         void OnDamageTaken(int damage, Vector2 src);
     }
     
-    [CreateAssetMenu]
+    [LoadResourceToField("bullet", "Bullet", typeof(GameObject))]
     public class Bow : Weapon, IDamageTaken
     {
         static int bowMass = 1;
@@ -21,9 +21,9 @@ namespace Items
         public override ItemID ID => id;
         public static readonly string itemName = "Bow";
         public override string Name => itemName;
-        public static Sprite projectileSprite;
-
-        public Sprite arrowSprite;
+        public static Sprite sprite;
+        public override Sprite Sprite => sprite;
+        public static GameObject bullet;
 
         public int baseDamage;
         public int chargedDamage;
@@ -34,9 +34,9 @@ namespace Items
         public float slowMoveSpeedMultiplier;
 
         //TODO FIX THIS
+        //introduce status effects
         private float defSpeed = 5;
-        //serialized
-        public FireProjectile fireArrow;
+        private FireProjectile fireArrow;
 
         //replacement to assignment at awake (since awake occurs on instantiation)
         private PlayerMove movement => Player.Instance.playerMove;
@@ -65,9 +65,13 @@ namespace Items
 
         #endregion
 
-        //replace
-        private Sprite _sprite;
-        public override Sprite Sprite => _sprite;
+        public override void Initialize()
+        {
+            //two handed
+            this.SwapSlot = twoHanded;
+
+            fireArrow = new FireProjectile(bullet, 0, 0, 0);
+        }
 
         public override void AltFire(Transform player, bool down)
         {
@@ -136,101 +140,6 @@ namespace Items
                 Vector2 lookDir = (CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.gameObject.transform.position).normalized;
                 playerAnim.SetFloat("xInput", lookDir.x);
                 playerAnim.SetFloat("yInput", lookDir.y);
-            }
-        }
-
-        //occupy both slots
-        internal override void SwapSlot(Inventory.InventorySlot currentSlot, Inventory.InventorySlot otherSlot, out bool success, out Action finalize)
-        {
-            finalize = null;
-            success = true;
-
-            // * -> null
-            if (otherSlot == null)
-            {
-                switch (currentSlot.slotType)
-                {
-                    case SlotType.Weapon:
-                    case SlotType.Shield:
-                        // Shield || Weapon -> null
-                        SlotType other = currentSlot.slotType == SlotType.Shield ? SlotType.Weapon : SlotType.Shield;
-                        Inventory.InventorySlot blockerSlot = Inventory.GetSlot(other);
-                        finalize = () => blockerSlot.Item = null;
-                        return;
-                    default:
-                        // Inventory -> null
-                        return;
-                }
-            }
-
-            switch (otherSlot.slotType)
-            {
-                case SlotType.Inventory:
-                    {
-                        if (currentSlot == null || currentSlot.slotType == SlotType.Inventory)
-                        {
-                            //null || inventory -> inventory
-                            success = true;
-                            return;
-                        }
-                        else
-                        {
-                            //shield || weapon -> inventory
-                            SlotType other = currentSlot.slotType == SlotType.Shield ? SlotType.Weapon : SlotType.Shield;
-                            Inventory.InventorySlot secondSlot = Inventory.GetSlot(other);
-                            Action removeBlocker = () =>
-                            {
-                                secondSlot.Item = null;
-                            };
-                            success = true;
-                            finalize = removeBlocker;
-                            return;
-                        }
-                    }
-                case SlotType.Shield:
-                case SlotType.Weapon:
-                    {
-                        SlotType other = otherSlot.slotType == SlotType.Shield ? SlotType.Weapon : SlotType.Shield;
-                        Inventory.InventorySlot blocker = Inventory.GetSlot(other);
-
-                        if (blocker.Item == this)
-                        {
-                            // Weapon -> Shield
-                            success = false;
-                            return;
-                        }
-
-                        if(blocker.Item != null)
-                        {
-                            //try to swap it out
-                            int swapIndex = Inventory.GetEmptyInventorySlot();
-                            if (swapIndex != -1)
-                            {
-                                Inventory.InventorySlot swapSlot = Inventory.GetSlot(SlotType.Inventory, swapIndex);
-                                success = Inventory.Swap(blocker, swapSlot);
-                                //fill the blocker slot if success
-                                finalize = () => blocker.Item = this;
-                                return;
-                            }
-                            else
-                            {
-                                //no swap slot avaliable
-                                success = false;
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            //blocker is empty
-                            success = true;
-                            Action fillBlocker = () =>
-                            {
-                                blocker.Item = this;
-                            };
-                            finalize = fillBlocker;
-                            return;
-                        }
-                    }
             }
         }
 

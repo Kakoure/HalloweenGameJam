@@ -8,15 +8,15 @@ namespace Items
     [CreateAssetMenu]
     public class StrawberryJam : Item
     {
-        public static Sprite sprite;
         public static readonly ItemID id = ItemID.Jam;
         public override ItemID ID => id;
         public static readonly string itemName = "Jam";
         public override string Name => itemName;
+        public static Sprite sprite;
+        public override Sprite Sprite => sprite;
 
         public static int itemMass = 1;
 
-        public override Sprite Sprite => sprite;
         public FireProjectile throwJar = new FireProjectile(null, itemMass, Mathf.Sqrt(massConstant / itemMass), .5f);
         public int healHP;
 
