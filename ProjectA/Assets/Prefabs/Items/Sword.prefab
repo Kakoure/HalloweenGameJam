@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3916141102960055223}
   - component: {fileID: 3916141102960055217}
   - component: {fileID: 913851462}
-  - component: {fileID: 9161909879284659548}
+  - component: {fileID: 3436090033515989071}
   m_Layer: 11
   m_Name: Sword
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3916141102960055221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4796479, y: -0.28901386, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -131,7 +132,7 @@ PolygonCollider2D:
       - {x: -0.042446136, y: -0.2864223}
       - {x: 0.66666603, y: 0.41830486}
       - {x: 0.6666667, y: 0.6666667}
---- !u!114 &9161909879284659548
+--- !u!114 &3436090033515989071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,13 +141,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3916141102960055221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3344fc90e7d645419c4b5d1f9a9b942, type: 3}
+  m_Script: {fileID: 11500000, guid: d9e6015c331f2a9478733bba481896d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSound: {fileID: 0}
-  cooldownTime: 0.25
-  radius: 1.5
-  arcRadians: 1
-  damage: 15
-  force: 10
-  lungeForce: 1
+  itemScript: {fileID: 11500000, guid: a3344fc90e7d645419c4b5d1f9a9b942, type: 3}
+  itemObject: {fileID: 11400000, guid: 798c6ade6b3c2a14e8d7e1456cc5d682, type: 2}

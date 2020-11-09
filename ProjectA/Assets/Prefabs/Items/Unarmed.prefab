@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2222837061288583460}
   - component: {fileID: 2222837061288583458}
   - component: {fileID: 2918885690830239445}
-  - component: {fileID: 5655590219827194346}
+  - component: {fileID: 8008323995405118786}
   m_Layer: 11
   m_Name: Unarmed
   m_TagString: Unarmed
@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -131,7 +132,7 @@ PolygonCollider2D:
       - {x: -0.042446136, y: -0.2864223}
       - {x: 0.66666603, y: 0.41830486}
       - {x: 0.6666667, y: 0.6666667}
---- !u!114 &5655590219827194346
+--- !u!114 &8008323995405118786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,13 +141,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2222837061288583462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 186ae8927844ee349ba09cff2db9b17c, type: 3}
+  m_Script: {fileID: 11500000, guid: d9e6015c331f2a9478733bba481896d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSound: {fileID: 0}
-  cooldownTime: 0.15
-  radius: 1.25
-  arcRadians: 0.5
-  damage: 5
-  force: 10
-  lungeForce: 1
+  itemScript: {fileID: 11500000, guid: 186ae8927844ee349ba09cff2db9b17c, type: 3}
+  itemObject: {fileID: 11400000, guid: 7b147457ba17ea24a914d0265e924b34, type: 2}

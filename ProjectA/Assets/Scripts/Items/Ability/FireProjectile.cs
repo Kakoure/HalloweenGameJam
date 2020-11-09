@@ -12,6 +12,7 @@ namespace Items
         Bullet Execute(Transform t, out Vector2 v);
     }
 
+    //FIX FIREPROJECTILE
     [System.Serializable]
     public class FireProjectile : IAbility
     {
@@ -41,7 +42,7 @@ namespace Items
         
         public FireProjectile(GameObject original,int damage, float knockBack, float speed, float throwTime = Mathf.Infinity)
         {
-            if (original == null) original = CameraReference.Instance.bulletGeneric;
+            //if (original == null) original = CameraReference.Instance.bulletGeneric;
             this.Bullet = original;
             this.damage = damage;
             this.speed = speed;

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 008deb65a8246ac448ad472cf9b06dec, type: 3}
+  m_Name: Bow
+  m_EditorClassIdentifier: 
+  useSound: {fileID: 0}
+  cooldownTime: 0.75
+  arrowSprite: {fileID: 0}
+  baseDamage: 15
+  chargedDamage: 35
+  baseSpeed: 10
+  knockback: 3
+  fullCharge: 0.5
+  fullChargeCooldown: 1.5
+  slowMoveSpeedMultiplier: 0.25
+  fireArrow:
+    damage: 0
+    speed: 0
+    throwTime: 0
+    knockBack: 0
+    Bullet: {fileID: 1698724928929206556, guid: 0f593a76fb746a94da962b82ca08c71c,
+      type: 3}

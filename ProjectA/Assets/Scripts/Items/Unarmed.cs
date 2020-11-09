@@ -8,6 +8,7 @@ using static Boomerang;
 
 namespace Items
 {
+    [CreateAssetMenu]
     public class Unarmed : Weapon
     {
         public static readonly ItemID itemID = ItemID.Unarmed;
@@ -20,18 +21,16 @@ namespace Items
         public int damage;
         public float force;
         public float lungeForce;
-        private Sprite _sprite;
+
+        //should be static
+        public Sprite sprite;
 
         private Cooldown comboReset;
         //integral is approximately one but because Unity essencially does remann sum, it is likely more
+        //should be protected static member of Weapon
         Converter lungeConverter = f => f < .1f ? 0f : Mathf.Max(0, (2 - Mathf.Pow(1.5f * f, 2))); 
         //Initalized in start
-        public override Sprite Sprite => _sprite;
-
-        private void Start()
-        {
-            _sprite = GetComponent<SpriteRenderer>().sprite;
-        }
+        public override Sprite Sprite => sprite;
 
         public override void AltFire(Transform player, bool down)
         {
@@ -43,8 +42,8 @@ namespace Items
         {
             if (!down) return;
             if (!IsReady) return;
-            if (!Player.Instance.pm.PathEnd) return;
-            StartCoroutine("AttackSequence");
+            if (!Player.Instance.playerMove.PathEnd) return;
+            Owner.StartCoroutine("AttackSequence");
             
             SetUseTime();
         }
@@ -104,7 +103,7 @@ namespace Items
             anim.SetFloat("yInput", lookDir.y);
 
             Path lungePath = LinePath(lungeConverter, lookDir);
-            Player.Instance.pm.SetPath(Boomerang.Mult(Player.Instance.pm.speed, lungePath), .25f);
+            Player.Instance.playerMove.SetPath(Boomerang.Mult(Player.Instance.playerMove.speed, lungePath), .25f);
 
             yield return new WaitForSeconds(.1f);
             HitScan();

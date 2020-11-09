@@ -12,7 +12,8 @@ namespace Items
     {
         void OnDamageTaken(int damage, Vector2 src);
     }
-
+    
+    [CreateAssetMenu]
     public class Bow : Weapon, IDamageTaken
     {
         static int bowMass = 1;
@@ -32,10 +33,14 @@ namespace Items
         public float fullChargeCooldown;
         public float slowMoveSpeedMultiplier;
 
-        private float defSpeed;
-        public FireProjectile fireArrow; // start
-        private PlayerMove movement;
-        private Animator playerAnim;
+        //TODO FIX THIS
+        private float defSpeed = 5;
+        //serialized
+        public FireProjectile fireArrow;
+
+        //replacement to assignment at awake (since awake occurs on instantiation)
+        private PlayerMove movement => Player.Instance.playerMove;
+        private Animator playerAnim => Player.Instance.playerAnimator;
         #region charging
 
         private float chargeTime = 0;
@@ -60,16 +65,9 @@ namespace Items
 
         #endregion
 
+        //replace
         private Sprite _sprite;
         public override Sprite Sprite => _sprite;
-
-        private void Start()
-        {
-            _sprite = GetComponent<SpriteRenderer>().sprite;
-            movement = Player.Instance.GetComponent<PlayerMove>();
-            defSpeed = movement.speed;
-            playerAnim = Player.Instance.GetComponent<Animator>();
-        }
 
         public override void AltFire(Transform player, bool down)
         {

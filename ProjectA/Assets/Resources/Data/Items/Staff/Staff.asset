@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bf339f8bc54774da25568c2bc38969, type: 3}
+  m_Name: Staff
+  m_EditorClassIdentifier: 
+  useSound: {fileID: 0}
+  cooldownTime: 1.5
+  damage: 15
+  force: 5
+  explosionDamage: 15
+  explosionForce: 5
+  explosionRadius: 2
+  spd: 6
+  fireball: {fileID: 7254974616750928701, guid: c938f609277e2c74681cd03060d2955b,
+    type: 3}
+  fireProjectile:
+    damage: 15
+    speed: 6
+    throwTime: Infinity
+    knockBack: 0
+    Bullet: {fileID: 7254974616750928701, guid: c938f609277e2c74681cd03060d2955b,
+      type: 3}

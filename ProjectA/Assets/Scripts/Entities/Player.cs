@@ -16,7 +16,9 @@ class Player : Entity
     private Rigidbody2D _rb;
     public override Rigidbody2D Rigidbody => _rb;
     [NonSerialized]
-    public PlayerMove pm;
+    public PlayerMove playerMove;
+    [NonSerialized]
+    public Animator playerAnimator;
 
     public float damageKnockbackDur = 1;
     public float damageKnockbackCoef = 0;
@@ -36,7 +38,7 @@ class Player : Entity
         if (force == 0) return; //if no force return
 
         Vector2 v = (Vector2)transform.position - from;
-        pm.SetPath(PlayerMove.RollPath(damageKnockbackCoef * v.normalized), damageKnockbackDur);
+        playerMove.SetPath(PlayerMove.RollPath(damageKnockbackCoef * v.normalized), damageKnockbackDur);
     }
     public override bool DealDamage(int damage, float force, Vector2 from)
     {
@@ -83,7 +85,8 @@ class Player : Entity
         _rb = GetComponent<Rigidbody2D>();
         if (Instance != null) Debug.LogError("Multiple players detected");
         Instance = this;
-        pm = GetComponent<PlayerMove>();
+        playerMove = GetComponent<PlayerMove>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     public override void Start()

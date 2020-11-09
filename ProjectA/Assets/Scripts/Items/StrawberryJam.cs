@@ -1,23 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Items
 {
+    [CreateAssetMenu]
     public class StrawberryJam : Item
     {
-        public static readonly ItemID itemID = ItemID.Jam;
-        public override ItemID ID => itemID;
-        public static readonly string itemName;
+        public static Sprite sprite;
+        public static readonly ItemID id = ItemID.Jam;
+        public override ItemID ID => id;
+        public static readonly string itemName = "Jam";
         public override string Name => itemName;
 
         public static int itemMass = 1;
 
-        public Sprite sprite;
         public override Sprite Sprite => sprite;
-        public FireProjectile throwJar;
+        public FireProjectile throwJar = new FireProjectile(null, itemMass, Mathf.Sqrt(massConstant / itemMass), .5f);
         public int healHP;
 
+        //delete
         public void Start()
         {
             throwJar = new FireProjectile(null, itemMass, Mathf.Sqrt(massConstant / itemMass), .5f);

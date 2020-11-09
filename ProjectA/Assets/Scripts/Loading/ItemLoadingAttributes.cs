@@ -7,6 +7,8 @@ using UnityEngine;
 
 namespace Items
 {
+    //these properties are used by LoadAssets to load specific resources such as sprites and assign them to static fields.
+
     [System.AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     public class LoadResourceToFieldAttribute : Attribute
     {
@@ -22,6 +24,14 @@ namespace Items
 
             //assign the resource to the static field
             var field = item.GetField(staticFieldName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+
+#if DEBUG
+            Debug.Log("DEBUG");
+#endif
+
+            //possible errors
+            if (field == null) Debug.LogError($"Field {staticFieldName} is not found on Item {item}");
+            if (o == null) Debug.LogError($"Resource {folderPath + key} could not be found");
 
             //since field is static this line should not throw null reference.
             //however, if the resource type is wrong, then this line may very well throw an exception
@@ -67,6 +77,14 @@ namespace Items
 
             //assign the resource to the static field
             var field = item.GetField(staticFieldName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+
+#if DEBUG
+            Debug.Log("DEBUG");
+#endif
+
+            //possible errors
+            if (field == null) Debug.LogError($"Field {staticFieldName} is not found on Item {item}");
+            if (o == null) Debug.LogError($"Resource {folderPath + key} could not be found");
 
             //since field is static this line should not throw null reference.
             //however, if the resource type is wrong, then this line may very well throw an exception
@@ -115,6 +133,14 @@ namespace Items
             //assign the resource to the static field
             var property = item.GetProperty(staticPropertyName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.SetProperty);
 
+#if DEBUG
+            Debug.Log("DEBUG");
+#endif
+
+            //possible errors
+            if (property == null) Debug.LogError($"Property {staticPropertyName} is not found on Item {item} or is not a set property");
+            if (o == null) Debug.LogError($"Resource {folderPath + key} could not be found");
+
             //property is guarenteed to be static and set
             //however, if the resource type is wrong, then this line may very well throw an exception
             property.SetValue(null, o);
@@ -159,6 +185,14 @@ namespace Items
 
             //assign the resource to the static field
             var property = item.GetProperty(staticPropertyName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.SetProperty);
+
+#if DEBUG
+            Debug.Log("DEBUG");
+#endif
+
+            //possible errors
+            if (property == null) Debug.LogError($"Property {staticPropertyName} is not found on Item {item} or is not a set property");
+            if (o == null) Debug.LogError($"Resource {folderPath + key} could not be found");
 
             //property is guarenteed to be static and set
             //however, if the resource type is wrong, then this line may very well throw an exception

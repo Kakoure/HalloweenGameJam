@@ -9,10 +9,11 @@ using static Boomerang;
 
 namespace Items
 {
+    [CreateAssetMenu]
     public class Sword : Weapon
     {
-        public static ItemID itemID = ItemID.Sword;
-        public override ItemID ID => itemID;
+        public static ItemID id = ItemID.Sword;
+        public override ItemID ID => id;
         public static string itemName = "Sword";
         public override string Name => itemName;
 
@@ -23,11 +24,17 @@ namespace Items
         public int damage;
         public float force;
         public float lungeForce;
+
+        //fix fireprojectile
+        public FireProjectile throwitem;
+
+        //replace
         private Sprite _sprite;
 
 
         private Cooldown comboReset;
-        //Initalized in start
+
+        //make static member of weapon
         Converter lungeConverter = f => f < .1f ? 0f : Mathf.Max(0, (2 - Mathf.Pow((f + .5f), 2)));
         public override Sprite Sprite => _sprite;
 
@@ -39,8 +46,8 @@ namespace Items
                 bullet.GetComponent<SpriteRenderer>().sprite = Sprite;
                 bullet.onCollision = () =>
                 {
-                //drop this item
-                this.DropAt(bullet.transform.position);
+                    //drop this item
+                    this.DropAt(bullet.transform.position);
                 };
                 bullet.GetComponent<Animator>().enabled = false;
                 Inventory.Instance.shield = null;
@@ -51,31 +58,27 @@ namespace Items
         {
             if (!down) return;
             if (!IsReady) return;
-            if (!Player.Instance.pm.PathEnd) return;
-            StartCoroutine("AttackSequence");
+            if (!Player.Instance.playerMove.PathEnd) return;
+
+            //Attack sequence shows up as "Unused" (also uses reflection to find the method)
+            //Owner.StartCoroutine("AttackSequence"); 
+            Owner.StartCoroutine(AttackSequence());
             SetUseTime();
         }
 
-        private FireProjectile throwitem;
-
-        // Start is called before the first frame update
-        void Start()
+        //delete
+        void Awake()
         {
-            throwitem = FireProjectile.ThrowProjectile(Mass, 0.5f);
-            _sprite = GetComponent<SpriteRenderer>().sprite;
-            lungeConverter = f => f < .3f ? 0f : lungeForce * Mathf.Max(0, (2 - Mathf.Pow((f + .3f), 2)));
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            //replace _sprite
+            //_sprite = Owner.GetComponent<SpriteRenderer>().sprite;
         }
 
         public Sword() : base(swordMass)
         {
 
         }
+
+        //TODO: fix the arc scan?
         private void HitScan()
         {
             Transform player = Player.Instance.gameObject.transform;
@@ -121,7 +124,7 @@ namespace Items
             anim.SetFloat("yInput", lookDir.y);
 
             Path lungePath = LinePath(lungeConverter, lookDir);
-            Player.Instance.pm.SetPath(Boomerang.Mult(Player.Instance.pm.speed, lungePath), .5f);
+            Player.Instance.playerMove.SetPath(Boomerang.Mult(Player.Instance.playerMove.speed, lungePath), .5f);
 
 
 

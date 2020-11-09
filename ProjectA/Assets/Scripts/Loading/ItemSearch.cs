@@ -18,7 +18,7 @@ namespace Items
         static readonly string[] itemNames = new string[(int)ItemID.SIZE];
 
         //directory of all items - ends with a /
-        static readonly string itemsDirectory = "Data/Items/";
+        public static readonly string itemsDirectory = "Assets/Resources/Data/Items/";
 
         static readonly string nameField = "itemName";
         static readonly string idField = "id";
@@ -85,6 +85,23 @@ namespace Items
                     att.Load(dataDirectory, item);
                 }
             }
+        }
+
+        public static ItemID GetItemID(Type item)
+        {
+            if (typeof(Item).IsAssignableFrom(item))
+            {
+                return (ItemID)item.GetField(idField, BindingFlags.Public | BindingFlags.Static).GetValue(null);
+            }
+            else return ItemID.Error;
+        }
+        public static string GetItemName(Type item)
+        {
+            if (typeof(Item).IsAssignableFrom(item))
+            {
+                return (string)item.GetField(nameField, BindingFlags.Public | BindingFlags.Static).GetValue(null);
+            }
+            else return null;
         }
 
         // end with a /

@@ -116,7 +116,7 @@ public partial class Inventory : MonoBehaviour
         }
     }
 
-    public static Item CurrentWeapon => Instance.weapon.Item ?? Instance.unarmed;
+    public static Item CurrentWeapon => Instance.weapon.Item == null? Instance.weapon.Item : Instance.unarmed;
 
     public static bool Swap(Transform t1, Transform t2)
     {
@@ -227,6 +227,8 @@ public partial class Inventory : MonoBehaviour
         weapon.slotType = InventorySlot.SlotType.Weapon;
         shield.standardSprite = shield.img.sprite;
         shield.slotType = InventorySlot.SlotType.Shield;
+
+        //TODO: get Item Generic instead
         unarmed = GameObject.FindGameObjectWithTag("Unarmed").GetComponent<Item>();
     }
 

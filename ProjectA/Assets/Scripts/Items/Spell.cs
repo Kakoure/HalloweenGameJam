@@ -25,8 +25,12 @@ namespace Items
         public float spd;
         public GameObject fireball;
 
-        private Sprite _sprite;
-        public override Sprite Sprite => _sprite;
+        //serialized
+        public FireProjectile fireProjectile;
+
+        //assigned on load
+        private Sprite sprite;
+        public override Sprite Sprite => sprite;
 
         public override void AltFire(Transform player, bool down)
         {
@@ -51,20 +55,9 @@ namespace Items
             }
         }
 
-        private FireProjectile fireProjectile;
+
+        //delete
         private void Awake()
-        {
-            fireProjectile = new FireProjectile(fireball, damage, 0, spd);
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            _sprite = GetComponent<SpriteRenderer>().sprite;
-        }
-
-        // Update is called once per frame
-        void Update()
         {
 
         }

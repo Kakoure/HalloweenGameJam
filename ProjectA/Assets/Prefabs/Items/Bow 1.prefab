@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 123061143236201679}
   - component: {fileID: 123061143236201678}
   - component: {fileID: 123061143236201713}
-  - component: {fileID: 123061143236201712}
+  - component: {fileID: 6635512385587458369}
   m_Layer: 11
   m_Name: Bow 1
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123061143236201715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 139.65, y: -21.47, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -48,6 +48,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -161,7 +162,7 @@ PolygonCollider2D:
     - - {x: 0.25, y: 0.083333336}
       - {x: -0.125, y: -0.2916667}
       - {x: -0.083333336, y: -0.33333334}
---- !u!114 &123061143236201712
+--- !u!114 &6635512385587458369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,23 +171,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 123061143236201715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 008deb65a8246ac448ad472cf9b06dec, type: 3}
+  m_Script: {fileID: 11500000, guid: d9e6015c331f2a9478733bba481896d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSound: {fileID: 8300000, guid: a89b08560de69514cb9e6cbfcd8492f7, type: 3}
-  cooldownTime: 0.75
-  arrowSprite: {fileID: 21300000, guid: de898bd3addea94468ca9a15768eb5aa, type: 3}
-  baseDamage: 15
-  chargedDamage: 35
-  baseSpeed: 10
-  knockback: 3
-  fullCharge: 0.5
-  fullChargeCooldown: 1.5
-  slowMoveSpeedMultiplier: 0.25
-  fireArrow:
-    damage: 0
-    speed: 0
-    throwTime: Infinity
-    knockBack: 0
-    Bullet: {fileID: 1698724928929206556, guid: 0f593a76fb746a94da962b82ca08c71c,
-      type: 3}
+  itemScript: {fileID: 11500000, guid: 008deb65a8246ac448ad472cf9b06dec, type: 3}
+  itemObject: {fileID: 11400000, guid: 49d9146bf044a1a43a03b6b7b5b8ff02, type: 2}
