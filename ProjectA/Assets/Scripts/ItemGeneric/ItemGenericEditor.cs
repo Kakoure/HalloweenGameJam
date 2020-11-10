@@ -19,7 +19,7 @@ class ItemGenericEditor : Editor
     SerializedProperty serializedItemProperty;
     SerializedProperty itemProperty;
     bool isValid => itemGeneric.itemObject != null;
-    string itemName;
+    string itemName = "Item Name";
 
     ItemGeneric itemGeneric => serializedObject.targetObject as ItemGeneric;
 
@@ -41,6 +41,7 @@ class ItemGenericEditor : Editor
         }
 
         EditorGUILayout.PropertyField(itemProperty);
+        serializedObject.ApplyModifiedProperties();
 
         itemName = GUILayout.TextField(itemName);
         if (GUILayout.Button("Create new"))
@@ -48,7 +49,9 @@ class ItemGenericEditor : Editor
             //create a new instance of the Item
             Type itemType = GetItemType();
             var item = CreateInstance(itemType);
-            AssetDatabase.CreateAsset(item, Item.itemsDirectoryAssets + Item.GetItemName(itemType) + $"/{itemName}.asset");
+            string itemFolder = Item.itemsDirectoryAssets + Item.GetItemName(itemType);
+            if (!AssetDatabase.IsValidFolder(itemFolder)) AssetDatabase.CreateFolder(Item.itemsDirectoryAssets, Item.GetItemName(itemType));
+            AssetDatabase.CreateAsset(item, itemFolder + $"/{itemName}.asset");
             itemGeneric.itemObject = item as Item;
         }
 

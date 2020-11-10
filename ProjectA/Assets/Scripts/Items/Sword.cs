@@ -12,8 +12,6 @@ namespace Items
     [CreateAssetMenu]
     public class Sword : Weapon
     {
-        public static ItemIDObsolete id = ItemIDObsolete.Sword;
-        public override ItemIDObsolete ID => id;
         public static string itemName = "Sword";
         public override string Name => itemName;
         private static Sprite sprite;

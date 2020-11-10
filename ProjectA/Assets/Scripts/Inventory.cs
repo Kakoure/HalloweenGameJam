@@ -211,7 +211,7 @@ public partial class Inventory : MonoBehaviour
     private Item unarmed;
     public InventorySlot weapon;
     public InventorySlot shield;
-    private ItemIDObsolete currentWepID;
+    private ItemID currentWepID;
 
     private void Awake()
     {
@@ -238,24 +238,26 @@ public partial class Inventory : MonoBehaviour
     //TODO make this a method of Item
     private static void EvaluateAnimWeaponID()
     {
+        int swordID = ItemID.GetID<Sword>().ID;
+        int bowID = ItemID.GetID<Bow>().ID;
         Animator anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
-        if(anim != null && Instance.currentWepID != CurrentWeapon.ID)
+        int weaponID = ItemID.GetID(CurrentWeapon.GetType());
+        if (anim != null && Instance.currentWepID != weaponID)
         {
-            switch (CurrentWeapon.ID) //you can switch enums
+            if (weaponID == swordID)
             {
-                case ItemIDObsolete.Sword:
-                    anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Sword Anim Controller") as RuntimeAnimatorController;
-                    break;
-                case ItemIDObsolete.Bow:
-                    anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Bow Anim Controller") as RuntimeAnimatorController;
-                    break;
-                default:
-                    anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Anim Controller") as RuntimeAnimatorController;
-                    break;
+                anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Sword Anim Controller") as RuntimeAnimatorController;
             }
-           
+            else if (weaponID == bowID)
+            {
+                anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Bow Anim Controller") as RuntimeAnimatorController;
+            }
+            else
+            {
+                anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Anim Controller") as RuntimeAnimatorController;
+            }
         }
-        Instance.currentWepID = CurrentWeapon.ID;
+        Instance.currentWepID = ItemID.GetID(CurrentWeapon.GetType());
     }
 }
 

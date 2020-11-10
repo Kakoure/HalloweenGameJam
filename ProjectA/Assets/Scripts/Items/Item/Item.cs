@@ -9,14 +9,6 @@ using UnityEngine;
 
 namespace Items
 {
-    public static class ItemIDExtend
-    {
-        public static int Value(this ItemIDObsolete id)
-        {
-            return (int)id;
-        }
-    }
-
     //getting rid of this
     [Obsolete]
     public enum ItemIDObsolete //So There is a single place to find and set id values
@@ -27,7 +19,7 @@ namespace Items
         Bow,
         Staff,
         Jam,
-        SIZE, //i just like to do this
+        SIZE,
     }
 
     public struct ItemID
@@ -40,6 +32,18 @@ namespace Items
         {
             return new ItemID(val);
         }
+        public static implicit operator int(ItemID id)
+        {
+            return id.ID;
+        }
+        public static bool operator ==(ItemID thisId, ItemID otherId)
+        {
+            return thisId.ID == otherId.ID;
+        }
+        public static bool operator !=(ItemID thisId, ItemID otherId)
+        {
+            return thisId.ID != otherId.ID;
+        }
 
         public static ItemID GetID<item>() where item : Item
         {
@@ -47,20 +51,34 @@ namespace Items
         }
         public static ItemID GetID(Type item)
         {
-            Array.FindIndex<Type>(Item.itemList, t => t == item)
+            int idx = Array.FindIndex<Type>(Item.itemList, t => t == item);
+            return new ItemID(idx + 1); //shift by 1 so that 0 has a unique value
         }
 
-        int id;
-        public int ID => id;
+        //immutable i guess
+        public int ID { get; }
 
         public Type GetItemType()
         {
-            throw new NotImplementedException();
+            return Item.itemList[ID - 1]; // shift by 1
+        }
+        public string GetItemName()
+        {
+            return Item.itemNames[ID - 1]; //shift by 1
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj is ItemID) return this == (ItemID)obj;
+            else return false;
+        }
+        public override int GetHashCode()
+        {
+            return ID;
         }
 
         public ItemID(int val)
         {
-            this.id = val;
+            this.ID = val;
         }
     }
 
@@ -70,10 +88,6 @@ namespace Items
         public static readonly int massConstant = 100;
         public static readonly float kbConst = 1.5f;
 
-        public abstract Sprite Sprite { get; }
-        [Obsolete]
-        public abstract ItemIDObsolete ID { get; }
-        public abstract string Name { get; }
         //since Item no longer inherits from Monobehavior, Owner needs to be used as an alternamtive
         public ItemGeneric Owner { get; set; } = null;
         public int Mass { get; protected set; } //letting mass be a modifiable value

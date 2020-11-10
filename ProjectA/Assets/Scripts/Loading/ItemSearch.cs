@@ -67,9 +67,10 @@ namespace Items
         }
         private static void LoadItemResources()
         {
-            for (int id = 0; id < itemList.Length; id++)
+            //TODO: find a better way to itterate through IDs
+            for (int id = 1; id <= itemList.Length; id++)
             {
-                Type item = itemList[id];
+                Type item = itemList[id - 1];
 
                 if (item == null) continue;
                 var attributes = item.GetCustomAttributes<LoadingAttribute>(true);
@@ -105,10 +106,14 @@ namespace Items
         }
 
         // end with a /
+        [Obsolete]
         public static string GetItemPath(ItemIDObsolete id)
         {
             return itemsDirectoryResources + itemNames[(int)id] + "/";
         }
-        public static string GetItemPath(int id) => GetItemPath((ItemIDObsolete)id);
+        public static string GetItemPath(ItemID id)
+        {
+            return itemsDirectoryResources + id.GetItemName() + "/";
+        }
     }
 }

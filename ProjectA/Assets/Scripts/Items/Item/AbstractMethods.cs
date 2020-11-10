@@ -115,10 +115,12 @@ namespace Items
                         }
                     }
             }
-
         };
 
         //abstract
+        public abstract Sprite Sprite { get; }
+        public abstract string Name { get; }
+
         /// <summary>
         /// effect when using the item in the primary slot
         /// </summary>
