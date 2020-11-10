@@ -50,7 +50,12 @@ class ItemGenericEditor : Editor
             Type itemType = GetItemType();
             var item = CreateInstance(itemType);
             string itemFolder = Item.itemsDirectoryAssets + Item.GetItemName(itemType);
-            if (!AssetDatabase.IsValidFolder(itemFolder)) AssetDatabase.CreateFolder(Item.itemsDirectoryAssets, Item.GetItemName(itemType));
+            if (!AssetDatabase.IsValidFolder(itemFolder))
+            {
+                var v = AssetDatabase.CreateFolder($"Assets/Resources/Data/Items", Item.GetItemName(itemType));
+
+            }
+            
             AssetDatabase.CreateAsset(item, itemFolder + $"/{itemName}.asset");
             itemGeneric.itemObject = item as Item;
         }

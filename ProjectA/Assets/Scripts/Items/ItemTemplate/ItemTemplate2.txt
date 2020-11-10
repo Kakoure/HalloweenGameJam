@@ -7,15 +7,12 @@ using UnityEngine;
 
 namespace Items
 {
-    class Template : Item
+    class ItemTemplate : Item
     {
         public static int mass = 1;
 
         public static Sprite sprite;
         public override Sprite Sprite => sprite;
-
-        public static ItemID id; // create a new ItemID
-        public override ItemID ID => id;
 
         public static string itemName = "";
         public override string Name => itemName;
@@ -37,6 +34,6 @@ namespace Items
         // OPTIONAL: add more overrides
 
         //constructor
-        public Template() : base(mass) { }
+        public ItemTemplate() : base(mass) { }
     }
 }
