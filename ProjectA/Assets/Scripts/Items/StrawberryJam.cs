@@ -8,8 +8,8 @@ namespace Items
     [CreateAssetMenu]
     public class StrawberryJam : Item
     {
-        public static readonly ItemID id = ItemID.Jam;
-        public override ItemID ID => id;
+        public static readonly ItemIDObsolete id = ItemIDObsolete.Jam;
+        public override ItemIDObsolete ID => id;
         public static readonly string itemName = "Jam";
         public override string Name => itemName;
         public static Sprite sprite;

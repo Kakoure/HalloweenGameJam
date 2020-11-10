@@ -17,8 +17,8 @@ namespace Items
     public class Bow : Weapon, IDamageTaken
     {
         static int bowMass = 1;
-        public static readonly ItemID id = ItemID.Bow;
-        public override ItemID ID => id;
+        public static readonly ItemIDObsolete id = ItemIDObsolete.Bow;
+        public override ItemIDObsolete ID => id;
         public static readonly string itemName = "Bow";
         public override string Name => itemName;
         public static Sprite sprite;

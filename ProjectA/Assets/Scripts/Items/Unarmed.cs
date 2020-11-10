@@ -11,8 +11,8 @@ namespace Items
     [CreateAssetMenu]
     public class Unarmed : Weapon
     {
-        public static readonly ItemID id = ItemID.Unarmed;
-        public override ItemID ID => id;
+        public static readonly ItemIDObsolete id = ItemIDObsolete.Unarmed;
+        public override ItemIDObsolete ID => id;
         public static readonly string itemName = "Unarmed";
         public override string Name => itemName;
         public static Sprite sprite;

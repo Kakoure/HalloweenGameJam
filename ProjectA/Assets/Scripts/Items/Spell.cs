@@ -10,8 +10,8 @@ namespace Items
 {
     public class Spell : Weapon
     {
-        public static ItemID id = ItemID.Staff;
-        public override ItemID ID => id;
+        public static ItemIDObsolete id = ItemIDObsolete.Staff;
+        public override ItemIDObsolete ID => id;
         public static string itemName = "Staff";
         public override string Name => itemName;
         public static Sprite sprite;

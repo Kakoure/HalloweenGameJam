@@ -12,10 +12,10 @@ namespace Items
     partial class Item
     {
         //used for loading screen
-        static readonly Type[] itemList = new Type[(int)ItemID.SIZE];
+        public static Type[] itemList = null;
 
         //given ItemID, should be able to find item name
-        static readonly string[] itemNames = new string[(int)ItemID.SIZE];
+        public static string[] itemNames = null;
 
         //start from Assets
         //directory of all items - ends with a /
@@ -25,6 +25,7 @@ namespace Items
         public static readonly string itemsDirectoryResources = "Data/Items/";
 
         static readonly string nameField = "itemName";
+        [Obsolete]
         static readonly string idField = "id";
 
         //since the game jam is over, im allowed to write clean code
@@ -36,34 +37,27 @@ namespace Items
             {
                 TypeFilter isAnItem = (i, o) => typeof(Item).IsAssignableFrom(i) && !i.IsAbstract;
                 
-                var types = m.FindTypes(isAnItem, null);
-                foreach (var type in types)
+                //initialize itemNames and itemList
+                itemList = m.FindTypes(isAnItem, null);
+                itemNames = new string[itemList.Length];
+
+                for (int i = 0; i < itemList.Length; i++) 
                 {
+                    Type type = itemList[i];
                     var name = type.GetField(nameField, BindingFlags.Public | BindingFlags.Static);
-                    var id = type.GetField(idField, BindingFlags.Public | BindingFlags.Static);
+                    //id is no longer needed
+                    //var id = type.GetField(idField, BindingFlags.Public | BindingFlags.Static);
                     if (name == null)
                     {
                         Debug.LogError($"field {nameField} of {type} is missing");
                         continue;
                     }
-                    else if (id == null)
-                    {
-                        Debug.LogError($"field {idField} of {type} is missing");
-                        continue;
-                    }
                     else
                     {
-                        //item with valid name and ID
-                        //any item without a valid name and (net) id will not be loaded
-                        int itemID = (int)id.GetValue(null);
+                        //item with valid name
                         string itemName = (string)name.GetValue(null);
-                        if (itemList[itemID] != null)
-                        {
-                            Debug.LogError($"itemID {(ItemID)itemID} has a clash between {itemName} and {itemNames[itemID]}");
-                            continue;
-                        }
-                        itemList[itemID] = type;
-                        itemNames[itemID] = itemName;
+                        itemList[i] = type;
+                        itemNames[i] = itemName;
                         //nameDictionary.Add((ItemID)id.GetValue(null), (string)name.GetValue(null));
                     }
                 }
@@ -73,7 +67,7 @@ namespace Items
         }
         private static void LoadItemResources()
         {
-            for (int id = 0; id < (int)ItemID.SIZE; id++)
+            for (int id = 0; id < itemList.Length; id++)
             {
                 Type item = itemList[id];
 
@@ -85,21 +79,22 @@ namespace Items
 
                 foreach (var att in attributes)
                 {
-
                     //load the resource
                     att.Load(dataDirectory, item);
                 }
             }
         }
 
-        public static ItemID GetItemID(Type item)
+        [Obsolete]
+        public static ItemIDObsolete GetItemID(Type item)
         {
             if (typeof(Item).IsAssignableFrom(item))
             {
-                return (ItemID)item.GetField(idField, BindingFlags.Public | BindingFlags.Static).GetValue(null);
+                return (ItemIDObsolete)item.GetField(idField, BindingFlags.Public | BindingFlags.Static).GetValue(null);
             }
-            else return ItemID.Error;
+            else return ItemIDObsolete.Error;
         }
+
         public static string GetItemName(Type item)
         {
             if (typeof(Item).IsAssignableFrom(item))
@@ -110,10 +105,10 @@ namespace Items
         }
 
         // end with a /
-        public static string GetItemPath(ItemID id)
+        public static string GetItemPath(ItemIDObsolete id)
         {
             return itemsDirectoryResources + itemNames[(int)id] + "/";
         }
-        public static string GetItemPath(int id) => GetItemPath((ItemID)id);
+        public static string GetItemPath(int id) => GetItemPath((ItemIDObsolete)id);
     }
 }

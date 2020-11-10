@@ -22,7 +22,7 @@ namespace Items
 
         // OPTIONAL: add more static fields
 
-        // right click
+        // space bar
         public override void AltFire(Transform player, bool down)
         {
             throw new NotImplementedException();
