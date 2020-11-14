@@ -7,12 +7,13 @@ using UnityEngine.UI;
 
 public abstract class HealthBar : MonoBehaviour
 {
-    public HealthBar chainLink;
+    [Tooltip("Extra health bar that is liked to this one")]
+    public HealthBar linkedHealthBar;
 
     public void SetHealth(int hp, int HP)
     {
         SetHealthBar(hp, HP);
-        chainLink?.SetHealth(hp, HP);
+        linkedHealthBar?.SetHealth(hp, HP);
     }
     protected abstract void SetHealthBar(int hp, int HP);
 }

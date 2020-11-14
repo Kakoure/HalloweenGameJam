@@ -70,7 +70,7 @@ namespace Items
         public virtual void Awake() { }
         public virtual void Start()
         {
-            healthBar.SetHealth(hp, MaxHP);
+            healthBar?.SetHealth(hp, MaxHP);
             sprRend = GetComponent<SpriteRenderer>();
             audioSrc = GetComponent<AudioSource>();
         }

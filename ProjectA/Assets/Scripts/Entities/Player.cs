@@ -44,7 +44,10 @@ class Player : Entity
     {
         if (IsInvuln) return false;
 
-        hp -= damage;
+        //discrete Damage
+        //hp -= damage;
+        hp -= 1;
+
         hp = Mathf.Clamp(hp, 0, MaxHP); //make sure that the player is not overhealed
         if (damage > 0)
         {
@@ -101,5 +104,7 @@ class Player : Entity
     {
         audioSrc.PlayOneShot(attackSound);
     }
+
+    //will eventually get to this
     int exp;
 }
