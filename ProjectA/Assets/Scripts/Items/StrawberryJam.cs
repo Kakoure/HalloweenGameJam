@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Items
 {
-    [CreateAssetMenu]
     public class StrawberryJam : Item
     {
         public static readonly string itemName = "Jam";

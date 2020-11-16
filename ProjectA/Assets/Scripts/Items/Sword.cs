@@ -9,7 +9,6 @@ using static Boomerang;
 
 namespace Items
 {
-    [CreateAssetMenu]
     public class Sword : Weapon
     {
         public static string itemName = "Sword";
