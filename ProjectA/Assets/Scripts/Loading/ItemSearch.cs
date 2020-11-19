@@ -49,7 +49,7 @@ namespace Items
                     //var id = type.GetField(idField, BindingFlags.Public | BindingFlags.Static);
                     if (name == null)
                     {
-                        Debug.LogError($"field {nameField} of {type} is missing");
+                        UnityEngine.Debug.LogError($"field {nameField} of {type} is missing");
                         continue;
                     }
                     else

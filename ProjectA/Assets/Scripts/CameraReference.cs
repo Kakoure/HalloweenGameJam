@@ -36,7 +36,7 @@ class CameraReference : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) Debug.LogError("Multiple CameraReferences detected");
+        if (Instance != null) UnityEngine.Debug.LogError("Multiple CameraReferences detected");
         Instance = this;
     }
 }

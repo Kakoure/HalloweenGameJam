@@ -7,6 +7,6 @@ public class ExitGame : MonoBehaviour
     public void ExitGameNow()
     {
         Application.Quit();
-        Debug.Log("YOUDIED");
+        UnityEngine.Debug.Log("YOUDIED");
     }
 }

@@ -215,7 +215,7 @@ public partial class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) Debug.LogError("Two instances of the Inventory detected");
+        if (Instance != null) UnityEngine.Debug.LogError("Two instances of the Inventory detected");
         Instance = this;
 
         //initialize InventorySlots

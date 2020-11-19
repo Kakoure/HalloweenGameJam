@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
+//Merge this with CheckClicks
 class ClickRaycaster : MonoBehaviour
 {
     [SerializeField]

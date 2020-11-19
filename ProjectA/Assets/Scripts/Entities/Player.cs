@@ -1,5 +1,6 @@
 ﻿using CooldownTimer;
 using Items;
+using PlayerClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,9 @@ class Player : Entity
     [NonSerialized]
     public Animator playerAnimator;
 
-    public float damageKnockbackDur = 1;
-    public float damageKnockbackCoef = 0;
+    public PlayerClass playerClass;
+    public float damageKnockbackDuration = 1;
+    public float damageKnockbackCoefficient = 0;
     [Tooltip("Ammount of time player spends invulurable after taking damage")]
     public Cooldown damageInvuln;
     [Tooltip("Ammount of time player spends invulurable in dodge state")]
@@ -38,7 +40,7 @@ class Player : Entity
         if (force == 0) return; //if no force return
 
         Vector2 v = (Vector2)transform.position - from;
-        playerMove.SetPath(PlayerMove.RollPath(damageKnockbackCoef * v.normalized), damageKnockbackDur);
+        playerMove.SetPath(PlayerMove.RollPath(damageKnockbackCoefficient * v.normalized), damageKnockbackDuration);
     }
     public override bool DealDamage(int damage, float force, Vector2 from)
     {
@@ -86,7 +88,7 @@ class Player : Entity
     {
         //base.Awake();
         _rb = GetComponent<Rigidbody2D>();
-        if (Instance != null) Debug.LogError("Multiple players detected");
+        if (Instance != null) UnityEngine.Debug.LogError("Multiple players detected");
         Instance = this;
         playerMove = GetComponent<PlayerMove>();
         playerAnimator = GetComponent<Animator>();
@@ -95,6 +97,16 @@ class Player : Entity
     public override void Start()
     {
         base.Start();
+
+        if (playerClass.startingWeaponSlot != null) Inventory.Pickup(Inventory.GetSlot(Inventory.InventorySlot.SlotType.Weapon), playerClass.startingWeaponSlot);
+        if (playerClass.startingOffhandSlot != null) Inventory.Pickup(Inventory.GetSlot(Inventory.InventorySlot.SlotType.Shield), playerClass.startingOffhandSlot);
+
+
+        foreach (var item in playerClass.items)
+        {
+            int slot = Inventory.GetEmptyInventorySlot();
+            if (slot != -1) Inventory.Pickup(Inventory.GetSlot(Inventory.InventorySlot.SlotType.Inventory, slot), item);
+        }
     }
     public void PlaySound(AudioClip sound)
     {

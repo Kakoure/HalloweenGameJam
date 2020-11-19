@@ -80,7 +80,7 @@ class ItemGenericEditor : Editor
         if (itemType.IsAbstract || !typeof(Item).IsAssignableFrom(itemType))
         {
             //the type is either abstract or does not inherit from Item
-            Debug.LogError($"The Script {script.name} does not represent a valid Item");
+            UnityEngine.Debug.LogError($"The Script {script.name} does not represent a valid Item");
 
             itemGeneric.itemObject = null;
             return null;
@@ -110,6 +110,6 @@ class ItemGenericEditor : Editor
             itemGeneric.GetComponent<SpriteRenderer>().sprite = sprite;
         else
             //TODO: assign a default item sprite
-            Debug.LogError($"sprite at {dir + "Sprite.png"} not found");
+            UnityEngine.Debug.LogError($"sprite at {dir + "Sprite.png"} not found");
     }
 }

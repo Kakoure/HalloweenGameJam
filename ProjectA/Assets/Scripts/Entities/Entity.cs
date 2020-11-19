@@ -23,15 +23,16 @@ namespace Items
         //return success
         public virtual bool DealDamage(int damage, float force, Vector2 from)
         {
-            //updates the healthbar
             hp -= damage;
-            hp = Mathf.Clamp(hp, 0, MaxHP); //prevent overheal
+
+            //prevent overheal
+            hp = Mathf.Clamp(hp, 0, MaxHP);
+
+            //updates the healthbar
             healthBar.SetHealth(hp, MaxHP);
 
             //hit marker
             CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
-
-            
 
             if (hp <= 0) {
                 Die();
@@ -50,6 +51,8 @@ namespace Items
 
             return true;
         }
+        //Note: currently not being used yet
+        public virtual bool Heal(ref int health) { hp += health; return true; }
         public virtual void Die()
         {
             if (hp <= 0)
@@ -87,7 +90,6 @@ namespace Items
                 yield return new WaitForSeconds(.1f);
                 sprRend.material.SetFloat("_FlashAmount", 0);
             }
-           
         }
         protected IEnumerator FadeAway(float time)
         {
@@ -95,7 +97,6 @@ namespace Items
             Color c = sprRend.material.GetColor("_Color");
             for (float i = 1; i >= 0f; i -= (timeStep / time))
             {
-                
                 sprRend.material.SetColor("_Color",new Color(c.r, c.g, c.b, i * c.a));
                 yield return new WaitForSeconds(timeStep);
             }

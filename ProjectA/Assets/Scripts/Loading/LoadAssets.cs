@@ -28,7 +28,7 @@ public class LoadAssets : MonoBehaviour
     {
         if (isEnd)
         {
-            Debug.Log("Thread Ended");
+            UnityEngine.Debug.Log("Thread Ended");
             isEnd = false;
         }
     }

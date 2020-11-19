@@ -24,7 +24,7 @@ namespace Items
         //folderPath ends with /
         public override void Load(string folderPath, Type item)
         {
-            Debug.Log($"Loading {folderPath} for {item}");
+            UnityEngine.Debug.Log($"Loading {folderPath} for {item}");
 
             //get the resource from the file system
             UnityEngine.Object o = Resources.Load(folderPath + key, type);
@@ -33,8 +33,8 @@ namespace Items
             var field = item.GetField(staticFieldName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
 
             //possible errors
-            if (field == null) Debug.LogError($"Field {staticFieldName} is not found on Item {item}");
-            if (o == null) Debug.LogError($"Resource {folderPath + key} could not be found");
+            if (field == null) UnityEngine.Debug.LogError($"Field {staticFieldName} is not found on Item {item}");
+            if (o == null) UnityEngine.Debug.LogError($"Resource {folderPath + key} could not be found");
 
             //since field is static this line should not throw null reference.
             //however, if the resource type is wrong, then this line may very well throw an exception
@@ -84,12 +84,12 @@ namespace Items
             //possible errors
             if (field == null)
             {
-                Debug.LogError($"Field {staticFieldName} is not found on Item {item}");
+                UnityEngine.Debug.LogError($"Field {staticFieldName} is not found on Item {item}");
                 return;
             }
             if (o == null)
             {
-                Debug.LogError($"Resource {folderPath + key} could not be found");
+                UnityEngine.Debug.LogError($"Resource {folderPath + key} could not be found");
                 return;
             }
 
@@ -141,8 +141,8 @@ namespace Items
             var property = item.GetProperty(staticPropertyName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.SetProperty);
 
             //possible errors
-            if (property == null) Debug.LogError($"Property {staticPropertyName} is not found on Item {item} or is not a set property");
-            if (o == null) Debug.LogError($"Resource {folderPath + key} could not be found");
+            if (property == null) UnityEngine.Debug.LogError($"Property {staticPropertyName} is not found on Item {item} or is not a set property");
+            if (o == null) UnityEngine.Debug.LogError($"Resource {folderPath + key} could not be found");
 
             //property is guarenteed to be static and set
             //however, if the resource type is wrong, then this line may very well throw an exception
@@ -190,8 +190,8 @@ namespace Items
             var property = item.GetProperty(staticPropertyName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.SetProperty);
 
             //possible errors
-            if (property == null) Debug.LogError($"Property {staticPropertyName} is not found on Item {item} or is not a set property");
-            if (o == null) Debug.LogError($"Resource {folderPath + key} could not be found");
+            if (property == null) UnityEngine.Debug.LogError($"Property {staticPropertyName} is not found on Item {item} or is not a set property");
+            if (o == null) UnityEngine.Debug.LogError($"Resource {folderPath + key} could not be found");
 
             //property is guarenteed to be static and set
             //however, if the resource type is wrong, then this line may very well throw an exception

@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 377278816543342218}
   - component: {fileID: 377278816543342194}
   - component: {fileID: 377278816543342198}
-  - component: {fileID: 377278816543342197}
   - component: {fileID: 377278816543342195}
   - component: {fileID: 377278816543342216}
   - component: {fileID: 377278816543342219}
@@ -188,6 +187,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 100
   hp: 100
-  healthBar: {fileID: 377278816543342197}
+  healthBar: {fileID: 0}
   hurtSound: {fileID: 8300000, guid: 3aeb04dfcc5f715489c067acd0142055, type: 3}
   deathSound: {fileID: 0}
   damageKnockbackDur: 0.25
@@ -336,50 +336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db827e9ced734334c949490d9e97c9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &377278816543342197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377278816543342221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 204dc9119fb79df459f1a4fc759e362f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chainLink: {fileID: 377278816543342195}
-  bar: {fileID: 0}
-  barBox: {fileID: 0}
-  colorGradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0.95488715, g: 1, b: 0, a: 1}
-    key2: {r: 0, g: 1, b: 0.181463, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 24672
-    ctime2: 65535
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 2
 --- !u!114 &377278816543342195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd4d576dd8f4464e8d9d903bccab35b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chainLink: {fileID: 0}
+  linkedHealthBar: {fileID: 0}
   text: {fileID: 0}
 --- !u!95 &377278816543342216
 Animator:

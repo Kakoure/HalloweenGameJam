@@ -28,7 +28,7 @@ namespace Items
         // left click
         public override void Fire(Transform player, bool down)
         {
-            Debug.Log("Hi");
+            UnityEngine.Debug.Log("Hi");
         }
 
         // OPTIONAL: add more overrides

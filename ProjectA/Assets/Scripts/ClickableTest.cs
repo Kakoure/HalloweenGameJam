@@ -6,6 +6,6 @@ public class ClickableTest : MonoBehaviour, IClickable
 {
     public void OnClick()
     {
-        Debug.Log("Ow you clicked me");
+        UnityEngine.Debug.Log("Ow you clicked me");
     }
 }

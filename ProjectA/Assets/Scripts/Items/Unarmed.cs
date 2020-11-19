@@ -30,7 +30,7 @@ namespace Items
         public override void AltFire(Transform player, bool down)
         {
             if (down)
-                Debug.Log("You misplace your weapon");
+                UnityEngine.Debug.Log("You misplace your weapon");
         }
 
         public override void Fire(Transform player, bool down)

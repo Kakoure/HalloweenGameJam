@@ -9,8 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c51304647b0ed194c9b6b04a077de30b, type: 3}
-  m_Name: Warrior
+  m_Script: {fileID: 11500000, guid: 2ecaf43f108803d45a3ef60b3dde9727, type: 3}
+  m_Name: Golden Jam
   m_EditorClassIdentifier: 
-  classSprite: {fileID: 0}
-  items: []
+  useSound: {fileID: 0}
+  throwJar:
+    damage: 1
+    speed: 0.5
+    throwTime: Infinity
+    knockBack: 10
+    Bullet: {fileID: 0}
+  healHP: -9999
