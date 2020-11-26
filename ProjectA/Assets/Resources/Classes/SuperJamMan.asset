@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: SuperJamMan
   m_EditorClassIdentifier: 
   classSprite: {fileID: 0}
-  startingWeaponSlot: {fileID: 11400000, guid: dedb5a3417004c7448b40171262f6f29, type: 2}
-  startingOffhandSlot: {fileID: 11400000, guid: dedb5a3417004c7448b40171262f6f29,
-    type: 2}
+  startingWeaponSlot: {fileID: 0}
+  startingOffhandSlot: {fileID: 0}
   items:
   - {fileID: 11400000, guid: dedb5a3417004c7448b40171262f6f29, type: 2}
   - {fileID: 11400000, guid: dedb5a3417004c7448b40171262f6f29, type: 2}
-  - {fileID: 11400000, guid: 46caecb47f160f74a8a730ff162589b3, type: 2}
+  - {fileID: 11400000, guid: dedb5a3417004c7448b40171262f6f29, type: 2}

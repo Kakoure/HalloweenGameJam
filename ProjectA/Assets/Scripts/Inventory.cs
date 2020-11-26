@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Inventory.InventorySlot;
 
+//TODO: change Inventory to a non static class? right now its basically static.
 public partial class Inventory : MonoBehaviour
 {
     //a single inventory slot
@@ -163,7 +164,8 @@ public partial class Inventory : MonoBehaviour
     {
         if (slot.Item != null) return false;
 
-        item.SwapSlot(item)(null, slot, out bool success, out Action f1);
+        Item.SlotController slotController = item.SwapSlot(item);
+        slotController(null, slot, out bool success, out Action f1);
 
         if (success)
         {

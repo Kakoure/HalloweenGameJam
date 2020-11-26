@@ -18,8 +18,8 @@ class ItemGenericEditor : Editor
 {
     SerializedProperty serializedItemProperty;
     SerializedProperty itemProperty;
-    bool isValid => itemGeneric.itemObject != null;
-    string itemName = "Item Name";
+    bool IsValid => itemGeneric.itemObject != null;
+    string itemName = "New Item Name";
 
     ItemGeneric itemGeneric => serializedObject.targetObject as ItemGeneric;
 
@@ -43,6 +43,9 @@ class ItemGenericEditor : Editor
         EditorGUILayout.PropertyField(itemProperty);
         serializedObject.ApplyModifiedProperties();
 
+        GUILayout.Space(15);
+        GUILayout.Label("Create New Item:");
+
         itemName = GUILayout.TextField(itemName);
         if (GUILayout.Button("Create new"))
         {
@@ -52,8 +55,7 @@ class ItemGenericEditor : Editor
             string itemFolder = Item.itemsDirectoryAssets + Item.GetItemName(itemType);
             if (!AssetDatabase.IsValidFolder(itemFolder))
             {
-                var v = AssetDatabase.CreateFolder($"Assets/Resources/Data/Items", Item.GetItemName(itemType));
-
+                AssetDatabase.CreateFolder($"Assets/Resources/Data/Items", Item.GetItemName(itemType));
             }
             
             AssetDatabase.CreateAsset(item, itemFolder + $"/{itemName}.asset");
@@ -92,10 +94,10 @@ class ItemGenericEditor : Editor
     private void UpdateSpriteRenderer()
     {
         Type itemType = GetItemType();
-
         if (itemType == null)
         {
-            //TODO: set default sprite
+            //default sprite is sword
+            itemGeneric.SpriteRenderer.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(Item.itemsDirectoryAssets + "Sword" + "/Sprite.png");
             return;
         }
 
@@ -107,9 +109,14 @@ class ItemGenericEditor : Editor
         //load the appropriate sprite if it exists
         Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(dir + "Sprite.png");
         if (sprite != null)
-            itemGeneric.GetComponent<SpriteRenderer>().sprite = sprite;
+        {
+            itemGeneric.SpriteRenderer.sprite = sprite;
+        }
         else
-            //TODO: assign a default item sprite
-            UnityEngine.Debug.LogError($"sprite at {dir + "Sprite.png"} not found");
+        {
+            //default sprite is sword
+            Debug.LogError($"sprite at {dir + "Sprite.png"} not found");
+            itemGeneric.SpriteRenderer.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(Item.itemsDirectoryAssets + "Sword" + "/Sprite.png");
+        }   
     }
 }

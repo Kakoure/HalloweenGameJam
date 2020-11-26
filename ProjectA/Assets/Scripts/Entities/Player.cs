@@ -98,9 +98,11 @@ class Player : Entity
     {
         base.Start();
 
+        playerClass.InstantiateItems();
+
+        //assigns items to the class
         if (playerClass.startingWeaponSlot != null) Inventory.Pickup(Inventory.GetSlot(Inventory.InventorySlot.SlotType.Weapon), playerClass.startingWeaponSlot);
         if (playerClass.startingOffhandSlot != null) Inventory.Pickup(Inventory.GetSlot(Inventory.InventorySlot.SlotType.Shield), playerClass.startingOffhandSlot);
-
 
         foreach (var item in playerClass.items)
         {
@@ -108,6 +110,8 @@ class Player : Entity
             if (slot != -1) Inventory.Pickup(Inventory.GetSlot(Inventory.InventorySlot.SlotType.Inventory, slot), item);
         }
     }
+
+    //TODO: move these to Entity probably
     public void PlaySound(AudioClip sound)
     {
         audioSrc.PlayOneShot(sound);

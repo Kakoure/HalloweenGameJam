@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using CooldownTimer;
 
+//TODO: merge this with UsePrimary
 public partial class PlayerMove : MonoBehaviour
 {
     private const float deadZone = .1f;
@@ -36,6 +37,9 @@ public partial class PlayerMove : MonoBehaviour
     Vector2 facingDir;
     void Update()
     {
+        //pause guard
+        if (PauseController.Paused) return;
+
         xAxis = Input.GetAxis("Horizontal");
         yAxis = Input.GetAxis("Vertical");
         dodge = Input.GetButtonDown("Jump");

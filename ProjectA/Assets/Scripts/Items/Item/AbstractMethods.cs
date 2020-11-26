@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -156,15 +155,6 @@ namespace Items
         /// <param name="otherSlot">can be null. If otherSlot is null then player is dropping the item</param>
         /// <param name="success">true if the swap was successful</param>
         /// <param name="finalize">action when swap was successful</param>
-        //in order to make this code more flexable, I should use a function of some sort in place of this messy thing
-        //also neither parameter should ever be null
-        /*
-        internal virtual void SwapSlot(Inventory.InventorySlot currentSlot, Inventory.InventorySlot otherSlot, out bool success, out Action finalize)
-        {
-            finalize = null;
-            success = true;
-        }
-        */
         public SlotBehaviour SwapSlot { get; protected set; } = defaultSlotBehaviour;
     }
 }

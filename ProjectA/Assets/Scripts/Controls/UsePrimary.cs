@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+//TODO: merge this with PlayerMove
 public class UsePrimary : MonoBehaviour
 {
     Player p;
@@ -19,6 +20,9 @@ public class UsePrimary : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Pause guard
+        if (PauseController.Paused) return;
+
         if (!p.playerMove.PathEnd) return;
 
         if (Input.GetButtonDown("Fire1")) mouse = true;

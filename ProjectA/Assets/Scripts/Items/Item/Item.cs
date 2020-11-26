@@ -83,6 +83,7 @@ namespace Items
     }
 
     [LoadResourceToFieldInherited("sprite", "Sprite", typeof(Sprite))]
+    [System.Serializable]
     public abstract partial class Item : ScriptableObject, IClickable
     {
         public static readonly int massConstant = 100;

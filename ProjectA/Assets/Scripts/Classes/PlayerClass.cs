@@ -13,8 +13,22 @@ namespace PlayerClasses
         [Tooltip("(This is just a placeholder right now)")]
         public Sprite classSprite;
 
+        [SerializeField]
         public Item startingWeaponSlot;
+        [SerializeField]
         public Item startingOffhandSlot;
+        [SerializeField]
         public Item[] items;
+
+        public void InstantiateItems()
+        {
+            startingWeaponSlot = Item.InstantiateItem(startingWeaponSlot);
+            startingOffhandSlot = Item.InstantiateItem(startingOffhandSlot);
+
+            for(int i = 0; i < items.Length; i++)
+            {
+                items[i] = Item.InstantiateItem(items[i]);
+            }
+        }
     }
 }

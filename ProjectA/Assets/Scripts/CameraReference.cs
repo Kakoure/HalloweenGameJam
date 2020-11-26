@@ -19,6 +19,7 @@ class CameraReference : MonoBehaviour
     public GameObject hitMarker;
     public GameObject bulletGeneric;
     public float damageConstant = 2;
+    public GameObject itemGeneric;
 
     public void InstantiateHitMarker(int damage, Vector2 pos)
     {

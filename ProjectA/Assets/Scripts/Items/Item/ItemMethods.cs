@@ -23,6 +23,18 @@ namespace Items
                 return (Item)ctor.Invoke(new object[] { });
             }
         }
+        public static Item InstantiateItem(Item original)
+        {
+            if (original == null) return null;
+
+            Item copy = Instantiate<Item>(original);
+            GameObject obj = GameObject.Instantiate(CameraReference.Instance.itemGeneric);
+
+            //assign the copy before it reaches Start()
+            obj.GetComponent<ItemGeneric>().itemObject = copy;
+
+            return copy;
+        }
 
         public void DropAt(Vector2 position)
         {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//used to define behaviour when clicking an object
+//pretty much obsolete now
 interface IClickable
 {
     void OnClick();
