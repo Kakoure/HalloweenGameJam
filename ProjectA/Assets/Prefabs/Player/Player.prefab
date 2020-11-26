@@ -311,13 +311,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3776a26cf3a8d54a8118373eaaf03cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 100
-  hp: 100
-  healthBar: {fileID: 0}
+  MaxHP: 8
+  hp: 8
+  healthBar: {fileID: 377278816543342195}
   hurtSound: {fileID: 8300000, guid: 3aeb04dfcc5f715489c067acd0142055, type: 3}
   deathSound: {fileID: 0}
-  damageKnockbackDur: 0.25
-  damageKnockbackCoef: 1
+  playerClass: {fileID: 11400000, guid: 62b5cac0cbb542e43a53a93c7408d903, type: 2}
+  damageKnockbackDuration: 0.2
+  damageKnockbackCoefficient: 0
   damageInvuln:
     cooldownTime: 1
   dodgeInvuln:

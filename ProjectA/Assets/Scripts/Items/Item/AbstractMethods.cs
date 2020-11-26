@@ -155,6 +155,6 @@ namespace Items
         /// <param name="otherSlot">can be null. If otherSlot is null then player is dropping the item</param>
         /// <param name="success">true if the swap was successful</param>
         /// <param name="finalize">action when swap was successful</param>
-        public SlotBehaviour SwapSlot { get; protected set; } = defaultSlotBehaviour;
+        public virtual SlotBehaviour SwapSlot { get; protected set; } = defaultSlotBehaviour;
     }
 }

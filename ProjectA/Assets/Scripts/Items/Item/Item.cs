@@ -54,6 +54,12 @@ namespace Items
             int idx = Array.FindIndex<Type>(Item.itemList, t => t == item);
             return new ItemID(idx + 1); //shift by 1 so that 0 has a unique value
         }
+        //does null checking
+        public static ItemID GetID(Item item)
+        {
+            if (item == null) return empty;
+            else return GetID(item.GetType());
+        }
 
         //immutable i guess
         public int ID { get; }

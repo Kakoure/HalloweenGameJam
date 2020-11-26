@@ -23,6 +23,11 @@ namespace Items
                 return (Item)ctor.Invoke(new object[] { });
             }
         }
+        /// <summary>
+        /// Creates a new Instance of an item. This must be called on an item if it's game object does not yet exist
+        /// </summary>
+        /// <param name="original"></param>
+        /// <returns></returns>
         public static Item InstantiateItem(Item original)
         {
             if (original == null) return null;

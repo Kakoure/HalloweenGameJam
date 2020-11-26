@@ -163,6 +163,7 @@ public partial class Inventory : MonoBehaviour
     public static bool Pickup(InventorySlot slot, Item item)
     {
         if (slot.Item != null) return false;
+        if (item == null) return false;
 
         Item.SlotController slotController = item.SwapSlot(item);
         slotController(null, slot, out bool success, out Action f1);
@@ -243,7 +244,8 @@ public partial class Inventory : MonoBehaviour
         int swordID = ItemID.GetID<Sword>().ID;
         int bowID = ItemID.GetID<Bow>().ID;
         Animator anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
-        int weaponID = ItemID.GetID(CurrentWeapon.GetType());
+
+        int weaponID = ItemID.GetID(CurrentWeapon);
         if (anim != null && Instance.currentWepID != weaponID)
         {
             if (weaponID == swordID)
