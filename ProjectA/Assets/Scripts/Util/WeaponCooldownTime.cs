@@ -20,7 +20,7 @@ public class WeaponCooldownTime : MonoBehaviour
     void Update()
     {
         Item i = Inventory.CurrentWeapon;
-        Weapon w = i as Weapon;
+        Weapon2 w = i as Weapon2;
         if (w != null)
         {
             if (w.IsReady)

@@ -1,4 +1,5 @@
 ﻿using CooldownTimer;
+using Entities;
 using Items;
 using PlayerClasses;
 using System;
@@ -8,11 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
 
-class Player : Entity
+public class Player : Entity
 {
     public static Player Instance { get; private set; }
+
+    public Vector2 MousePositionRelative => CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
 
     private Rigidbody2D _rb;
     public override Rigidbody2D Rigidbody => _rb;
@@ -28,6 +30,8 @@ class Player : Entity
     public Cooldown damageInvuln;
     [Tooltip("Ammount of time player spends invulurable in dodge state")]
     public Cooldown dodgeInvuln;
+
+    //TODO: I can load this from resources instead of using a field
     public AudioClip attackSound;
     public AudioClip equipSound;
 
@@ -44,27 +48,14 @@ class Player : Entity
     }
     public override bool DealDamage(int damage, float force, Vector2 from)
     {
+        //replace this with an effect...
         if (IsInvuln) return false;
 
         //discrete Damage
-        //hp -= damage;
-        hp -= 1;
-
-        hp = Mathf.Clamp(hp, 0, MaxHP); //make sure that the player is not overhealed
         if (damage > 0)
         {
-            audioSrc.PlayOneShot(hurtSound);
-        }
-        //updates the healthbar
-        healthBar.SetHealth(hp, MaxHP);
-        CameraReference.Instance.InstantiateHitMarker(damage, transform.position);
-        if (hp <= 0)
-        {
-            Die();
-        }
-        else
-        {
-            StartCoroutine("DamageFlash");
+            //call base instead of doing all of that stuff
+            base.DealDamage(1, force, from);
         }
 
         //activate damageInvulnurablilty
@@ -72,10 +63,6 @@ class Player : Entity
 
         //apply force
         ApplyImpulse(force, from);
-
-        //if weapon implements IDamageTaken then call it
-        IDamageTaken damageTaken = Inventory.CurrentWeapon as IDamageTaken;
-        damageTaken?.OnDamageTaken(damage, from);
 
         return true;
     }
@@ -93,7 +80,6 @@ class Player : Entity
         playerMove = GetComponent<PlayerMove>();
         playerAnimator = GetComponent<Animator>();
     }
-
     public override void Start()
     {
         base.Start();

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Items
 {
-    public class Spell : Weapon
+    public class Spell : Weapon2
     {
         public static string itemName = "Staff";
         public override string Name => itemName;

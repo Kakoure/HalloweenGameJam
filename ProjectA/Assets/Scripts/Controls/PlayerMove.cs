@@ -12,7 +12,8 @@ public partial class PlayerMove : MonoBehaviour
     private static Player player;
     public Rigidbody2D rb;
 
-    public float speed = 5;
+    public float defaultSpeed = 5;
+    public float playerSpeed;
     public float diveDur;
     public float diveCoef;
     public Cooldown jumpCooldown;
@@ -24,6 +25,8 @@ public partial class PlayerMove : MonoBehaviour
 
     private void Start()
     {
+        playerSpeed = defaultSpeed;
+
         anim = GetComponent<Animator>();
         player = Player.Instance;
     }
@@ -35,6 +38,7 @@ public partial class PlayerMove : MonoBehaviour
     float yAxisRaw;
     bool dodge;
     Vector2 facingDir;
+
     void Update()
     {
         //pause guard
@@ -58,7 +62,7 @@ public partial class PlayerMove : MonoBehaviour
                 facingDir.Set(xAxisRaw, yAxisRaw);
             }
 
-            SetPath(Boomerang.Mult(speed * diveCoef, RollPath(facingDir.normalized)), diveDur);
+            SetPath(Boomerang.Mult(defaultSpeed * diveCoef, RollPath(facingDir.normalized)), diveDur);
             player.damageInvuln.Use();
             jumpCooldown.Use();
 
@@ -95,7 +99,7 @@ public partial class PlayerMove : MonoBehaviour
                 anim.SetBool("isMoving", false);
             }
 
-            rb.velocity = Vector2.ClampMagnitude(new Vector2(xAxis, yAxis), 1) * speed;
+            rb.velocity = Vector2.ClampMagnitude(new Vector2(xAxis, yAxis), 1) * defaultSpeed;
             if (rb.velocity.sqrMagnitude > .1f && walkSoundCooldown.IsReady)
             {
                 player.PlaySound(walkSounds[UnityEngine.Random.Range(0, walkSounds.Length)]);

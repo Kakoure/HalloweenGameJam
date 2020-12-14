@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -9,14 +9,56 @@ using static Inventory.InventorySlot;
 
 namespace Items
 {
+    [Obsolete]
     public interface IDamageTaken
     {
         void OnDamageTaken(int damage, Vector2 src);
     }
     
     [LoadResourceToField("bullet", "Bullet", typeof(GameObject))]
-    public class Bow : Weapon, IDamageTaken
+    public class Bow : Weapon2
     {
+        public class Charging : StatusEffect
+        {
+            Bow bow;
+
+            public override void OnDamage(Entity currentEntity, int damage, out bool shouldRemove)
+            {
+                if (damage > 0)
+                {
+                    //cancel charge
+                    if (bow.ChargingState)
+                    {
+                        bow.ChargingState = false;
+                        bow.PlayerAnim.SetBool("isAiming", false);
+                        Vector2 lookDir = Player.Instance.MousePositionRelative.normalized;
+                        bow.PlayerAnim.SetFloat("xInput", lookDir.x);
+                        bow.PlayerAnim.SetFloat("yInput", lookDir.y);
+                    }
+
+                    shouldRemove = true;
+                    Debug.Log("Canceling charge");
+                }
+                else
+                {
+                    shouldRemove = false;
+                }
+            }
+
+            public override void OnRemoval(Entity currentEntity)
+            {
+                Debug.Log("Removing charging effect");
+
+                //reset player speed
+
+            }
+
+            public Charging(Bow bow)
+            {
+                this.bow = bow;
+            }
+        }
+
         static int bowMass = 1;
         public static readonly string itemName = "Bow";
         public override string Name => itemName;
@@ -32,90 +74,6 @@ namespace Items
         public float fullChargeCooldown;
         public float slowMoveSpeedMultiplier;
 
-        //TODO FIX THIS
-        //introduce status effects
-        private float defSpeed = 5;
-        private FireProjectile fireArrow;
-
-        //replacement to assignment at awake (since awake occurs on instantiation)
-        private PlayerMove movement => Player.Instance.playerMove;
-        private Animator playerAnim => Player.Instance.playerAnimator;
-        #region charging
-
-        private float chargeTime = 0;
-        private bool _isCharging = false;
-        public bool ChargingState 
-        { 
-            get => _isCharging;
-            private set
-            {
-                if (value)
-                {
-                    chargeTime = Time.time;
-                    movement.speed *= slowMoveSpeedMultiplier;
-                }
-                else
-                {
-                    movement.speed = defSpeed;
-                }
-                _isCharging = value;
-            }
-        }
-
-        #endregion
-
-        public override void Initialize()
-        {
-            //two handed
-            this.SwapSlot = twoHanded;
-
-            fireArrow = new FireProjectile(bullet, 0, 0, 0);
-        }
-
-        public override void AltFire(Transform player, bool down)
-        {
-
-        }
-
-        public override void Fire(Transform player, bool down)
-        {
-            if (down)
-            {
-                if (!IsReady) return;
-
-                //begin charge
-                ChargingState = true;
-                playerAnim.SetBool("isAiming", true);
-            }
-            else
-            {
-                if (!ChargingState) return;
-
-                chargeTime = Time.time - this.chargeTime;
-
-                //release and fire
-                ChargingState = false;
-                playerAnim.SetBool("isAiming", false);
-                Player.Instance.PlaySound(useSound);
-                Vector2 lookDir = (CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.gameObject.transform.position).normalized;
-                playerAnim.SetFloat("xInput", lookDir.x);
-                playerAnim.SetFloat("yInput", lookDir.y);
-                //chargeTime is deltaTime
-                int damage = GetDamage(chargeTime);
-                float kb = GetKnockback(chargeTime);
-                float speed = GetSpeed(chargeTime);
-
-                fireArrow.damage = damage;
-                fireArrow.knockBack = kb;
-                fireArrow.speed = speed;
-
-                var i = fireArrow.Execute(player, out _);
-
-                float cooldown = chargeTime < fullCharge ? cooldownTime : fullChargeCooldown;
-                SetUseTime(cooldown);
-            }
-        }
-
         public int GetDamage(float t)
         {
             return t < fullCharge ? baseDamage : chargedDamage;
@@ -129,16 +87,95 @@ namespace Items
             return t < fullCharge ? baseSpeed : 1.5f * baseSpeed;
         }
 
-        public void OnDamageTaken(int damage, Vector2 src)
-        {
-            //cancel charge
-            if (ChargingState)
+        //innitially a workaround but will remove
+        private float defSpeed = 5;
+        private FireProjectile fireArrow;
+
+        //replacement to assignment at awake (since awake occurs on instantiation)
+        private PlayerMove Movement => Player.Instance.playerMove;
+        private Animator PlayerAnim => Player.Instance.playerAnimator;
+        #region charging
+
+        private Bow.Charging chargingEffect;
+        private float chargeTime = 0;
+        private bool _isCharging = false;
+        public bool ChargingState 
+        { 
+            get => _isCharging;
+            private set
             {
+                if (value)
+                {
+                    chargeTime = Time.time;
+                    Movement.defaultSpeed *= slowMoveSpeedMultiplier;
+                }
+                else
+                {
+                    Movement.defaultSpeed = defSpeed;
+                }
+                _isCharging = value;
+            }
+        }
+
+        #endregion
+
+        public override void Initialize()
+        {
+            //two handed
+            this.SwapSlot = twoHanded;
+
+            //initialize the status effect
+            chargingEffect = new Charging(this);
+
+            fireArrow = new FireProjectile(bullet, 0, 0, 0);
+        }
+        public override void AltFire(Transform player, bool down)
+        {
+
+        }
+        public override void Fire(Transform player, bool down)
+        {
+            if (down)
+            {
+                if (!IsReady) return;
+
+                //begin charge
+                ChargingState = true;
+                PlayerAnim.SetBool("isAiming", true);
+
+                //apply the charging effect
+                Player.Instance.ApplyEffect(chargingEffect);
+                Debug.Log("Queueing charge effect");
+            }
+            else
+            {
+                if (!ChargingState) return;
+                chargeTime = Time.time - this.chargeTime;
+
+                //remove the charging effect
+                Player.Instance.EndEffect(chargingEffect);
+                Debug.Log("Firing");
+
+                //release and fire
                 ChargingState = false;
-                playerAnim.SetBool("isAiming", false);
+                PlayerAnim.SetBool("isAiming", false);
+                Player.Instance.PlaySound(useSound);
                 Vector2 lookDir = (CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.gameObject.transform.position).normalized;
-                playerAnim.SetFloat("xInput", lookDir.x);
-                playerAnim.SetFloat("yInput", lookDir.y);
+                PlayerAnim.SetFloat("xInput", lookDir.x);
+                PlayerAnim.SetFloat("yInput", lookDir.y);
+                //chargeTime is deltaTime
+                int damage = GetDamage(chargeTime);
+                float kb = GetKnockback(chargeTime);
+                float speed = GetSpeed(chargeTime);
+
+                fireArrow.damage = damage;
+                fireArrow.knockBack = kb;
+                fireArrow.speed = speed;
+
+                var i = fireArrow.Execute(player, out _);
+
+                float cooldown = chargeTime < fullCharge ? cooldownTime : fullChargeCooldown;
+                SetUseTime(cooldown);
             }
         }
 

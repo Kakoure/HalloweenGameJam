@@ -9988,7 +9988,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.060274847, y: 0.016}
   m_AnchorMax: {x: 0.8995419, y: 0.18}
-  m_AnchoredPosition: {x: 1.999958, y: 0}
+  m_AnchoredPosition: {x: 1.9999619, y: 0}
   m_SizeDelta: {x: 16, y: 18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1516213281
@@ -10976,18 +10976,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1860352598 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 377278816543342195, guid: e7ec070ab4e74614a9090250c607c005,
-    type: 3}
-  m_PrefabInstance: {fileID: 8603324811697038520}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fd4d576dd8f4464e8d9d903bccab35b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1887547645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24689,59 +24677,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1325141214, guid: e7ec070ab4e74614a9090250c607c005, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1325141216, guid: e7ec070ab4e74614a9090250c607c005, type: 3}
-      propertyPath: m_TargetTexture
-      value: 
-      objectReference: {fileID: 8400000, guid: b338e9d98f2f53c409e7a1df4cbad965, type: 2}
-    - target: {fileID: 1325141216, guid: e7ec070ab4e74614a9090250c607c005, type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 377278816543342194, guid: e7ec070ab4e74614a9090250c607c005,
-        type: 3}
-      propertyPath: MaxHP
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 377278816543342194, guid: e7ec070ab4e74614a9090250c607c005,
-        type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 1860352598}
-    - target: {fileID: 377278816543342194, guid: e7ec070ab4e74614a9090250c607c005,
-        type: 3}
-      propertyPath: hp
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 377278816543342194, guid: e7ec070ab4e74614a9090250c607c005,
-        type: 3}
-      propertyPath: playerClass
-      value: 
-      objectReference: {fileID: 11400000, guid: 62b5cac0cbb542e43a53a93c7408d903,
-        type: 2}
-    - target: {fileID: 377278816543342194, guid: e7ec070ab4e74614a9090250c607c005,
-        type: 3}
-      propertyPath: damageKnockbackDuration
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 377278816543342195, guid: e7ec070ab4e74614a9090250c607c005,
-        type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 1098069018}
     - target: {fileID: 377278816543342195, guid: e7ec070ab4e74614a9090250c607c005,
         type: 3}
       propertyPath: linkedHealthBar
       value: 
       objectReference: {fileID: 735483487}
-    - target: {fileID: 377278816543342199, guid: e7ec070ab4e74614a9090250c607c005,
+    - target: {fileID: 377278816543342195, guid: e7ec070ab4e74614a9090250c607c005,
         type: 3}
-      propertyPath: speed
-      value: 4
-      objectReference: {fileID: 0}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 1098069018}
     - target: {fileID: 377278816543342217, guid: e7ec070ab4e74614a9090250c607c005,
         type: 3}
       propertyPath: m_LocalPosition.x

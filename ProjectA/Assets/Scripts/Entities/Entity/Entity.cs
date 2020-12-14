@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using System.Collections;
 using UnityEngine;
 
-namespace Items
+namespace Entities
 {
-    //tmp
-    public abstract class Entity : MonoBehaviour
+    public abstract partial class Entity : MonoBehaviour
     {
         public int MaxHP;
         public int hp;
@@ -20,9 +19,20 @@ namespace Items
         public AudioClip deathSound;
         protected AudioSource audioSrc;
         private SpriteRenderer sprRend;
+
+        public delegate void DamageModifier(ref int damage);
+        public DamageModifier damageModifiers = null;
         //return success
         public virtual bool DealDamage(int damage, float force, Vector2 from)
         {
+            Debug.Log(currentStatusEffects.Count);
+
+            //status effects
+            IterateStatusEffects(s => s.OnDamage(this, damage));
+
+            //apply damage modifiers
+            damageModifiers?.Invoke(ref damage);
+
             hp -= damage;
 
             //prevent overheal
@@ -77,8 +87,13 @@ namespace Items
             sprRend = GetComponent<SpriteRenderer>();
             audioSrc = GetComponent<AudioSource>();
         }
+        public virtual void Update()
+        {
+            //update the status effect
+            IterateStatusEffects(s => s.OnUpdate(this));
+        }
 
-        private IEnumerator DamageFlash()
+        protected IEnumerator DamageFlash()
         {
             if(GetComponent<SpriteRenderer>() != null)
             {

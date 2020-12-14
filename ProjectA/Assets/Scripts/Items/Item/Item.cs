@@ -26,7 +26,7 @@ namespace Items
     {
         public static readonly ItemID ERROR = -1;
         //since default value is zero, zero should have a special value
-        public static readonly ItemID empty = 0;
+        public static readonly ItemID EMPTY = 0;
 
         public static implicit operator ItemID(int val)
         {
@@ -51,13 +51,14 @@ namespace Items
         }
         public static ItemID GetID(Type item)
         {
-            int idx = Array.FindIndex<Type>(Item.itemList, t => t == item);
+            //TODO: use binary search instead
+            int idx = Array.FindIndex(Item.itemList, t => t == item);
             return new ItemID(idx + 1); //shift by 1 so that 0 has a unique value
         }
         //does null checking
         public static ItemID GetID(Item item)
         {
-            if (item == null) return empty;
+            if (item == null) return EMPTY;
             else return GetID(item.GetType());
         }
 

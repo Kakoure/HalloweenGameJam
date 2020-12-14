@@ -12,6 +12,7 @@ namespace Items
     partial class Item
     {
         //used for loading screen
+        //TODO: Use List<T> instead
         public static Type[] itemList = null;
 
         //given ItemID, should be able to find item name
@@ -46,7 +47,6 @@ namespace Items
                     Type type = itemList[i];
                     var name = type.GetField(nameField, BindingFlags.Public | BindingFlags.Static);
                     //id is no longer needed
-                    //var id = type.GetField(idField, BindingFlags.Public | BindingFlags.Static);
                     if (name == null)
                     {
                         UnityEngine.Debug.LogError($"field {nameField} of {type} is missing");

@@ -9,20 +9,6 @@ namespace Items
 {
     public partial class Item
     {
-        [Obsolete]
-        public static Item InstantiateItem(Type itemType)
-        {
-            if (itemType.IsAbstract || !typeof(Item).IsAssignableFrom(itemType)) return null;
-            else
-            {
-                //find a no arg constructor
-                //im assuming that no arg is the only valid constructor
-                var ctor = itemType.GetConstructor(new Type[] { });
-
-                //invoke no arg constructor
-                return (Item)ctor.Invoke(new object[] { });
-            }
-        }
         /// <summary>
         /// Creates a new Instance of an item. This must be called on an item if it's game object does not yet exist
         /// </summary>

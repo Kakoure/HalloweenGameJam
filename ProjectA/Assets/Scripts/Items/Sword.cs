@@ -6,10 +6,11 @@ using UnityEngine;
 using CooldownTimer;
 using UnityEngine.UI;
 using static Boomerang;
+using Entities;
 
 namespace Items
 {
-    public class Sword : Weapon
+    public class Sword : Weapon2
     {
         public static string itemName = "Sword";
         public override string Name => itemName;
@@ -119,7 +120,7 @@ namespace Items
             anim.SetFloat("yInput", lookDir.y);
 
             Path lungePath = LinePath(lungeConverter, lookDir);
-            Player.Instance.playerMove.SetPath(Boomerang.Mult(Player.Instance.playerMove.speed, lungePath), .5f);
+            Player.Instance.playerMove.SetPath(Boomerang.Mult(Player.Instance.playerMove.defaultSpeed, lungePath), .5f);
 
 
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
+using Entities;
 using static Boomerang;
 
 public partial class Joker : Entity

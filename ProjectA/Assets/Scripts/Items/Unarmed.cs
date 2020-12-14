@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using CooldownTimer;
 using static Boomerang;
+using Entities;
 
 namespace Items
 {
-    public class Unarmed : Weapon
+    public class Unarmed : Weapon2
     {
         public static readonly string itemName = "Unarmed";
         public override string Name => itemName;
@@ -102,7 +103,7 @@ namespace Items
             anim.SetFloat("yInput", lookDir.y);
 
             Path lungePath = LinePath(lungeConverter, lookDir);
-            Player.Instance.playerMove.SetPath(Boomerang.Mult(Player.Instance.playerMove.speed, lungePath), .25f);
+            Player.Instance.playerMove.SetPath(Boomerang.Mult(Player.Instance.playerMove.defaultSpeed, lungePath), .25f);
 
             yield return new WaitForSeconds(.1f);
             HitScan();
