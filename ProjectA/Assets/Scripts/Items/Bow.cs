@@ -47,10 +47,9 @@ namespace Items
 
             public override void OnRemoval(Entity currentEntity)
             {
-                Debug.Log("Removing charging effect");
 
                 //reset player speed
-
+                bow.ChargingState = false;
             }
 
             public Charging(Bow bow)
@@ -87,6 +86,7 @@ namespace Items
             return t < fullCharge ? baseSpeed : 1.5f * baseSpeed;
         }
 
+        //TODO:Get rid of this
         //innitially a workaround but will remove
         private float defSpeed = 5;
         private FireProjectile fireArrow;
@@ -145,7 +145,6 @@ namespace Items
 
                 //apply the charging effect
                 Player.Instance.ApplyEffect(chargingEffect);
-                Debug.Log("Queueing charge effect");
             }
             else
             {
@@ -153,11 +152,11 @@ namespace Items
                 chargeTime = Time.time - this.chargeTime;
 
                 //remove the charging effect
+                //removing the effect will set player to default speed
                 Player.Instance.EndEffect(chargingEffect);
                 Debug.Log("Firing");
 
                 //release and fire
-                ChargingState = false;
                 PlayerAnim.SetBool("isAiming", false);
                 Player.Instance.PlaySound(useSound);
                 Vector2 lookDir = (CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.gameObject.transform.position).normalized;

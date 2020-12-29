@@ -25,8 +25,6 @@ namespace Entities
         //return success
         public virtual bool DealDamage(int damage, float force, Vector2 from)
         {
-            Debug.Log(currentStatusEffects.Count);
-
             //status effects
             IterateStatusEffects(s => s.OnDamage(this, damage));
 
@@ -95,16 +93,12 @@ namespace Entities
 
         protected IEnumerator DamageFlash()
         {
-            if(GetComponent<SpriteRenderer>() != null)
-            {
-                SpriteRenderer sprRend = GetComponent<SpriteRenderer>();
-                sprRend.material.SetColor("_FlashColor", Color.white);
-                sprRend.material.SetFloat("_FlashAmount", 1);
-                yield return new WaitForSeconds(.1f);
-                sprRend.material.SetColor("_FlashColor", Color.red);
-                yield return new WaitForSeconds(.1f);
-                sprRend.material.SetFloat("_FlashAmount", 0);
-            }
+            sprRend.material.SetColor("_FlashColor", Color.white); 
+            sprRend.material.SetFloat("_FlashAmount", 1);
+            yield return new WaitForSeconds(.1f);
+            sprRend.material.SetColor("_FlashColor", Color.red);
+            yield return new WaitForSeconds(.1f);
+            sprRend.material.SetFloat("_FlashAmount", 0);
         }
         protected IEnumerator FadeAway(float time)
         {
