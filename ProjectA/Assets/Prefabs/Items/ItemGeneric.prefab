@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e6015c331f2a9478733bba481896d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemScript: {fileID: 0}
-  itemObject: {fileID: 0}
+  itemScript: {fileID: 11500000, guid: 008deb65a8246ac448ad472cf9b06dec, type: 3}
+  itemObject: {fileID: 11400000, guid: 49d9146bf044a1a43a03b6b7b5b8ff02, type: 2}
 --- !u!212 &2257188060820074155
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f2824a996be495f4db9ec7958229af04, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
