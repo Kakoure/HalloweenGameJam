@@ -46,7 +46,7 @@ namespace Items
                     this.DropAt(bullet.transform.position);
                 };
                 bullet.GetComponent<Animator>().enabled = false;
-                Inventory.Instance.shield = null;
+                Inventory.Swap(Inventory.Instance.shield, null);
             }
         }
 

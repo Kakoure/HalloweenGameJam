@@ -9,6 +9,40 @@ using UnityEngine;
 
 public class ItemGeneric : MonoBehaviour, IClickable
 {
+    public static List<ItemGeneric> GetNearbyItems(Vector2 position, float radius)
+    {
+        var colliders = UnityEngine.Physics2D.OverlapCircleAll(position, radius, LayerMask.GetMask("Items"));
+        List<ItemGeneric> items = new List<ItemGeneric>(colliders.Length);
+        foreach (var col in colliders)
+        {
+            items.Add(col.GetComponent<ItemGeneric>());
+        }
+        return items;
+    }
+    public static ItemGeneric GetNearestItem(Vector2 position, float radius)
+    {
+        var items = GetNearbyItems(position, radius);
+
+        if (items.Count == 0) return null;
+
+        Func<ItemGeneric, float> getRad = (item) => ((Vector2)item.transform.position - position).sqrMagnitude;
+
+        ItemGeneric nearest = items[0];
+        float minDist = getRad(nearest);
+        for (int i = 1; i < items.Count; i++)
+        {
+            var item = items[i];
+            float dist = getRad(item);
+            if (dist < minDist)
+            {
+                //replace nearest
+                nearest = item;
+                minDist = dist;
+            }
+        }
+        return nearest;
+    }
+
     private SpriteRenderer _spriteRenderer;
     public SpriteRenderer SpriteRenderer
     {
@@ -47,6 +81,7 @@ public class ItemGeneric : MonoBehaviour, IClickable
         }
 
         this.SpriteRenderer.sprite = itemObject.Sprite;
+        this.SpriteRenderer.material.SetColor("_HighlightColor", new Color(0, 0, 0, 0));
 
         itemObject.Owner = this;
         itemObject.Initialize();

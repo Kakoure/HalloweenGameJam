@@ -37,10 +37,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_94F937BB: 0.0325
+    - Vector1_94F937BB: 32
     - _EnableExternalAlpha: 0
     m_Colors:
     - Color_23D0EF49: {r: 1, g: 1, b: 0, a: 1}
+    - Vector2_945AACFB: {r: 0.9, g: 0.9, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _HighlightColor: {r: 1, g: 1, b: 0, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

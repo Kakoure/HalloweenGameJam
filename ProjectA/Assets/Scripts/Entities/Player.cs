@@ -15,13 +15,18 @@ public class Player : Entity
     public static Player Instance { get; private set; }
 
     public Vector2 MousePositionRelative => CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
-
-    private Rigidbody2D _rb;
     public override Rigidbody2D Rigidbody => _rb;
+
     [NonSerialized]
     public PlayerMove playerMove;
     [NonSerialized]
     public Animator playerAnimator;
+    private Rigidbody2D _rb;
+    /// <summary>
+    /// The current highlighted item (null if none)
+    /// </summary>
+    [NonSerialized]
+    public ItemGeneric itemPickupTarget = null;
 
     public PlayerClass playerClass;
     public float damageKnockbackDuration = 1;
@@ -31,14 +36,17 @@ public class Player : Entity
     [Tooltip("Ammount of time player spends invulurable in dodge state")]
     public Cooldown dodgeInvuln;
 
+    [SerializeField]
+    private float itemPickupRadius; 
+    //TODO: Temporary
+    public Color itemHighlightColor;
+
     //TODO: I can load this from resources instead of using a field
     public AudioClip attackSound;
     public AudioClip equipSound;
 
     public bool IsInvuln => !dodgeInvuln.IsReady || !damageInvuln.IsReady;
 
-    //deal damage and apply impulse can be merged
-    //also apply impulse for player ignores force parameter
     protected override void ApplyImpulse(float force, Vector2 from)
     {
         if (force == 0) return; //if no force return
@@ -48,7 +56,7 @@ public class Player : Entity
     }
     public override bool DealDamage(int damage, float force, Vector2 from)
     {
-        //replace this with an effect...
+        //Todo: replace this with an effect
         if (IsInvuln) return false;
 
         //discrete Damage
@@ -69,6 +77,15 @@ public class Player : Entity
     public override void Die()
     {
         SceneManager.LoadScene("RIP");
+    }
+
+    public void PlaySound(AudioClip sound)
+    {
+        audioSrc.PlayOneShot(sound);
+    }
+    public void PlayAttackSound()
+    {
+        audioSrc.PlayOneShot(attackSound);
     }
 
     public override void Awake()
@@ -94,15 +111,24 @@ public class Player : Entity
             if (slot != -1) Inventory.Pickup(Inventory.GetSlot(Inventory.InventorySlot.SlotType.Inventory, slot), Item.InstantiateItem(item));
         }
     }
+    public override void Update()
+    {
+        base.Update();
 
-    public void PlaySound(AudioClip sound)
-    {
-        audioSrc.PlayOneShot(sound);
+        var newNearest = ItemGeneric.GetNearestItem(this.transform.position, itemPickupRadius);
+        if (newNearest != itemPickupTarget)
+        {
+            //highlight the item
+            newNearest?.SpriteRenderer.material.SetColor("_HighlightColor", itemHighlightColor);
+
+            //un highlight the previous item
+            itemPickupTarget?.SpriteRenderer.material.SetColor("_HighlightColor", new Color(0, 0, 0, 0));
+
+            //replace the previous item
+            itemPickupTarget = newNearest;
+        }
     }
-    public void PlayAttackSound()
-    {
-        audioSrc.PlayOneShot(attackSound);
-    }
+
 
     //will eventually get to this
     int exp;
