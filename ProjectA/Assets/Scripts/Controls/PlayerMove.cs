@@ -80,8 +80,6 @@ public partial class PlayerMove : MonoBehaviour
     {
         if (PathEnd)
         {
-            //always check input on Update then use input values on FixedUpdate
-
             //Store last control input for anim facing dir
             if (xAxisRaw != 0 || yAxisRaw != 0)
             {
@@ -94,7 +92,8 @@ public partial class PlayerMove : MonoBehaviour
             if (Mathf.Abs(xAxis) >= deadZone || Mathf.Abs(yAxis) >= deadZone)
             {
                 anim.SetBool("isMoving", true);
-            } else
+            } 
+            else
             {
                 anim.SetBool("isMoving", false);
             }

@@ -71,6 +71,11 @@ public partial class Inventory : MonoBehaviour
         return PopFromSlot(invSlot);
     }
 
+    /// <summary>
+    /// Returns the index of an empty inventory slot.
+    /// </summary>
+    /// <param name="upper"></param>
+    /// <returns></returns>
     public static int GetEmptyInventorySlot() => GetEmptyInventorySlot(Instance.inventorySlots.Length);
     public static int GetEmptyInventorySlot(int upper)
     {
@@ -81,6 +86,10 @@ public partial class Inventory : MonoBehaviour
         }
         return upper;
     }
+    /// <summary>
+    /// Returns an empty inventory slot. Null if inventory is full
+    /// </summary>
+    /// <returns></returns>
     public static InventorySlot GetOpenSlot()
     {
         if (Instance.weapon.Item == null) return Instance.weapon;
@@ -162,6 +171,7 @@ public partial class Inventory : MonoBehaviour
     }
     public static bool Pickup(InventorySlot slot, Item item)
     {
+        if (slot == null) return false;
         if (slot.Item != null) return false;
         if (item == null) return false;
 

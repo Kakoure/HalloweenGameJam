@@ -21,6 +21,7 @@ class CameraReference : MonoBehaviour
     public float damageConstant = 2;
     public GameObject itemGeneric;
 
+    //utility function
     public void InstantiateHitMarker(int damage, Vector2 pos)
     {
         if (damage <= 0) return; //just apply a hack to cover up a bug

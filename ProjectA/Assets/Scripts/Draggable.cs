@@ -24,7 +24,13 @@ class Draggable : MonoBehaviour, IClickable
     private void Start()
     {
         snapback = this.transform.position;
-        
+
+        var clickableMask = LayerMask.NameToLayer("UI Clickable");
+        if (gameObject.layer != clickableMask)
+        {
+            Debug.Log("Assigning UI Clickable layer to this gameObject", this.gameObject);
+            gameObject.layer = clickableMask;
+        }
     }
 
     public void Update()

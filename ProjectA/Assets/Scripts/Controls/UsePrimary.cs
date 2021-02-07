@@ -15,33 +15,50 @@ public class UsePrimary : MonoBehaviour
         p = Player.Instance;
     }
 
-    bool? mouse = null;
-    bool? mouse2 = null;
+    bool? mouseButton = null;
+    bool? mouseButton2 = null;
+    bool pickupItem;
     // Update is called once per frame
     void Update()
     {
         //Pause guard
         if (PauseController.Paused) return;
 
+        //Path overrides control
         if (!p.playerMove.PathEnd) return;
 
-        if (Input.GetButtonDown("Fire1")) mouse = true;
-        if (Input.GetButtonDown("Fire2")) mouse2 = true;
-        if (Input.GetButtonUp("Fire1")) mouse = false;
-        if (Input.GetButtonUp("Fire2")) mouse2 = false;
-        if (mouse != null)
+        //Assigning controls
+        if (Input.GetButtonDown("Fire1")) mouseButton = true;
+        if (Input.GetButtonDown("Fire2")) mouseButton2 = true;
+        if (Input.GetButtonUp("Fire1")) mouseButton = false;
+        if (Input.GetButtonUp("Fire2")) mouseButton2 = false;
+
+        pickupItem = Input.GetButton("Pickup Item");
+
+        //resolve controls
+        if (mouseButton != null)
         {
             //use weapon
             Item primary = Inventory.CurrentWeapon;
-            primary?.Fire(this.transform, (bool)mouse);
-            mouse = null;
+            primary?.Fire(this.transform, (bool)mouseButton);
+            mouseButton = null;
         }
-        if(mouse2 != null)
+        if (mouseButton2 != null)
         {
             //use Secondary
             Item offhand = Inventory.Instance.shield.Item;
-            offhand?.AltFire(this.transform, (bool)mouse2);
-            mouse2 = null;
+            offhand?.AltFire(this.transform, (bool)mouseButton2);
+            mouseButton2 = null;
+        }
+        if (pickupItem)
+        {
+            //if an Item is highlighted, pick it up.
+            Player.Instance.itemPickupTarget?.PickUpItem();
+
+            /*
+             * It will sort itself out next update.
+            Player.Instance.itemPickupTarget = null;
+            */
         }
     }
 }

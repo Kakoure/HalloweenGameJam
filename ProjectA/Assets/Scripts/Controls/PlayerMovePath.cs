@@ -1,15 +1,10 @@
 ﻿using CooldownTimer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using static Boomerang;
 
 public partial class PlayerMove
 {
-    static Converter rollConv = f => f < 3.0f / 5 ? 4.0f / 3 : 1.0f / 2;
+    readonly static Converter rollConv = f => f < 3.0f / 5 ? 4.0f / 3 : 1.0f / 2;
     static Converter c = f => f < 0.6f ? 4 * f / 3 : f / 2 + 0.5f;
     public static Path RollPath(Vector2 dir) => LinePath(rollConv, dir);
 

@@ -35,8 +35,13 @@ namespace Items
             MakeVisible();
         }
 
-        //pick up the item
+        [Obsolete]
         public void OnClick()
+        {
+            PickUpItem();
+        }
+        //pick up the item
+        public void PickUpItem()
         {
             Inventory.InventorySlot slot = Inventory.GetOpenSlot();
 

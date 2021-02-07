@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Events;
 
 //rename this
+//TODO: build a pause screen
 public class PauseController : MonoBehaviour
 {
     [System.Serializable]

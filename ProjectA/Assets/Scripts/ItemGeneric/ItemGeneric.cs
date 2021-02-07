@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
-public class ItemGeneric : MonoBehaviour, IClickable
+public class ItemGeneric : MonoBehaviour
 {
     public static List<ItemGeneric> GetNearbyItems(Vector2 position, float radius)
     {
@@ -86,9 +86,16 @@ public class ItemGeneric : MonoBehaviour, IClickable
         itemObject.Owner = this;
         itemObject.Initialize();
     }
+
+    //TODO: Remove and replace. press button to pick up item instead
+    [Obsolete]
     public void OnClick()
     {
+        PickUpItem();
+    }
+    public void PickUpItem()
+    {
         //just pass the method over to the itemObject
-        itemObject.OnClick();
+        itemObject.PickUpItem();
     }
 }

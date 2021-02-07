@@ -129,7 +129,6 @@ public class Player : Entity
         }
     }
 
-
     //will eventually get to this
     int exp;
 }

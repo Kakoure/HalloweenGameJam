@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+//TODO: merge with PlayerMove
+/// <summary>
+/// A click checker for UI elements.
+/// </summary>
 public class CheckClicks : MonoBehaviour
 {
     // Normal raycasts do not work on UI elements, they require a special kind
+    //TODO: set the raycast layer of the raycaster
     GraphicRaycaster raycaster;
 
     void Awake()
@@ -27,7 +32,7 @@ public class CheckClicks : MonoBehaviour
             //Raycast using the Graphics Raycaster and mouse click position
             pointerData.position = Input.mousePosition;
 
-            //TODO could try to raycast on a specific layer?
+            //raycaster should raycast on a specific layer
             this.raycaster.Raycast(pointerData, results);
 
             foreach(RaycastResult r in results)

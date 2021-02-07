@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// why is this on the canvas?
 public class CameraScroller : MonoBehaviour
 {
     private Camera c;

@@ -7,6 +7,9 @@ using UnityEditor;
 using UnityEngine;
 
 //Merge this with CheckClicks
+/// <summary>
+/// A click checker for Game Objects
+/// </summary>
 class ClickRaycaster : MonoBehaviour
 {
     [SerializeField]
