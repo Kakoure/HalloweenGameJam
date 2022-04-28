@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "test_dll": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\antho\\OneDrive\\Documents\\GitHub\\HalloweenGameJam\\test_dll\\bin\\Debug\\netcoreapp3.1\\test_dll.exe",
+      "commandLineArgs": "C:\\Users\\antho\\OneDrive\\Documents\\GitHub\\HalloweenGameJam\\generic_chess\\x64\\Debug\\generic_chess.dll",
+      "workingDirectory": "C:\\Users\\antho\\OneDrive\\Documents\\GitHub\\HalloweenGameJam\\generic_chess\\x64\\Debug"
+    }
+  }
+}

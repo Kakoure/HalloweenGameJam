@@ -8,10 +8,10 @@ using UnityEngine;
 
 public class Skeleton : Entity
 {
-    private Rigidbody2D rb;
-    public override Rigidbody2D Rigidbody => rb;
+
     public float seekRadius;
     public float wander;
+    //TODO: rename speed
     public float speed;
     public EntityBehaviour behaviour;
     public bool fireArrows;
@@ -26,11 +26,17 @@ public class Skeleton : Entity
     [Tooltip("Time disabled after getting hit")]
     public Cooldown hitstun;
     public AudioClip attackSound;
+    public Func<Vector2> getDir = null;
+
+    private Rigidbody2D rb;
+    public override Rigidbody2D Rigidbody => rb;
+    public override float DefaultSpeed => speed;
+    public override float CurrentSpeed { get; protected set; }
+
     public Vector2 Wander()
     {
         return UnityEngine.Random.insideUnitCircle * wander;
     }
-    public Func<Vector2> getDir = null;
 
     // Start is called before the first frame update
     public override void Start()
@@ -82,8 +88,11 @@ public class Skeleton : Entity
     Func<Vector2> seeker;
     Transform target = null;
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
+        //TODO: should put all of this in a behaviour function
         if (seekTimer.IsReady && target == null)
         {
             if ((Player.Instance.transform.position - this.transform.position).magnitude < seekRadius)

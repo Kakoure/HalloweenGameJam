@@ -17,7 +17,6 @@ public partial class PlayerMove : MonoBehaviour
     public float diveDur;
     public float diveCoef;
     public Cooldown jumpCooldown;
-
     public Cooldown walkSoundCooldown;
     public AudioClip[] walkSounds;
 

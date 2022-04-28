@@ -10,18 +10,64 @@ namespace Entities
 {
     public abstract partial class Entity : MonoBehaviour
     {
+        //1: CONSTANTS AND STATIC
+
+        //2: SERIALIZED
         public int MaxHP;
         public int hp;
-        public abstract Rigidbody2D Rigidbody { get; }
         public HealthBar healthBar;
-
         public AudioClip hurtSound;
         public AudioClip deathSound;
+
+        //3: NON SERIALIZED AND ACCESSORS
         internal protected AudioSource audioSrc;
         internal protected SpriteRenderer spriteRenderer;
+        public abstract Rigidbody2D Rigidbody { get; }
+        public abstract float DefaultSpeed { get; }
+        public abstract float CurrentSpeed { get; protected set; }
 
+        //4: METHODS
+        /// <summary>
+        /// modifies damage dealt to the entity
+        /// </summary>
         public delegate void DamageModifier(ref int damage);
         public DamageModifier damageModifiers = null;
+
+        /// <summary>
+        /// Modifies the speed temporarily
+        /// </summary>
+        /// <param name="currentSpeed"></param>
+        /// <returns></returns>
+        public delegate float SpeedModifier(float currentSpeed);
+        private LinkedList<SpeedModifier> speedModifiers;
+        private float CalculateSpeed()
+        {
+            float speed = DefaultSpeed;
+            foreach (var mod in speedModifiers)
+            {
+                speed = mod(speed);
+            }
+            return speed;
+        }
+        /// <summary>
+        /// Removes a modifier. May or may not have a problem with duplicate modifiers.
+        /// </summary>
+        /// <param name="modifier"></param>
+        public void RemoveModifier(SpeedModifier modifier)
+        {
+            speedModifiers.Remove(modifier);
+            UpdateSpeed();
+        }
+        public void UpdateSpeed(SpeedModifier modifier)
+        {
+            speedModifiers.AddLast(modifier);
+            UpdateSpeed();
+        }
+        public void UpdateSpeed()
+        {
+            CurrentSpeed = CalculateSpeed();
+        }
+
         /// <summary>
         /// Called when damage is done to an entity.
         /// </summary>
@@ -76,7 +122,15 @@ namespace Entities
             Rigidbody.AddForce(disp.normalized * force, ForceMode2D.Impulse);
         }
         //Note: currently not being used yet
+        /// <summary>
+        /// Heals entity
+        /// </summary>
+        /// <param name="health"></param>
+        /// <returns></returns>
         public virtual bool Heal(ref int health) { hp += health; return true; }
+        /// <summary>
+        /// Kills the entity
+        /// </summary>
         public virtual void Die()
         {
             if (hp <= 0)
@@ -89,12 +143,16 @@ namespace Entities
             }
         }
 
+        //5: MONOBEHAVIOUR
         public virtual void Awake() { }
         public virtual void Start()
         {
-            healthBar?.SetHealth(hp, MaxHP);
-            spriteRenderer = GetComponent<SpriteRenderer>();
-            audioSrc = GetComponent<AudioSource>();
+            if (healthBar != null) healthBar.SetHealth(hp, MaxHP);
+            spriteRenderer  = GetComponent<SpriteRenderer>();
+            audioSrc        = GetComponent<AudioSource>();
+
+            //currentspeed is assigned at start automatically
+            CurrentSpeed = DefaultSpeed;
         }
         public virtual void Update()
         {

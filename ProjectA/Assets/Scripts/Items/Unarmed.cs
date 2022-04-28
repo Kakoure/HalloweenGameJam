@@ -15,6 +15,7 @@ namespace Items
         public override string Name => itemName;
         public static Sprite sprite;
         public override Sprite Sprite => sprite;
+        public override AnimationControllerID AnimationControllerID => AnimationControllerID.unarmed;
 
         public float radius;
         public float arcRadians; //sq

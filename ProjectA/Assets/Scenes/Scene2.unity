@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 271193924}
   - component: {fileID: 271193923}
   - component: {fileID: 271193922}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Shield
   m_TagString: ItemSlot
   m_Icon: {fileID: 0}
@@ -6094,7 +6094,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 16384
 --- !u!114 &907333300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6177,7 +6177,7 @@ GameObject:
   - component: {fileID: 940038043}
   - component: {fileID: 940038042}
   - component: {fileID: 940038041}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Inventory transform
   m_TagString: ItemSlot
   m_Icon: {fileID: 0}
@@ -6321,7 +6321,7 @@ GameObject:
   - component: {fileID: 963640936}
   - component: {fileID: 963640935}
   - component: {fileID: 963640934}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Inventory transform (2)
   m_TagString: ItemSlot
   m_Icon: {fileID: 0}
@@ -10314,7 +10314,7 @@ GameObject:
   - component: {fileID: 1516213283}
   - component: {fileID: 1516213282}
   - component: {fileID: 1516213281}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Weapon
   m_TagString: ItemSlot
   m_Icon: {fileID: 0}
@@ -11869,7 +11869,7 @@ GameObject:
   - component: {fileID: 2094030018}
   - component: {fileID: 2094030017}
   - component: {fileID: 2094030016}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Inventory transform (1)
   m_TagString: ItemSlot
   m_Icon: {fileID: 0}

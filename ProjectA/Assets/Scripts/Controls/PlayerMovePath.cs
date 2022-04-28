@@ -13,6 +13,7 @@ public partial class PlayerMove
     Cooldown pathDuration;
 
     public bool PathEnd => pathDuration.IsReady;
+
     public Path path = f => Vector2.zero;
 
     /// <summary>

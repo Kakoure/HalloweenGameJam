@@ -1,4 +1,5 @@
-﻿using Items;
+﻿using CooldownTimer;
+using Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,8 @@ namespace Items
     public abstract class Weapon : Item
     {
         public delegate Action<Transform, bool> WeaponBehaviour(Item thisItem);
+
+        public Cooldown weaponCooldown;
     
         //turn a virtual function into an exposed field
         protected virtual WeaponBehaviour primaryBehaviour { get; }

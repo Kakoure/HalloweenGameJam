@@ -1,0 +1,20 @@
+Chess State:
+{
+	width
+	height
+	
+	struct {
+		color
+		id
+		*attr...
+	} *pieces
+
+}
+
+Game Rules
+{
+	//rules should define how pieces move, where theyre allowed to move, etc.
+	//in baroque the solution is to wrap the iterator in a check that looks for a nullifier before iterating though moves
+	piece_iterators 	Map<pieceid, iter>
+	check_validity (move => bool)
+}

@@ -224,7 +224,7 @@ public partial class Inventory : MonoBehaviour
     private Item unarmed;
     public InventorySlot weapon;
     public InventorySlot shield;
-    private ItemID currentWepID;
+    private AnimationControllerID currentWepID;
 
     private void Awake()
     {
@@ -241,28 +241,25 @@ public partial class Inventory : MonoBehaviour
         shield.standardSprite = shield.img.sprite;
         shield.slotType = InventorySlot.SlotType.Shield;
     }
-
     private void Start()
     {
         //find the unarmed script by getting the ItemGeneric first
         unarmed = GameObject.FindGameObjectWithTag("Unarmed").GetComponent<ItemGeneric>().itemObject;
     }
 
-    //TODO make this a method of Item
+    //Changes the AnimatorController based on the item's AnimationControllerID
     private static void EvaluateAnimWeaponID()
     {
-        int swordID = ItemID.GetID<Sword>().ID;
-        int bowID = ItemID.GetID<Bow>().ID;
-        Animator anim = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+        Animator anim = Player.Instance.GetComponent<Animator>();
 
-        int weaponID = ItemID.GetID(CurrentWeapon);
+        AnimationControllerID weaponID = CurrentWeapon.AnimationControllerID;
         if (anim != null && Instance.currentWepID != weaponID)
         {
-            if (weaponID == swordID)
+            if (weaponID == AnimationControllerID.sword)
             {
                 anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Sword Anim Controller") as RuntimeAnimatorController;
             }
-            else if (weaponID == bowID)
+            else if (weaponID == AnimationControllerID.bow)
             {
                 anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Bow Anim Controller") as RuntimeAnimatorController;
             }
@@ -271,7 +268,15 @@ public partial class Inventory : MonoBehaviour
                 anim.runtimeAnimatorController = Resources.Load("Player/Animations/Player Anim Controller") as RuntimeAnimatorController;
             }
         }
-        Instance.currentWepID = ItemID.GetID(CurrentWeapon.GetType());
+        Instance.currentWepID = CurrentWeapon.AnimationControllerID;
     }
+}
+
+public enum AnimationControllerID
+{ 
+    bow,
+    sword,
+    staff,
+    unarmed,
 }
 

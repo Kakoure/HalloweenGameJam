@@ -14,6 +14,7 @@ namespace Items
         public override string Name => itemName;
         public static Sprite sprite;
         public override Sprite Sprite => sprite;
+        public override AnimationControllerID AnimationControllerID => AnimationControllerID.staff;
 
         static readonly int SpellMass = 1;
 

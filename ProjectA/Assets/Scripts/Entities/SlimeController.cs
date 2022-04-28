@@ -8,18 +8,21 @@ using UnityEngine.UIElements;
 
 public class SlimeController : Entity
 {
-    private Rigidbody2D rb;
-    private Animator anim;
-    public override Rigidbody2D Rigidbody => rb;
     public float chaseDistance;
     public float aggressiveDist;
     public float jumpStr;
     public float passiveStr;
     public AudioClip jumpSound;
     public AudioClip landSound;
-    private float actionTime = 0;
-    private Player target = null;
 
+    //private float actionTime = 0;
+    private Player target = null;
+    private Animator anim;
+    private Rigidbody2D rb;
+    public override Rigidbody2D Rigidbody => rb;
+    //TODO: define what "speed" means on a slime
+    public override float DefaultSpeed => throw new NotImplementedException();
+    public override float CurrentSpeed { get; protected set; }
 
     #region Timer members
 
@@ -118,6 +121,7 @@ public class SlimeController : Entity
             Invoke("Disappear", 6f);
         }
     }
+    //TODO: apply this to all entities, rename aicorutine to aiBehaviour?
     //Make slime stop attacking, corpse sits there for a bit
     private void Neutralize()
     {
@@ -127,6 +131,7 @@ public class SlimeController : Entity
             col.enabled = false;
         }
     }
+    //TODO: apply this to all entities?
     //Kill slime for good
     private void Disappear()
     {

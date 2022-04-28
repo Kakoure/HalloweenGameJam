@@ -15,8 +15,9 @@ namespace Items
         void OnDamageTaken(int damage, Vector2 src);
     }
     
+    //TODO: clean up this class
     [LoadResourceToField("bullet", "Bullet", typeof(GameObject))]
-    public class Bow : Weapon2
+    public class Bow : Weapon
     {
         public class Charging : StatusEffect
         {
@@ -64,34 +65,32 @@ namespace Items
         public static Sprite sprite;
         public override Sprite Sprite => sprite;
         public static GameObject bullet;
+        public override AnimationControllerID AnimationControllerID => throw new NotImplementedException();
 
         public int baseDamage;
         public int chargedDamage;
         public float baseSpeed;
         public float knockback;
-        public float fullCharge;
+        public float fullChargeTime;
+        public float standardChargeCooldown;
         public float fullChargeCooldown;
         public float slowMoveSpeedMultiplier;
 
         public int GetDamage(float t)
         {
-            return t < fullCharge ? baseDamage : chargedDamage;
+            return t < fullChargeTime ? baseDamage : chargedDamage;
         }
         public float GetKnockback(float t)
         {
-            return t < fullCharge ? knockback : 1.5f * knockback;
+            return t < fullChargeTime ? knockback : 1.5f * knockback;
         }
         public float GetSpeed(float t)
         {
-            return t < fullCharge ? baseSpeed : 1.5f * baseSpeed;
+            return t < fullChargeTime ? baseSpeed : 1.5f * baseSpeed;
         }
 
-        //TODO:Get rid of this
-        //innitially a workaround but will remove
-        private float defSpeed = 5;
         private FireProjectile fireArrow;
 
-        //replacement to assignment at awake (since awake occurs on instantiation)
         private PlayerMove Movement => Player.Instance.playerMove;
         private Animator PlayerAnim => Player.Instance.playerAnimator;
         #region charging
@@ -107,11 +106,11 @@ namespace Items
                 if (value)
                 {
                     chargeTime = Time.time;
-                    Movement.defaultSpeed *= slowMoveSpeedMultiplier;
+                    Movement.playerSpeed = slowMoveSpeedMultiplier * Movement.defaultSpeed;
                 }
                 else
                 {
-                    Movement.defaultSpeed = defSpeed;
+                    Movement.playerSpeed = Movement.defaultSpeed;
                 }
                 _isCharging = value;
             }
@@ -137,7 +136,7 @@ namespace Items
         {
             if (down)
             {
-                if (!IsReady) return;
+                if (!weaponCooldown.IsReady) return;
 
                 //begin charge
                 ChargingState = true;
@@ -162,19 +161,18 @@ namespace Items
                 Vector2 lookDir = (CameraReference.Instance.camera.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.gameObject.transform.position).normalized;
                 PlayerAnim.SetFloat("xInput", lookDir.x);
                 PlayerAnim.SetFloat("yInput", lookDir.y);
-                //chargeTime is deltaTime
-                int damage = GetDamage(chargeTime);
-                float kb = GetKnockback(chargeTime);
-                float speed = GetSpeed(chargeTime);
 
-                fireArrow.damage = damage;
-                fireArrow.knockBack = kb;
-                fireArrow.speed = speed;
+                //set damage, speed, and knockback for the projectile
+                fireArrow.damage = GetDamage(chargeTime);
+                fireArrow.knockBack = GetKnockback(chargeTime);
+                fireArrow.speed = GetSpeed(chargeTime);
 
-                var i = fireArrow.Execute(player, out _);
+                //fire the projectile
+                fireArrow.Execute(player, out _);
 
-                float cooldown = chargeTime < fullCharge ? cooldownTime : fullChargeCooldown;
-                SetUseTime(cooldown);
+                //set the cooldown of the attack
+                float cooldown = chargeTime < fullChargeTime ? standardChargeCooldown : fullChargeCooldown;
+                weaponCooldown.Use(cooldown);
             }
         }
 
